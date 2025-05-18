@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Home from "./Components/Home/Landing.jsx";
+import Landing from "./Components/Home/Landing.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import Footer from "./Components/footer/Footer.jsx";
 import { Register } from "./Components/routes/auth/Register/Register.jsx";
@@ -12,7 +12,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />

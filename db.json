@@ -1,16 +1,3 @@
 {
-  "users": [
-    {
-      "email": "edward.n9343@gmail.comx",
-      "password": "$2a$10$5kDjXS.6zM2bOZYcDSvw7ujVsVAdZ1AixsOUvaWemYK80jZPOMGgW",
-      "userName": "a",
-      "id": 1
-    },
-    {
-      "email": "asd@asd.com",
-      "password": "$2a$10$tzQfY.cI2ZRxSw/8oIp03OTEsL0vEw6EjZGAby1KEBEjqm7ZxH2MS",
-      "userName": "asd",
-      "id": 2
-    }
-  ]
+  "users": []
 }
