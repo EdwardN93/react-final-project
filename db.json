@@ -1,3 +1,18 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "edward.n934@gmail.asa",
+      "password": "$2a$10$MhLhpFkOW3/fu6/9x1RnM.d.pIdQ0BI51odfT5MEcXLTSKRV7bWy6",
+      "firstName": "Eduard",
+      "lastName": "Nedelcu",
+      "id": 1
+    },
+    {
+      "email": "edward.n934@gmail.asaa",
+      "password": "$2a$10$Qo22KoV9Qv11fR2YmOPP7eglWtDYgxJdGCDFyHwfwgrVjj/2k7Alm",
+      "firstName": "Eduard",
+      "lastName": "Nedelcu",
+      "id": 2
+    }
+  ]
 }

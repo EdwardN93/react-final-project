@@ -46,38 +46,79 @@ export const Register = () => {
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={register} className="form">
-        <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" />
+    <div className="flex justify-center items-center min-h-screen px-4 mb-10">
+      <form
+        onSubmit={register}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
+
+        <div className="mb-4">
+          <label htmlFor="firstName" className="block mb-1 font-medium">
+            First Name
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" />
+        <div className="mb-4">
+          <label htmlFor="lastName" className="block mb-1 font-medium">
+            Last Name
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" />
+        <div className="mb-4">
+          <label htmlFor="email" className="block mb-1 font-medium">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" />
+        <div className="mb-4">
+          <label htmlFor="password" className="block mb-1 font-medium">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="reTypePassword">Confirm Password</label>
-          <input type="password" id="reTypePassword" name="reTypePassword" />
+        <div className="mb-6">
+          <label htmlFor="reTypePassword" className="block mb-1 font-medium">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="reTypePassword"
+            name="reTypePassword"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+          />
         </div>
 
-        <div className="form-actions">
-          <button type="submit" className="submit-btn">
-            Register
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          Register
+        </button>
       </form>
     </div>
   );
