@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router";
 import "./Navbar.css";
-import { useNavigate } from "react-router";
+
 function Navbar() {
-  const [activation, setactivation] = useState(Boolean);
-
-  function logOut() {
-    console.log("Logged out :(");
-    setactivation(false);
-  }
-
-  function logIn() {
-    setactivation(true);
-    console.log("Logged in! :)");
-  }
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("user"));
+
+  useEffect(() => {
+    // Check for changes in route and update login status
+    setIsLoggedIn(!!localStorage.getItem("user"));
+  }, [location]);
+
+  const logOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
   return (
     <nav className="h-full text-center md:text-left">
       <ul className="flex flex-col space-y-4 text-gray-800">
@@ -24,29 +29,33 @@ function Navbar() {
         >
           Home
         </li>
+        {isLoggedIn ? (
+          ""
+        ) : (
+          <li
+            className="cursor-pointer hover:bg-gray-300 p-2 rounded"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </li>
+        )}
 
-        <li
-          className="cursor-pointer hover:bg-gray-300 p-2 rounded"
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </li>
-
-        {activation ? (
+        {isLoggedIn ? (
           <li
             className="cursor-pointer hover:bg-gray-300 p-2 rounded"
             onClick={logOut}
           >
-            LogOut
+            Log Out
           </li>
         ) : (
           <li
             className="cursor-pointer hover:bg-gray-300 p-2 rounded"
-            onClick={logIn}
+            onClick={() => navigate("/login")}
           >
-            LogIn
+            Log In
           </li>
         )}
+
         <li className="cursor-pointer hover:bg-gray-300 p-2 rounded">Stuff</li>
       </ul>
     </nav>

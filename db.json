@@ -13,6 +13,41 @@
       "firstName": "Eduard",
       "lastName": "Nedelcu",
       "id": 2
+    },
+    {
+      "email": "edward@edward.ed",
+      "password": "$2a$10$Ues4sZw.TqwSaGsQtgpKdOYDlEVv7r.DqqS.u/U7rIvR9QzCAvHjO",
+      "firstName": "Eduard",
+      "lastName": "Edward",
+      "id": 3
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 1,
+      "plateNumber": "B51TCH",
+      "carBrand": "VolksWagen",
+      "carName": "Polo",
+      "vinNumber": "VWdSJDSA2342",
+      "fuelType": "Benzina",
+      "engineCapacity": 1197,
+      "category": "Turism",
+      "department": "Prajitorie",
+      "user": "Marco Polo",
+      "carStatus": true
+    },
+    {
+      "id": 2,
+      "plateNumber": "B51TCH",
+      "carBrand": "VolksWagen",
+      "carName": "Polo",
+      "vinNumber": "VWdSJDSA2342",
+      "fuelType": "Benzina",
+      "engineCapacity": 1197,
+      "category": "Turism",
+      "department": "Prajitorie",
+      "user": "Marco Polo",
+      "carStatus": true
     }
   ]
 }

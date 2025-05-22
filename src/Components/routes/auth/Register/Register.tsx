@@ -4,26 +4,29 @@ import "./Register.css";
 export const Register = () => {
   const navigate = useNavigate();
 
-  const register = async (event) => {
+  const register = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = event.target;
+    const formData = event.currentTarget;
     const { firstName, lastName, email, password, reTypePassword } = formData;
 
-    if (password.value !== reTypePassword.value) {
+    if (
+      (password as HTMLInputElement).value !==
+      (reTypePassword as HTMLInputElement).value
+    ) {
       alert("Passwords don't match");
       return;
     }
 
     const user = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      password: password.value,
+      firstName: (firstName as HTMLInputElement).value,
+      lastName: (lastName as HTMLInputElement).value,
+      email: (email as HTMLInputElement).value,
+      password: (password as HTMLInputElement).value,
     };
 
     try {
-      const response = await fetch("http://localhost:3000/users", {
+      const response = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,17 +42,21 @@ export const Register = () => {
 
       alert("Your account was created successfully!");
       navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       console.log("Network or server error:", error.message);
       alert(error.message);
     }
   };
 
+  function goToLogin() {
+    navigate("/login");
+  }
+
   return (
-    <div className="flex justify-center items-center min-h-screen px-4 mb-10">
+    <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col ">
       <form
         onSubmit={register}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
       >
         <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
 
@@ -120,6 +127,17 @@ export const Register = () => {
           Register
         </button>
       </form>
+      <div className="">
+        <p>
+          Already have an account? Log in{" "}
+          <span
+            className="text-blue-600 hover:cursor-pointer md:text-center"
+            onClick={goToLogin}
+          >
+            HERE
+          </span>
+        </p>
+      </div>
     </div>
   );
 };
