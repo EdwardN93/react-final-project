@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
-import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("user"));
+  const [isLoggedIn, setIsLoggedIn] = useState<string | boolean | null>(
+    localStorage.getItem("user")
+  );
 
   useEffect(() => {
     // Check for changes in route and update login status

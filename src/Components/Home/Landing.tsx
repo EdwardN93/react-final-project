@@ -2,8 +2,21 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 export default function Landing() {
+  type Car = {
+    id: number;
+    plateNumber: string;
+    carBrand: string;
+    carName: string;
+    vinNumber: string;
+    fuelType: string;
+    engineCapacity: number;
+    category: string;
+    department: string;
+    user: string;
+  };
+
   const location = useLocation();
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState<Car[]>([]);
   const [token, setToken] = useState<string | null>(null);
   const [sorter, setSorter] = useState<boolean>(false);
 
@@ -43,7 +56,6 @@ export default function Landing() {
     setCars(sorted);
   }
 
-  // If not logged in
   if (!token) {
     return (
       <div className="p-6 text-center text-red-600 font-semibold">
@@ -52,7 +64,6 @@ export default function Landing() {
     );
   }
 
-  // Show table if logged in
   return (
     <div
       className="table_component overflow-auto mb-16"
@@ -60,8 +71,8 @@ export default function Landing() {
       tabIndex={0}
     >
       <table className="min-w-full border border-gray-300">
-        <caption className="caption-top font-bold text-lg mb-2">
-          Company Cars
+        <caption className="caption-top font-bold text-lg mb-8">
+          All Company Cars
         </caption>
         <thead className="bg-gray-200">
           <tr>

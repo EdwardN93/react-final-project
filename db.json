@@ -31,30 +31,17 @@
   ],
   "vehicles": [
     {
-      "id": 1,
-      "plateNumber": "B06TCH",
-      "carBrand": "Nissan",
-      "carName": "X-trail",
-      "vinNumber": "VWdSJDSA2342",
-      "fuelType": "Benzina",
-      "engineCapacity": 1597,
+      "plateNumber": "B87TCH",
+      "carBrand": "Dacia",
+      "carName": "Logan",
+      "vinNumber": "TMBAM2832",
+      "engineCapacity": "1197",
+      "fuelType": "Benzină",
       "category": "Turism",
       "department": "Vanzari",
-      "user": "John Doe",
-      "carStatus": true
-    },
-    {
-      "id": 2,
-      "plateNumber": "B51TCH",
-      "carBrand": "VolksWagen",
-      "carName": "Polo",
-      "vinNumber": "VWdSJDSA2342",
-      "fuelType": "Benzina",
-      "engineCapacity": 1197,
-      "category": "Turism",
-      "department": "Prajitorie",
-      "user": "Marco Polo",
-      "carStatus": true
+      "user": "Marian",
+      "status": "Activa",
+      "id": 1
     }
   ]
 }

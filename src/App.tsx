@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
-import Landing from "./Components/Home/Landing.jsx";
-import Navbar from "./Components/Navbar/Navbar.jsx";
-import Footer from "./Components/footer/Footer.jsx";
-import { Register } from "./Components/routes/auth/Register/Register.jsx";
+import Landing from "./Components/Home/Landing";
+import SideNav from "./Components/SideNav/SideNav";
+import MainNav from "./Components/MainNav/MainNav";
+import Footer from "./Components/footer/Footer";
+import { Register } from "./Components/routes/auth/Register/Register";
 import { Login } from "./Components/routes/auth/Login/Login";
+import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 
 function App() {
   const navigate = useNavigate();
@@ -16,17 +18,19 @@ function App() {
       <ScrollToTop />
       {/* Sidebar */}
       <aside className="w-full md:w-44 bg-gray-200 p-4 md:sticky md:top-0 md:h-screen ">
-        <Navbar />
+        <SideNav />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto bg-gray-50">
         <div className="p-6">
           <h2 className="text-2xl font-semibold mb-4">Content</h2>
+          <MainNav />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register-car" element={<RegisterCar />} />
           </Routes>
           <Footer />
         </div>
