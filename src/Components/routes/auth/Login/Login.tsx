@@ -18,7 +18,7 @@ export const Login = () => {
     const user = { email, password };
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("http://192.168.1.137:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +41,10 @@ export const Login = () => {
       alert("Login failed: " + error.message);
     }
   };
+
+  function goToRegister() {
+    navigate("/register");
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col">
@@ -81,6 +85,17 @@ export const Login = () => {
           Log In
         </button>
       </form>
+      <div className="">
+        <p>
+          Don't have an account? Register{" "}
+          <span
+            className="text-blue-600 hover:cursor-pointer md:text-center"
+            onClick={goToRegister}
+          >
+            HERE
+          </span>
+        </p>
+      </div>
     </div>
   );
 };

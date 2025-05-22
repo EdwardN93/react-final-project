@@ -5,6 +5,7 @@ export default function Landing() {
   const location = useLocation();
   const [cars, setCars] = useState([]);
   const [token, setToken] = useState<string | null>(null);
+  const [sorter, setSorter] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -16,7 +17,7 @@ export default function Landing() {
 
   async function fetchCars(token: string) {
     try {
-      const response = await fetch("http://localhost:3000/vehicles", {
+      const response = await fetch("http://192.168.1.137:3000/vehicles", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -35,6 +36,13 @@ export default function Landing() {
     }
   }
 
+  function sortAscById(sorter: boolean) {
+    const sorted = cars
+      .map((item) => item)
+      .sort((a: any, b: any) => (sorter ? a.id - b.id : b.id - a.id));
+    setCars(sorted);
+  }
+
   // If not logged in
   if (!token) {
     return (
@@ -46,14 +54,26 @@ export default function Landing() {
 
   // Show table if logged in
   return (
-    <div className="table_component overflow-auto" role="region" tabIndex={0}>
+    <div
+      className="table_component overflow-auto mb-16"
+      role="region"
+      tabIndex={0}
+    >
       <table className="min-w-full border border-gray-300">
         <caption className="caption-top font-bold text-lg mb-2">
           Company Cars
         </caption>
         <thead className="bg-gray-200">
           <tr>
-            <th className="p-2 border">ID</th>
+            <th
+              className="p-2 border"
+              onClick={() => {
+                setSorter(!sorter);
+                sortAscById(sorter);
+              }}
+            >
+              ID {sorter ? "↓" : "↑"}
+            </th>
             <th className="p-2 border">Plate Number</th>
             <th className="p-2 border">Brand</th>
             <th className="p-2 border">Model</th>
@@ -90,12 +110,6 @@ export default function Landing() {
           )}
         </tbody>
       </table>
-      <div style={{ marginTop: "8px" }}>
-        Made with{" "}
-        <a href="https://www.htmltables.io/" target="_blank">
-          HTML Tables
-        </a>
-      </div>
     </div>
   );
 }

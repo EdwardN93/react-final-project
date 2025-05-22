@@ -20,20 +20,27 @@
       "firstName": "Eduard",
       "lastName": "Edward",
       "id": 3
+    },
+    {
+      "email": "ed@ed.ed",
+      "password": "$2a$10$wfQkSvdHPueB91fQ.OVX2Oa/cFrDOjflVGbt3IQgfabZ7aT7sU.PW",
+      "firstName": "Eduard",
+      "lastName": "Nedelcu",
+      "id": 4
     }
   ],
   "vehicles": [
     {
       "id": 1,
-      "plateNumber": "B51TCH",
-      "carBrand": "VolksWagen",
-      "carName": "Polo",
+      "plateNumber": "B06TCH",
+      "carBrand": "Nissan",
+      "carName": "X-trail",
       "vinNumber": "VWdSJDSA2342",
       "fuelType": "Benzina",
-      "engineCapacity": 1197,
+      "engineCapacity": 1597,
       "category": "Turism",
-      "department": "Prajitorie",
-      "user": "Marco Polo",
+      "department": "Vanzari",
+      "user": "John Doe",
       "carStatus": true
     },
     {
