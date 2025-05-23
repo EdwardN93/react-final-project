@@ -4,6 +4,7 @@ import ScrollToTop from "./Components/behavior/ScrollToTop";
 import Landing from "./Components/Home/Landing";
 import SideNav from "./Components/SideNav/SideNav";
 import MainNav from "./Components/MainNav/MainNav";
+import { UserMenu } from "./Components/UserMenu/UserMenu";
 import Footer from "./Components/footer/Footer";
 import { Register } from "./Components/routes/auth/Register/Register";
 import { Login } from "./Components/routes/auth/Login/Login";
@@ -24,7 +25,11 @@ function App() {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-gray-50">
         <div className="p-6">
-          <h2 className="text-2xl font-semibold mb-4">Content</h2>
+          <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
+            <h2 className="text-2xl font-semibold mb-4">My Car Logistic App</h2>
+            <UserMenu />
+          </div>
+
           <MainNav />
           <Routes>
             <Route path="/" element={<Landing />} />

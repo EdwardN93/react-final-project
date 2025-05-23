@@ -90,6 +90,7 @@ export function RegisterCar() {
             name="plateNumber"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             placeholder="Ex. B100TCH"
+            required
           />
         </div>
 
@@ -103,6 +104,7 @@ export function RegisterCar() {
             name="carBrand"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             placeholder="Dacia"
+            required
           />
         </div>
 
@@ -116,6 +118,7 @@ export function RegisterCar() {
             name="carName"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             placeholder="Logan"
+            required
           />
         </div>
 
@@ -129,6 +132,7 @@ export function RegisterCar() {
             name="vinNumber"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             placeholder="DC9234JMAX"
+            required
           />
         </div>
 
@@ -142,6 +146,7 @@ export function RegisterCar() {
             name="engineCapacity"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             placeholder="1197"
+            required
           />
         </div>
 
@@ -149,7 +154,7 @@ export function RegisterCar() {
           <label htmlFor="fuelType" className="block mb-1 font-medium">
             Combustibil<span className="text-red-600">*</span>
           </label>
-          <select id="fuelType" name="fuelType" className="p-2">
+          <select id="fuelType" name="fuelType" className="p-2" required>
             <option id="benzina">Benzină</option>
             <option id="motorina">Motorină</option>
           </select>
@@ -159,7 +164,7 @@ export function RegisterCar() {
           <label htmlFor="category" className="block mb-1 font-medium">
             Categorie vehicul<span className="text-red-600">*</span>
           </label>
-          <select name="category" id="category" className="p-2">
+          <select name="category" id="category" className="p-2" required>
             <option value="Turism">Turism</option>
             <option value="Autoutilitara">Autoutilitară M1</option>
           </select>
@@ -169,15 +174,15 @@ export function RegisterCar() {
           <label htmlFor="department" className="block mb-1 font-medium">
             Selectează Departament<span className="text-red-600">*</span>
           </label>
-          <select name="department" className="p-2">
+          <select name="department" className="p-2" required>
             <option value="Administrativ">Administrativ</option>
             <option value="Cafenele">Cafenele</option>
             <option value="Financiar">Financiar</option>
-            <option value="Logistica">Logistică</option>
+            <option value="Logistică">Logistică</option>
             <option value="Marketing">Marketing</option>
-            <option value="Prajitorie">Prăjitorie</option>
+            <option value="Prăjitorie">Prăjitorie</option>
             <option value="Service">Service</option>
-            <option value="Vanzari">Vânzări</option>
+            <option value="Vânzări">Vânzări</option>
           </select>
         </div>
 

@@ -77,7 +77,7 @@ export default function Landing() {
         <thead className="bg-gray-200">
           <tr>
             <th
-              className="p-2 border"
+              className="p-2 border hover:cursor-pointer"
               onClick={() => {
                 setSorter(!sorter);
                 sortAscById(sorter);
@@ -85,15 +85,15 @@ export default function Landing() {
             >
               ID {sorter ? "↓" : "↑"}
             </th>
-            <th className="p-2 border">Plate Number</th>
-            <th className="p-2 border">Brand</th>
-            <th className="p-2 border">Model</th>
-            <th className="p-2 border">VIN</th>
-            <th className="p-2 border">Fuel Type</th>
-            <th className="p-2 border">Engine (cc)</th>
-            <th className="p-2 border">Category</th>
-            <th className="p-2 border">Department</th>
-            <th className="p-2 border">Assigned To</th>
+            <th className="p-2 border hover:cursor-pointer">Plate Number</th>
+            <th className="p-2 border hover:cursor-pointer">Brand</th>
+            <th className="p-2 border hover:cursor-pointer">Model</th>
+            <th className="p-2 border hover:cursor-pointer">VIN</th>
+            <th className="p-2 border hover:cursor-pointer">Fuel Type</th>
+            <th className="p-2 border hover:cursor-pointer">Engine (cc)</th>
+            <th className="p-2 border hover:cursor-pointer">Category</th>
+            <th className="p-2 border hover:cursor-pointer">Department</th>
+            <th className="p-2 border hover:cursor-pointer">Assigned To</th>
           </tr>
         </thead>
         <tbody>
