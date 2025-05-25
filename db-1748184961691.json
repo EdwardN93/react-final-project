@@ -19,7 +19,6 @@
       "password": "$2a$10$Ues4sZw.TqwSaGsQtgpKdOYDlEVv7r.DqqS.u/U7rIvR9QzCAvHjO",
       "firstName": "Eduard",
       "lastName": "Edward",
-      "role": 1,
       "id": 3
     },
     {
@@ -102,19 +101,6 @@
       "user": "Laurentiu Nedelcu",
       "status": "Activă",
       "id": 6
-    },
-    {
-      "plateNumber": "B144TCH",
-      "carBrand": "Nissan",
-      "carName": "X-Trail",
-      "vinNumber": "NSSN432890",
-      "engineCapacity": "1998",
-      "fuelType": "Hibrid",
-      "category": "Autoturism M1",
-      "department": "Marketing",
-      "user": "Seda Koek",
-      "status": "Activă",
-      "id": 7
     }
   ]
 }

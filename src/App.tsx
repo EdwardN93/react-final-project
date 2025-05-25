@@ -4,8 +4,11 @@ import ScrollToTop from "./Components/behavior/ScrollToTop";
 import Landing from "./Components/Home/Landing";
 import SideNav from "./Components/SideNav/SideNav";
 import MainNav from "./Components/MainNav/MainNav";
-import { UserMenu } from "./Components/UserMenu/UserMenu";
 import Footer from "./Components/footer/Footer";
+import { Account } from "./Components/Account/Account";
+import VehicleDetails from "./Components/VehicleDetails/VehicleDetails";
+import { ModifyCar } from "./Components/ModifyCar/ModifyCar";
+import { UserMenu } from "./Components/UserMenu/UserMenu";
 import { Register } from "./Components/routes/auth/Register/Register";
 import { Login } from "./Components/routes/auth/Login/Login";
 import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
@@ -36,6 +39,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register-car" element={<RegisterCar />} />
+            <Route path="/vehicles/:id" element={<VehicleDetails />} />
+            <Route path="/modify-car/:id" element={<ModifyCar />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
           <Footer />
         </div>

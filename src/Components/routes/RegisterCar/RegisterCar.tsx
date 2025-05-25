@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { Button } from "../../Button/Button";
 
 export function RegisterCar() {
   const token = localStorage.getItem("token");
@@ -34,7 +35,7 @@ export function RegisterCar() {
     } = formData;
 
     const car: Car = {
-      plateNumber: plateNumber.value,
+      plateNumber: plateNumber.value.toUpperCase().split(" ").join(""),
       carBrand: carBrand.value,
       carName: carName.value,
       vinNumber: vinNumber.value,
@@ -66,7 +67,6 @@ export function RegisterCar() {
     const response = await fetch(url, options);
 
     const data = await response.json();
-    console.log(data);
 
     alert("Car successfuly added !");
     navigate("/");
@@ -78,7 +78,9 @@ export function RegisterCar() {
         onSubmit={sendFormDetails}
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
       >
-        <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center">
+          Înregistrare Mașină
+        </h2>
 
         <div className="mb-4">
           <label htmlFor="plateNumber" className="block mb-1 font-medium">
@@ -154,9 +156,15 @@ export function RegisterCar() {
           <label htmlFor="fuelType" className="block mb-1 font-medium">
             Combustibil<span className="text-red-600">*</span>
           </label>
-          <select id="fuelType" name="fuelType" className="p-2" required>
+          <select
+            id="fuelType"
+            name="fuelType"
+            className="p-2 rounded"
+            required
+          >
             <option id="benzina">Benzină</option>
             <option id="motorina">Motorină</option>
+            <option id="hibrid">Hibrid</option>
           </select>
         </div>
 
@@ -164,17 +172,23 @@ export function RegisterCar() {
           <label htmlFor="category" className="block mb-1 font-medium">
             Categorie vehicul<span className="text-red-600">*</span>
           </label>
-          <select name="category" id="category" className="p-2" required>
-            <option value="Turism">Turism</option>
-            <option value="Autoutilitara">Autoutilitară M1</option>
+          <select
+            name="category"
+            id="category"
+            className="p-2 rounded"
+            required
+          >
+            <option value="Autoturism M1">Autoturism M1</option>
+            <option value="Autoturism M1G">Autoturism M1G</option>
+            <option value="Autoutilitara N1">Autoutilitară N1</option>
           </select>
         </div>
 
         <div className="mb-4">
           <label htmlFor="department" className="block mb-1 font-medium">
-            Selectează Departament<span className="text-red-600">*</span>
+            Selectează departament<span className="text-red-600">*</span>
           </label>
-          <select name="department" className="p-2" required>
+          <select name="department" className="p-2 rounded" required>
             <option value="Administrativ">Administrativ</option>
             <option value="Cafenele">Cafenele</option>
             <option value="Financiar">Financiar</option>
@@ -188,7 +202,7 @@ export function RegisterCar() {
 
         <div className="mb-4">
           <label htmlFor="user" className="block mb-1 font-medium">
-            Nume Utilizator Mașină<span className="text-red-600">*</span>
+            Nume utilizator mașină<span className="text-red-600">*</span>
           </label>
           <input
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -204,28 +218,21 @@ export function RegisterCar() {
           <label htmlFor="status" className="block mb-1 font-medium">
             Status Mașină<span className="text-red-600">*</span>
           </label>
-          <select name="status" className="p-2">
-            <option value="Activa">Activă</option>
-            <option value="Vanduta">Vândută</option>
+          <select name="status" className="p-2 rounded">
+            <option value="Activă">Activă</option>
+            <option value="Vândută">Vândută</option>
           </select>
         </div>
+        <div className="flex justify-center ">
+          <Button text="Adaugă" width />
+        </div>
 
-        {/* "plateNumber": "B06TCH",
-      "carBrand": "Nissan",
-      "carName": "X-trail",
-      "vinNumber": "VWdSJDSA2342",
-      "fuelType": "Benzina",
-      "engineCapacity": 1597,
-      "category": "Turism",
-      "department": "Vanzari",
-      "user": "John Doe",
-      "carStatus": true */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          Register
-        </button>
+        <div>
+          <p className="text-xs mt-4">
+            Câmpurile marcate cu <span className="text-red-600">*</span> sunt
+            obligatorii!
+          </p>
+        </div>
       </form>
     </div>
   );
