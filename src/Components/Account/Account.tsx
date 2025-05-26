@@ -47,18 +47,17 @@ export function Account() {
     <div className="flex flex-col justify-center mt-6">
       <h1 className="text-lg">User Details</h1>
       <span>
-        Name: {user?.firstName} {user?.lastName}
+        Nume: {user?.firstName} {user?.lastName}
       </span>
       <i className="fas fa-heart"></i>
       <span>Email: {user?.email}</span>
-
-      {user?.role === 1 ? (
-        <span>User type: Admin</span>
-      ) : (
-        <span>User type: User</span>
-      )}
+      <span>Tip cont: {user?.role === 1 ? "Admin" : "User"}</span>
+      <span>
+        Doar tipul de cont <strong>ADMIN</strong> poate adăuga / modifica /
+        șterge datele mașinilor<span className="text-red-600">*</span>
+      </span>
       <div className="flex mt-6">
-        <Button text="Change Details" onClick={getLog} color="green" />
+        <Button text="Modifică date cont" onClick={getLog} color="green" />
       </div>
     </div>
   );
