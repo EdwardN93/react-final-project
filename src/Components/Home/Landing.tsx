@@ -42,7 +42,7 @@ export default function Landing() {
 
   async function fetchCars(token: string) {
     try {
-      const response = await fetch("http://192.168.1.137:3000/vehicles", {
+      const response = await fetch("http://localhost:3000/vehicles", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

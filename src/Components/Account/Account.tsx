@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import { getCurrentUser, getAccessToken } from "../routes/auth/Login/utils";
 import { Button } from "../Button/Button";
+import { useNavigate } from "react-router";
 
 type User = {
   email: string;
@@ -16,6 +17,7 @@ type User = {
 
 export function Account() {
   const [user, setUser] = useState<User | null>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getAccountDetails() {
@@ -24,7 +26,7 @@ export function Account() {
       if (!token || !userDetails) return alert("You have to be logged in !");
 
       const getUser = await fetch(
-        `http://192.168.1.137:3000/users/${userDetails.id}`,
+        `http://localhost:3000/users/${userDetails.id}`,
         {
           method: "GET",
           headers: {
@@ -39,8 +41,9 @@ export function Account() {
     getAccountDetails();
   }, []);
 
-  function getLog() {
+  function getToModifyAccountDetailsPage() {
     console.log("clickd");
+    navigate("/change-account-details");
   }
 
   return (
@@ -57,7 +60,11 @@ export function Account() {
         șterge datele mașinilor<span className="text-red-600">*</span>
       </span>
       <div className="flex mt-6">
-        <Button text="Modifică date cont" onClick={getLog} color="green" />
+        <Button
+          text="Modifică date cont"
+          onClick={getToModifyAccountDetailsPage}
+          color="green"
+        />
       </div>
     </div>
   );

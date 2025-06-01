@@ -6,6 +6,7 @@ import SideNav from "./Components/SideNav/SideNav";
 import MainNav from "./Components/MainNav/MainNav";
 import Footer from "./Components/footer/Footer";
 import { Account } from "./Components/Account/Account";
+import { ChangeAccountDetails } from "./Components/Account/ChangeAccountDetails/ChangeAccountDetails";
 import VehicleDetails from "./Components/VehicleDetails/VehicleDetails";
 import { ModifyCar } from "./Components/ModifyCar/ModifyCar";
 import { UserMenu } from "./Components/UserMenu/UserMenu";
@@ -42,6 +43,10 @@ function App() {
             <Route path="/vehicles/:id" element={<VehicleDetails />} />
             <Route path="/modify-car/:id" element={<ModifyCar />} />
             <Route path="/account" element={<Account />} />
+            <Route
+              path="/change-account-details"
+              element={<ChangeAccountDetails />}
+            />
           </Routes>
           <Footer />
         </div>

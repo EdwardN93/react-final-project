@@ -18,12 +18,14 @@ function Navbar() {
   return isLoggedIn ? (
     <nav className="text-center">
       <ul className="flex justify-start items-center text-gray-800 gap-2">
-        <li>
-          <Button
-            text="Înregistrează mașină nouă"
-            onClick={() => navigate("/register-car")}
-          />
-        </li>
+        {location.pathname === "/" && (
+          <li>
+            <Button
+              text="Înregistrează mașină nouă"
+              onClick={() => navigate("/register-car")}
+            />
+          </li>
+        )}
 
         {id && (
           <li>

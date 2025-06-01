@@ -40,7 +40,7 @@ export function ModifyCar() {
   }, [id]);
 
   async function getCarFromId(id: string) {
-    const url = `http://192.168.1.137:3000/vehicles/${id}`;
+    const url = `http://localhost:3000/vehicles/${id}`;
     const options = {
       method: "GET",
       headers: {

@@ -21,7 +21,7 @@ export default function VehicleDetails() {
 
   useEffect(() => {
     async function getCarFromApi(id: string) {
-      const url = `http://192.168.1.137:3000/vehicles/${id}`;
+      const url = `http://localhost:3000/vehicles/${id}`;
 
       const options = {
         headers: {
