@@ -214,8 +214,8 @@ export function RegisterCar() {
             name="status"
             className="p-2 rounded hover:cursor-pointer border"
           >
-            <option value="Activă">Activă</option>
-            <option value="Vândută">Vândută</option>
+            <option value="Activa">Activă</option>
+            <option value="Vanduta">Vândută</option>
           </select>
         </div>
         <div className="flex justify-center ">

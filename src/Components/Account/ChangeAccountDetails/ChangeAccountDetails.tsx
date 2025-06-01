@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { getCurrentUser, getAccessToken } from "../../routes/auth/Login/utils";
 import { Button } from "../../Button/Button";
+import { useNavigate } from "react-router";
 export function ChangeAccountDetails() {
   type User = {
     email: string;
@@ -10,6 +11,7 @@ export function ChangeAccountDetails() {
   };
 
   const [getUser, setGetUser] = useState<null | User>();
+  const navigate = useNavigate();
 
   async function onEditChange(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,6 +54,7 @@ export function ChangeAccountDetails() {
       }
 
       alert("Your account details changed successfuly !");
+      navigate("/account");
     } catch (error: any) {
       console.log("Network or server error:", error.message);
       alert(error.message);
@@ -80,6 +83,7 @@ export function ChangeAccountDetails() {
             id="firstName"
             name="firstName"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
 
@@ -92,6 +96,7 @@ export function ChangeAccountDetails() {
             id="lastName"
             name="lastName"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
 
@@ -104,6 +109,7 @@ export function ChangeAccountDetails() {
             id="email"
             name="email"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
 
@@ -116,6 +122,7 @@ export function ChangeAccountDetails() {
             id="password"
             name="password"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
 
@@ -128,6 +135,7 @@ export function ChangeAccountDetails() {
             id="reTypePassword"
             name="reTypePassword"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
 

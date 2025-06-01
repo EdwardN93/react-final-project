@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "email": "edward.n934@gmail.asa",
-      "password": "$2a$10$8AuIfrY/64RrZnVWJa26me5MW4KAfLT.GMsKDtIWHe020M2nBeENO",
-      "firstName": "Edwartian",
-      "lastName": "Nedelcus",
+      "email": "",
+      "password": "",
+      "firstName": "",
+      "lastName": "",
       "role": 1,
       "id": 1
     },
@@ -64,7 +64,7 @@
       "category": "Turism",
       "department": "Vânzări",
       "user": "Florian Patru",
-      "status": "Vândută",
+      "status": "Vanduta",
       "id": 2
     },
     {
@@ -77,7 +77,7 @@
       "category": "Autoturism M1",
       "department": "Vânzări",
       "user": "Papadocle Mamanuanu",
-      "status": "Activă",
+      "status": "Activa",
       "id": 3
     },
     {
@@ -90,7 +90,7 @@
       "category": "Autoutilitara N1",
       "department": "Logistică",
       "user": "Gugiu Daniel",
-      "status": "Activă",
+      "status": "Activa",
       "id": 4
     },
     {
@@ -103,7 +103,7 @@
       "category": "Autoutilitara N1",
       "department": "Logistică",
       "user": "Marian Sirbu",
-      "status": "Activă",
+      "status": "Activa",
       "id": 5
     },
     {
@@ -116,7 +116,7 @@
       "category": "Autoturism M1",
       "department": "Logistică",
       "user": "Laurentiu Nedelcu",
-      "status": "Activă",
+      "status": "Activa",
       "id": 6
     },
     {
@@ -129,7 +129,7 @@
       "category": "Autoturism M1",
       "department": "Marketing",
       "user": "Seda Koek",
-      "status": "Activă",
+      "status": "Activa",
       "id": 7
     },
     {
@@ -142,8 +142,21 @@
       "category": "Autoutilitara N1",
       "department": "Service",
       "user": "Nedelciu Alexandru",
-      "status": "Activă",
+      "status": "Activa",
       "id": 8
+    },
+    {
+      "plateNumber": "B66TCH",
+      "carBrand": "Nissan",
+      "carName": "Juke",
+      "vinNumber": "NSSJK284292",
+      "engineCapacity": "1198",
+      "fuelType": "Benzină",
+      "category": "Autoturism M1",
+      "department": "Vânzări",
+      "user": "Marian Stelea",
+      "status": "Activa",
+      "id": 9
     }
   ]
 }
