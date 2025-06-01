@@ -83,7 +83,7 @@ export function ChangeAccountDetails() {
 
         <div className="mb-4">
           <label htmlFor="firstName" className="block mb-1 font-medium">
-            First Name
+            Change First Name
           </label>
           <input
             type="text"
@@ -95,7 +95,7 @@ export function ChangeAccountDetails() {
 
         <div className="mb-4">
           <label htmlFor="lastName" className="block mb-1 font-medium">
-            Last Name
+            Change Last Name
           </label>
           <input
             type="text"
@@ -119,7 +119,7 @@ export function ChangeAccountDetails() {
 
         <div className="mb-4">
           <label htmlFor="password" className="block mb-1 font-medium">
-            New Password
+            Password
           </label>
           <input
             type="password"
@@ -131,7 +131,7 @@ export function ChangeAccountDetails() {
 
         <div className="mb-6">
           <label htmlFor="reTypePassword" className="block mb-1 font-medium">
-            Confirm New Password
+            Confirm Password
           </label>
           <input
             type="password"
