@@ -53,7 +53,7 @@ export function RegisterCar() {
   }
 
   async function registerCar(car: Car) {
-    const url = "http://192.168.1.137:3000/vehicles";
+    const url = "http://localhost:3000/vehicles";
 
     const options = {
       method: "POST",

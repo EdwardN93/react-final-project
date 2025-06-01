@@ -122,6 +122,19 @@
       "user": "Seda Koek",
       "status": "Activă",
       "id": 7
+    },
+    {
+      "plateNumber": "IF44TCH",
+      "carBrand": "Renault",
+      "carName": "Express",
+      "vinNumber": "RNLT2838923",
+      "engineCapacity": "1198",
+      "fuelType": "Motorină",
+      "category": "Autoutilitara N1",
+      "department": "Service",
+      "user": "Nedelciu Alexandru",
+      "status": "Activă",
+      "id": 8
     }
   ]
 }
