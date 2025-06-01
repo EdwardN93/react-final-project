@@ -1,20 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Car } from "../Types/Types";
 
 export default function VehicleDetails() {
-  type Car = {
-    id: number;
-    plateNumber: string;
-    carBrand: string;
-    carName: string;
-    vinNumber: string;
-    fuelType: string;
-    engineCapacity: number;
-    category: string;
-    department: string;
-    user: string;
-  };
-
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>(null);
   const token = localStorage.getItem("token");
@@ -56,19 +44,22 @@ export default function VehicleDetails() {
           <strong>VIN:</strong> {car.vinNumber}
         </li>
         <li>
-          <strong>Fuel Type:</strong> {car.fuelType}
+          <strong>Combustibil:</strong> {car.fuelType}
         </li>
         <li>
-          <strong>Engine Capacity:</strong> {car.engineCapacity}
+          <strong>Capacitate Motor:</strong> {car.engineCapacity} cmc
         </li>
         <li>
-          <strong>Category:</strong> {car.category}
+          <strong>Categorie:</strong> {car.category}
         </li>
         <li>
-          <strong>Department:</strong> {car.department}
+          <strong>Departament:</strong> {car.department}
         </li>
         <li>
-          <strong>Assigned To:</strong> {car.user}
+          <strong>Utilizator:</strong> {car.user}
+        </li>
+        <li>
+          <strong>Status:</strong> {car.status}
         </li>
       </ul>
     </div>

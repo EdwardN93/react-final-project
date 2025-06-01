@@ -1,15 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { getCurrentUser, getAccessToken } from "../../routes/auth/Login/utils";
+import { Button } from "../../Button/Button";
 export function ChangeAccountDetails() {
-  /*
-   * Preluare date cont server
-   * afisare date curente preluate
-   * modificare date
-   * confirmare cu email si pass inainte de trimitere
-   * trimitere date noi la server
-   * confirmam datele cu succes
-   */
-
   type User = {
     email: string;
     firstName: string;
@@ -21,8 +13,6 @@ export function ChangeAccountDetails() {
 
   async function onEditChange(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(e.target);
-    console.log(getUser);
 
     const formData = e.currentTarget;
     const { firstName, lastName, email, password, reTypePassword } = formData;
@@ -141,21 +131,8 @@ export function ChangeAccountDetails() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          Register
-        </button>
+        <Button text="Confirm Changes" width />
       </form>
-      <div className="">
-        <p>
-          Already have an account? Log in{" "}
-          <span className="text-blue-600 hover:cursor-pointer md:text-center">
-            HERE
-          </span>
-        </p>
-      </div>
     </div>
   );
 }

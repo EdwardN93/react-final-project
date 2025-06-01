@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button } from "../Button/Button";
-
-type Car = {
-  plateNumber: string;
-  carBrand: string;
-  carName: string;
-  vinNumber: string;
-  engineCapacity: string;
-  fuelType: string;
-  category: string;
-  department: string;
-  user: string;
-  status: string;
-};
+import { Car } from "../Types/Types";
 
 export function ModifyCar() {
   const token = localStorage.getItem("token");
@@ -59,14 +47,14 @@ export function ModifyCar() {
 
     const carToSend: Car = {
       ...formState,
-      plateNumber: formState.plateNumber.toUpperCase().split(" ").join(""),
+      plateNumber: formState?.plateNumber?.toUpperCase().split(" ").join(""),
     };
 
     editCar(carToSend);
   }
 
   async function editCar(car: Car) {
-    const url = `http://192.168.1.137:3000/vehicles/${id}`;
+    const url = `http://localhost:3000/vehicles/${id}`;
     const options = {
       method: "PUT",
       headers: {
@@ -132,7 +120,7 @@ export function ModifyCar() {
           </label>
           <select
             name="fuelType"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border"
             value={formState.fuelType}
             onChange={(e) =>
               setFormState((prev) => ({ ...prev, fuelType: e.target.value }))
@@ -151,7 +139,7 @@ export function ModifyCar() {
           </label>
           <select
             name="category"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border"
             value={formState.category}
             onChange={(e) =>
               setFormState((prev) => ({ ...prev, category: e.target.value }))
@@ -170,7 +158,7 @@ export function ModifyCar() {
           </label>
           <select
             name="department"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border"
             value={formState.department}
             onChange={(e) =>
               setFormState((prev) => ({ ...prev, department: e.target.value }))
@@ -194,7 +182,7 @@ export function ModifyCar() {
           </label>
           <select
             name="status"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border "
             value={formState.status}
             onChange={(e) =>
               setFormState((prev) => ({ ...prev, status: e.target.value }))

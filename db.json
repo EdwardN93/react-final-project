@@ -2,9 +2,10 @@
   "users": [
     {
       "email": "edward.n934@gmail.asa",
-      "password": "$2a$10$MhLhpFkOW3/fu6/9x1RnM.d.pIdQ0BI51odfT5MEcXLTSKRV7bWy6",
-      "firstName": "Eduard",
-      "lastName": "Nedelcu",
+      "password": "$2a$10$8AuIfrY/64RrZnVWJa26me5MW4KAfLT.GMsKDtIWHe020M2nBeENO",
+      "firstName": "Edwartian",
+      "lastName": "Nedelcus",
+      "role": 1,
       "id": 1
     },
     {
@@ -42,6 +43,14 @@
       "firstName": "Edwarrr",
       "lastName": "Deaarr",
       "id": 6
+    },
+    {
+      "email": "bacha@kha.com",
+      "password": "$2a$10$GdO60159R2Ws3UUDcQxYyuJrkyiOwCGz6iCiVprt6susycu..P21y",
+      "firstName": "Bahart",
+      "lastName": "Bachakarat",
+      "role": 2,
+      "id": 7
     }
   ],
   "vehicles": [
@@ -55,7 +64,7 @@
       "category": "Turism",
       "department": "Vânzări",
       "user": "Florian Patru",
-      "status": "Activă",
+      "status": "Vândută",
       "id": 2
     },
     {

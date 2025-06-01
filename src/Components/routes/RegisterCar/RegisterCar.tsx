@@ -1,22 +1,10 @@
 import { useNavigate } from "react-router";
 import { Button } from "../../Button/Button";
+import { Car } from "../../Types/Types";
 
 export function RegisterCar() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-
-  type Car = {
-    plateNumber: string;
-    carBrand: string;
-    carName: string;
-    vinNumber: string;
-    engineCapacity: string;
-    fuelType: string;
-    category: string;
-    department: string;
-    user: string;
-    status: string;
-  };
 
   function sendFormDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -159,7 +147,7 @@ export function RegisterCar() {
           <select
             id="fuelType"
             name="fuelType"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border"
             required
           >
             <option id="benzina">Benzină</option>
@@ -175,7 +163,7 @@ export function RegisterCar() {
           <select
             name="category"
             id="category"
-            className="p-2 rounded"
+            className="p-2 rounded hover:cursor-pointer border"
             required
           >
             <option value="Autoturism M1">Autoturism M1</option>
@@ -188,7 +176,11 @@ export function RegisterCar() {
           <label htmlFor="department" className="block mb-1 font-medium">
             Selectează departament<span className="text-red-600">*</span>
           </label>
-          <select name="department" className="p-2 rounded" required>
+          <select
+            name="department"
+            className="p-2 rounded hover:cursor-pointer border"
+            required
+          >
             <option value="Administrativ">Administrativ</option>
             <option value="Cafenele">Cafenele</option>
             <option value="Financiar">Financiar</option>
@@ -218,7 +210,10 @@ export function RegisterCar() {
           <label htmlFor="status" className="block mb-1 font-medium">
             Status Mașină<span className="text-red-600">*</span>
           </label>
-          <select name="status" className="p-2 rounded">
+          <select
+            name="status"
+            className="p-2 rounded hover:cursor-pointer border"
+          >
             <option value="Activă">Activă</option>
             <option value="Vândută">Vândută</option>
           </select>

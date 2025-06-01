@@ -1,24 +1,34 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router";
-import { getAccessToken } from "../routes/auth/Login/utils";
+import { useNavigate, useLocation } from "react-router";
+import { getAccessToken, getCurrentUser } from "../routes/auth/Login/utils";
 import { Button } from "../Button/Button";
+
+type User = {
+  email: string;
+  firstName: string;
+  id: number;
+  lastName: string;
+  role: number;
+};
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const segments = location.pathname.split("/");
+  const [getUser, setGetUser] = useState<null | User>(null);
   const id = segments[1] === "vehicles" ? segments[2] : null;
 
   const [isLoggedIn, setIsLoggedIn] = useState<string | boolean | null>();
 
   useEffect(() => {
     setIsLoggedIn(getAccessToken());
+    setGetUser(getCurrentUser());
   }, [location]);
 
   return isLoggedIn ? (
     <nav className="text-center">
       <ul className="flex justify-start items-center text-gray-800 gap-2">
-        {location.pathname === "/" && (
+        {location.pathname === "/" && getUser?.role === 1 && (
           <li>
             <Button
               text="Înregistrează mașină nouă"
@@ -27,7 +37,7 @@ function Navbar() {
           </li>
         )}
 
-        {id && (
+        {id && getUser?.role === 1 && (
           <li>
             <Button
               text="Modifică mașină"

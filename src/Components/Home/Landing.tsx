@@ -1,20 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { Car } from "../Types/Types";
 
 export default function Landing() {
-  type Car = {
-    id: number;
-    plateNumber: string;
-    carBrand: string;
-    carName: string;
-    vinNumber: string;
-    fuelType: string;
-    engineCapacity: number;
-    category: string;
-    department: string;
-    user: string;
-  };
-
   const location = useLocation();
   const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>([]);
@@ -30,6 +18,7 @@ export default function Landing() {
     category: "",
     department: "",
     user: "",
+    status: "",
   });
 
   useEffect(() => {
@@ -62,7 +51,7 @@ export default function Landing() {
 
   function sortAscDescId(sorter: boolean) {
     const sorted = [...cars].sort((a, b) =>
-      sorter ? a.id - b.id : b.id - a.id
+      sorter ? a.id! - b.id! : b.id! - a.id!
     );
     setCars(sorted);
   }
@@ -121,6 +110,7 @@ export default function Landing() {
             <th className="p-2 border">Category</th>
             <th className="p-2 border">Department</th>
             <th className="p-2 border">Assigned To</th>
+            <th className="p-2 border">Status</th>
           </tr>
           <tr>
             <td className="p-2 border" />
@@ -204,6 +194,14 @@ export default function Landing() {
                 onChange={(e) => handleFilterChange("user", e.target.value)}
               />
             </td>
+            <td className="p-2 border">
+              <input
+                type="text"
+                className="w-full p-1"
+                value={filters.status}
+                onChange={(e) => handleFilterChange("status", e.target.value)}
+              />
+            </td>
           </tr>
         </thead>
         <tbody>
@@ -230,6 +228,7 @@ export default function Landing() {
                 <Row carDetail={car.category} />
                 <Row carDetail={car.department} />
                 <Row carDetail={car.user} />
+                <Row carDetail={car.status} />
               </tr>
             ))
           )}

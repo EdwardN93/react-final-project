@@ -22,6 +22,7 @@ export const Register = () => {
       lastName: (lastName as HTMLInputElement).value,
       email: (email as HTMLInputElement).value,
       password: (password as HTMLInputElement).value,
+      role: 2,
     };
 
     try {
