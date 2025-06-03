@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, NavLink } from "react-router";
+
+import "./SideNav.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -23,21 +25,24 @@ function Navbar() {
 
   return (
     <nav className="h-full text-center md:text-left">
-      <ul className="flex flex-col space-y-4 text-gray-800">
+      <menu className="flex flex-col space-y-4 text-gray-800 sideNav">
         <li
-          className="cursor-pointer hover:bg-gray-300 p-2 rounded"
-          onClick={() => navigate("/")}
+        // onClick={() => navigate("/")}
         >
-          Home
+          <NavLink className="block w-full hover:bg-gray-300 p-2" to="/">
+            Home
+          </NavLink>
         </li>
         {isLoggedIn ? (
           ""
         ) : (
-          <li
-            className="cursor-pointer hover:bg-gray-300 p-2 rounded"
-            onClick={() => navigate("/register")}
-          >
-            Register
+          <li>
+            <NavLink
+              className="block w-full hover:bg-gray-300 p-2 rounded"
+              to="/register"
+            >
+              Register
+            </NavLink>
           </li>
         )}
 
@@ -50,15 +55,19 @@ function Navbar() {
           </li>
         ) : (
           <li
-            className="cursor-pointer hover:bg-gray-300 p-2 rounded"
-            onClick={() => navigate("/login")}
+          // onClick={() => navigate("/login")}
           >
-            Log In
+            <NavLink
+              className="block w-full hover:bg-gray-300 p-2 rounded "
+              to="/login"
+            >
+              Log In
+            </NavLink>
           </li>
         )}
 
         <li className="cursor-pointer hover:bg-gray-300 p-2 rounded">Stuff</li>
-      </ul>
+      </menu>
     </nav>
   );
 }

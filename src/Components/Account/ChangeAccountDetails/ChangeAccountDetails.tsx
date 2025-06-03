@@ -60,6 +60,9 @@ export function ChangeAccountDetails() {
       alert(error.message);
     }
   }
+  function discardChanges() {
+    navigate("/account");
+  }
   useEffect(() => {
     setGetUser(getCurrentUser);
   }, []);
@@ -138,8 +141,10 @@ export function ChangeAccountDetails() {
             required
           />
         </div>
-
-        <Button text="Confirm Changes" width />
+        <div className="flex flex-row gap-2">
+          <Button text="Anulează" color="red" width onClick={discardChanges} />
+          <Button text="Confirmă" width />
+        </div>
       </form>
     </div>
   );

@@ -66,17 +66,21 @@ export function ModifyCar() {
 
     const response = await fetch(url, options);
     const data = await response.json();
-    // Optional: navigate or show a success message
+
     console.log("Updated", data);
     alert("Vehicul modificat cu succes !");
-    navigate("/"); // redirect after edit
+    navigate("/");
+  }
+
+  function discardChanges() {
+    navigate("/");
   }
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4 mb-10 mt-10 flex-col">
       <form
         onSubmit={sendFormDetails}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10 flex flex-col gap-2"
       >
         <h2 className="text-2xl font-semibold mb-6 text-center">
           Modificare date
@@ -189,13 +193,16 @@ export function ModifyCar() {
             }
             required
           >
-            <option value="Activă">Activă</option>
-            <option value="Vândută">Vândută</option>
+            <option value="Activa">Activă</option>
+            <option value="Vanduta">Vândută</option>
           </select>
         </div>
 
-        <Button text="Modifică Mașină" width />
+        <div className="flex flex-row gap-2">
+          <Button text="Confirmă" width onClick={() => editCar} />
+        </div>
 
+        <Button text="Anulează" color="red" width onClick={discardChanges} />
         <p className="text-xs mt-4">
           Câmpurile marcate cu <span className="text-red-600">*</span> sunt
           obligatorii!
