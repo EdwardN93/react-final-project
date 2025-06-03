@@ -199,10 +199,18 @@ export function ModifyCar() {
         </div>
 
         <div className="flex flex-row gap-2">
-          <Button text="Confirmă" width onClick={() => editCar} />
+          <Button
+            text="Anulează"
+            color="red"
+            width
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault();
+              discardChanges();
+            }}
+          />
+          <Button text="Confirmă" width />
         </div>
 
-        <Button text="Anulează" color="red" width onClick={discardChanges} />
         <p className="text-xs mt-4">
           Câmpurile marcate cu <span className="text-red-600">*</span> sunt
           obligatorii!

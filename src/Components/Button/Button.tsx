@@ -2,7 +2,7 @@ type Button = {
   text: string;
   color?: "blue" | "red" | "green" | "sky" | "gray"; // Add more Tailwind colors as needed
   width?: boolean;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function Button({ text, onClick, width, color = "blue" }: Button) {
