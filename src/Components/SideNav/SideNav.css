@@ -3,10 +3,13 @@
     border-radius: 10px;
     color: var(--text-inverted);
     text-decoration: none;
+    transition: all 0.2s ease-in-out;
 
     &.active {
       color: color-mix(in srgb, var(--text-inverted) 70%, #000);
-      text-decoration: underline;
+      /* background-color: #d1d5db; */
+      color: #448bff;
+      font-weight: bold;
     }
   }
 }

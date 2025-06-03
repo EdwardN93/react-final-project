@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router";
+import { AnimatePresence, motion } from "framer-motion";
+import { useLocation } from "react-router";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
 import Landing from "./Components/Home/Landing";
 import SideNav from "./Components/SideNav/SideNav";
@@ -35,20 +37,22 @@ function App() {
           </div>
 
           <MainNav />
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register-car" element={<RegisterCar />} />
-            <Route path="/vehicles/:id" element={<VehicleDetails />} />
-            <Route path="/modify-car/:id" element={<ModifyCar />} />
-            <Route path="/account" element={<Account />} />
-            <Route
-              path="/change-account-details"
-              element={<ChangeAccountDetails />}
-            />
-          </Routes>
-          <Footer />
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register-car" element={<RegisterCar />} />
+              <Route path="/vehicles/:id" element={<VehicleDetails />} />
+              <Route path="/modify-car/:id" element={<ModifyCar />} />
+              <Route path="/account" element={<Account />} />
+              <Route
+                path="/change-account-details"
+                element={<ChangeAccountDetails />}
+              />
+            </Routes>
+            <Footer />
+          </AnimatePresence>
         </div>
       </main>
     </div>

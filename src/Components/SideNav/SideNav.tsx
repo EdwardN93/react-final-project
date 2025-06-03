@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router";
+import { FaChartBar, FaRegUser, FaUser } from "react-icons/fa";
 
 import "./SideNav.css";
 
@@ -29,8 +30,12 @@ function Navbar() {
         <li
         // onClick={() => navigate("/")}
         >
-          <NavLink className="block w-full hover:bg-gray-300 p-2" to="/">
-            Home
+          <NavLink
+            className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
+            to="/"
+            viewTransition
+          >
+            <FaChartBar /> Home
           </NavLink>
         </li>
         {isLoggedIn ? (
@@ -38,30 +43,32 @@ function Navbar() {
         ) : (
           <li>
             <NavLink
-              className="block w-full hover:bg-gray-300 p-2 rounded"
+              className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
               to="/register"
+              viewTransition
             >
-              Register
+              <FaRegUser /> Register
             </NavLink>
           </li>
         )}
 
         {isLoggedIn ? (
           <li
-            className="cursor-pointer hover:bg-gray-300 p-2 rounded"
+            className=" flex cursor-pointer hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
             onClick={logOut}
           >
-            Log Out
+            <FaRegUser /> Log Out
           </li>
         ) : (
           <li
           // onClick={() => navigate("/login")}
           >
             <NavLink
-              className="block w-full hover:bg-gray-300 p-2 rounded "
+              className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded "
               to="/login"
+              viewTransition
             >
-              Log In
+              <FaUser /> Log In
             </NavLink>
           </li>
         )}

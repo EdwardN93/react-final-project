@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Car } from "../Types/Types";
+import { motion } from "framer-motion";
 
 export default function Landing() {
   const location = useLocation();
@@ -81,159 +82,174 @@ export default function Landing() {
   }
 
   return (
-    <div
-      className="table_component overflow-auto mb-16"
-      role="region"
-      tabIndex={0}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
     >
-      <table className="min-w-full border border-gray-300">
-        <caption className="caption-top font-bold text-lg mb-8">
-          All Company Cars
-        </caption>
-        <thead className="bg-gray-200">
-          <tr>
-            <th
-              className="p-2 border hover:cursor-pointer"
-              onClick={() => {
-                setSorter(!sorter);
-                sortAscDescId(sorter);
-              }}
-            >
-              ID {sorter ? "↓" : "↑"}
-            </th>
-            <th className="p-2 border">Plate Number</th>
-            <th className="p-2 border">Brand</th>
-            <th className="p-2 border">Model</th>
-            <th className="p-2 border">VIN</th>
-            <th className="p-2 border">Fuel Type</th>
-            <th className="p-2 border">Engine (cc)</th>
-            <th className="p-2 border">Category</th>
-            <th className="p-2 border">Department</th>
-            <th className="p-2 border">Assigned To</th>
-            <th className="p-2 border">Status</th>
-          </tr>
-          <tr>
-            <td className="p-2 border" />
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.plateNumber}
-                onChange={(e) =>
-                  handleFilterChange("plateNumber", e.target.value)
-                }
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.carBrand}
-                onChange={(e) => handleFilterChange("carBrand", e.target.value)}
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.carName}
-                onChange={(e) => handleFilterChange("carName", e.target.value)}
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.vinNumber}
-                onChange={(e) =>
-                  handleFilterChange("vinNumber", e.target.value)
-                }
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.fuelType}
-                onChange={(e) => handleFilterChange("fuelType", e.target.value)}
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="number"
-                className="w-full p-1"
-                value={filters.engineCapacity}
-                onChange={(e) =>
-                  handleFilterChange("engineCapacity", e.target.value)
-                }
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.category}
-                onChange={(e) => handleFilterChange("category", e.target.value)}
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.department}
-                onChange={(e) =>
-                  handleFilterChange("department", e.target.value)
-                }
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.user}
-                onChange={(e) => handleFilterChange("user", e.target.value)}
-              />
-            </td>
-            <td className="p-2 border">
-              <input
-                type="text"
-                className="w-full p-1"
-                value={filters.status}
-                onChange={(e) => handleFilterChange("status", e.target.value)}
-              />
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCars.length === 0 ? (
+      <div
+        className="table_component overflow-auto mb-16"
+        role="region"
+        tabIndex={0}
+      >
+        <table className="min-w-full border border-gray-300">
+          <caption className="caption-top font-bold text-lg mb-8">
+            All Company Cars
+          </caption>
+          <thead className="bg-gray-200">
             <tr>
-              <td colSpan={10} className="text-center p-4">
-                No vehicles found.
+              <th
+                className="p-2 border hover:cursor-pointer"
+                onClick={() => {
+                  setSorter(!sorter);
+                  sortAscDescId(sorter);
+                }}
+              >
+                ID {sorter ? "↓" : "↑"}
+              </th>
+              <th className="p-2 border">Plate Number</th>
+              <th className="p-2 border">Brand</th>
+              <th className="p-2 border">Model</th>
+              <th className="p-2 border">VIN</th>
+              <th className="p-2 border">Fuel Type</th>
+              <th className="p-2 border">Engine (cc)</th>
+              <th className="p-2 border">Category</th>
+              <th className="p-2 border">Department</th>
+              <th className="p-2 border">Assigned To</th>
+              <th className="p-2 border">Status</th>
+            </tr>
+            <tr>
+              <td className="p-2 border" />
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.plateNumber}
+                  onChange={(e) =>
+                    handleFilterChange("plateNumber", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.carBrand}
+                  onChange={(e) =>
+                    handleFilterChange("carBrand", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.carName}
+                  onChange={(e) =>
+                    handleFilterChange("carName", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.vinNumber}
+                  onChange={(e) =>
+                    handleFilterChange("vinNumber", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.fuelType}
+                  onChange={(e) =>
+                    handleFilterChange("fuelType", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="number"
+                  className="w-full p-1"
+                  value={filters.engineCapacity}
+                  onChange={(e) =>
+                    handleFilterChange("engineCapacity", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.category}
+                  onChange={(e) =>
+                    handleFilterChange("category", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.department}
+                  onChange={(e) =>
+                    handleFilterChange("department", e.target.value)
+                  }
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.user}
+                  onChange={(e) => handleFilterChange("user", e.target.value)}
+                />
+              </td>
+              <td className="p-2 border">
+                <input
+                  type="text"
+                  className="w-full p-1"
+                  value={filters.status}
+                  onChange={(e) => handleFilterChange("status", e.target.value)}
+                />
               </td>
             </tr>
-          ) : (
-            filteredCars.map((car: Car) => (
-              <tr
-                key={car.id}
-                className="hover:bg-sky-300 hover:cursor-pointer"
-                onClick={() => navigate(`/vehicles/${car.id}`)}
-              >
-                <Row carDetail={car.id} />
-                <Row carDetail={car.plateNumber} />
-                <Row carDetail={car.carBrand} />
-                <Row carDetail={car.carName} />
-                <Row carDetail={car.vinNumber} />
-                <Row carDetail={car.fuelType} />
-                <Row carDetail={car.engineCapacity} />
-                <Row carDetail={car.category} />
-                <Row carDetail={car.department} />
-                <Row carDetail={car.user} />
-                <Row carDetail={car.status} />
+          </thead>
+          <tbody>
+            {filteredCars.length === 0 ? (
+              <tr>
+                <td colSpan={10} className="text-center p-4">
+                  No vehicles found.
+                </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </div>
+            ) : (
+              filteredCars.map((car: Car) => (
+                <tr
+                  key={car.id}
+                  className="hover:bg-sky-300 hover:cursor-pointer"
+                  onClick={() => navigate(`/vehicles/${car.id}`)}
+                >
+                  <Row carDetail={car.id} />
+                  <Row carDetail={car.plateNumber} />
+                  <Row carDetail={car.carBrand} />
+                  <Row carDetail={car.carName} />
+                  <Row carDetail={car.vinNumber} />
+                  <Row carDetail={car.fuelType} />
+                  <Row carDetail={car.engineCapacity} />
+                  <Row carDetail={car.category} />
+                  <Row carDetail={car.department} />
+                  <Row carDetail={car.user} />
+                  <Row carDetail={car.status} />
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </motion.div>
   );
 }

@@ -20,6 +20,18 @@ function Navbar() {
 
   const [isLoggedIn, setIsLoggedIn] = useState<string | boolean | null>();
 
+  async function deleteCar() {
+    fetch(`http://localhost:3000/vehicles/${segments[2]}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    alert("Car successfully deleted !");
+    navigate("/");
+  }
+
   useEffect(() => {
     setIsLoggedIn(getAccessToken());
     setGetUser(getCurrentUser());
@@ -43,6 +55,15 @@ function Navbar() {
               text="Modifică mașină"
               color="green"
               onClick={() => navigate(`/modify-car/${id}`)}
+            />
+          </li>
+        )}
+        {id && getUser?.role === 1 && (
+          <li>
+            <Button
+              text="Sterge mașină"
+              color="red"
+              onClick={() => deleteCar()}
             />
           </li>
         )}

@@ -26,32 +26,6 @@
   ],
   "vehicles": [
     {
-      "plateNumber": "IF07TCH",
-      "carBrand": "Nissan",
-      "carName": "X-Trail",
-      "vinNumber": "NSSNX88334R",
-      "engineCapacity": "1998",
-      "fuelType": "Benzină",
-      "category": "Turism",
-      "department": "Vânzări",
-      "user": "Florian Patru",
-      "status": "Activa",
-      "id": 2
-    },
-    {
-      "plateNumber": "B21TCH",
-      "carBrand": "Nissan",
-      "carName": "X-Trail",
-      "vinNumber": "NSSN43892KS",
-      "engineCapacity": "1998",
-      "fuelType": "Hibrid",
-      "category": "Autoturism M1",
-      "department": "Vânzări",
-      "user": "Papadocle Mamanuanu",
-      "status": "Activa",
-      "id": 3
-    },
-    {
       "plateNumber": "B52TCH",
       "carBrand": "Dacia",
       "carName": "Dokker",
@@ -86,7 +60,7 @@
       "fuelType": "Motorină",
       "category": "Autoturism M1",
       "department": "Logistică",
-      "user": "Laurentiu Nedelcu",
+      "user": "Laurentiu Nedelcul",
       "status": "Activa",
       "id": 6
     },
@@ -100,7 +74,7 @@
       "category": "Autoturism M1",
       "department": "Marketing",
       "user": "Seda Koek",
-      "status": "Activa",
+      "status": "Vanduta",
       "id": 7
     },
     {
@@ -111,7 +85,7 @@
       "engineCapacity": "1198",
       "fuelType": "Motorină",
       "category": "Autoutilitara N1",
-      "department": "Service",
+      "department": "Cafenele",
       "user": "Nedelciu Alexandru",
       "status": "Activa",
       "id": 8
@@ -123,7 +97,7 @@
       "vinNumber": "NSSJK284292",
       "engineCapacity": "1198",
       "fuelType": "Benzină",
-      "category": "Autoturism M1",
+      "category": "Autoturism M1G",
       "department": "Vânzări",
       "user": "Marian Stelea",
       "status": "Activa",

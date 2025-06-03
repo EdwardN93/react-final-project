@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { getCurrentUser, getAccessToken } from "../../routes/auth/Login/utils";
 import { Button } from "../../Button/Button";
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 export function ChangeAccountDetails() {
   type User = {
     email: string;
@@ -68,84 +69,96 @@ export function ChangeAccountDetails() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col ">
-      <form
-        onSubmit={onEditChange}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
-      >
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          Change Password
-        </h2>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col ">
+        <form
+          onSubmit={onEditChange}
+          className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
+        >
+          <h2 className="text-2xl font-semibold mb-6 text-center">
+            Change Password
+          </h2>
 
-        <div className="mb-4">
-          <label htmlFor="firstName" className="block mb-1 font-medium">
-            Change First Name
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label htmlFor="firstName" className="block mb-1 font-medium">
+              Change First Name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="lastName" className="block mb-1 font-medium">
-            Change Last Name
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label htmlFor="lastName" className="block mb-1 font-medium">
+              Change Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-1 font-medium">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block mb-1 font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="password" className="block mb-1 font-medium">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block mb-1 font-medium">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div className="mb-6">
-          <label htmlFor="reTypePassword" className="block mb-1 font-medium">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="reTypePassword"
-            name="reTypePassword"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
-        </div>
-        <div className="flex flex-row gap-2">
-          <Button text="Anulează" color="red" width onClick={discardChanges} />
-          <Button text="Confirmă" width />
-        </div>
-      </form>
-    </div>
+          <div className="mb-6">
+            <label htmlFor="reTypePassword" className="block mb-1 font-medium">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="reTypePassword"
+              name="reTypePassword"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              required
+            />
+          </div>
+          <div className="flex flex-row gap-2">
+            <Button
+              text="Anulează"
+              color="red"
+              width
+              onClick={discardChanges}
+            />
+            <Button text="Confirmă" width />
+          </div>
+        </form>
+      </div>
+    </motion.div>
   );
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getCurrentUser, getAccessToken } from "../routes/auth/Login/utils";
 import { Button } from "../Button/Button";
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 
 type User = {
   email: string;
@@ -47,25 +48,32 @@ export function Account() {
   }
 
   return (
-    <div className="flex flex-col justify-center mt-6">
-      <h1 className="text-lg">User Details</h1>
-      <span>
-        Nume: {user?.firstName} {user?.lastName}
-      </span>
-      <i className="fas fa-heart"></i>
-      <span>Email: {user?.email}</span>
-      <span>Tip cont: {user?.role === 1 ? "Admin" : "User"}</span>
-      <span>
-        Doar tipul de cont <strong>ADMIN</strong> poate adăuga / modifica /
-        șterge datele mașinilor<span className="text-red-600">*</span>
-      </span>
-      <div className="flex mt-6">
-        <Button
-          text="Modifică date cont"
-          onClick={getToModifyAccountDetailsPage}
-          color="green"
-        />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex flex-col justify-center mt-6">
+        <h1 className="text-lg">User Details</h1>
+        <span>
+          Nume: {user?.firstName} {user?.lastName}
+        </span>
+        <i className="fas fa-heart"></i>
+        <span>Email: {user?.email}</span>
+        <span>Tip cont: {user?.role === 1 ? "Admin" : "User"}</span>
+        <span>
+          Doar tipul de cont <strong>ADMIN</strong> poate adăuga / modifica /
+          șterge datele mașinilor<span className="text-red-600">*</span>
+        </span>
+        <div className="flex mt-6">
+          <Button
+            text="Modifică date cont"
+            onClick={getToModifyAccountDetailsPage}
+            color="green"
+          />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
