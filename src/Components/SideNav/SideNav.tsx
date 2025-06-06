@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation, NavLink } from "react-router";
+import { useLocation, NavLink, useNavigate } from "react-router";
 import { FaChartBar, FaRegUser, FaUser } from "react-icons/fa";
-
+import { LiElementProps } from "../Types/Types";
+import { logout } from "../routes/auth/Logout/Logout";
 import "./SideNav.css";
 
-function Navbar() {
+export default function SideNav() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,23 +14,24 @@ function Navbar() {
   );
 
   useEffect(() => {
-    // Check for changes in route and update login status
     setIsLoggedIn(!!localStorage.getItem("user"));
   }, [location]);
 
-  const logOut = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/login");
-  };
+  // const logOut = () => {
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("token");
+  //   setIsLoggedIn(false);
+  //   navigate("/login");
+  // };
+
+  function LiElement({ children, ...props }: LiElementProps) {
+    return <li {...props}>{children}</li>;
+  }
 
   return (
     <nav className="h-full text-center md:text-left">
       <menu className="flex flex-col space-y-4 text-gray-800 sideNav">
-        <li
-        // onClick={() => navigate("/")}
-        >
+        <LiElement>
           <NavLink
             className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
             to="/"
@@ -37,11 +39,11 @@ function Navbar() {
           >
             <FaChartBar /> Home
           </NavLink>
-        </li>
+        </LiElement>
         {isLoggedIn ? (
           ""
         ) : (
-          <li>
+          <LiElement>
             <NavLink
               className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
               to="/register"
@@ -49,20 +51,18 @@ function Navbar() {
             >
               <FaRegUser /> Register
             </NavLink>
-          </li>
+          </LiElement>
         )}
 
         {isLoggedIn ? (
-          <li
+          <LiElement
             className=" flex cursor-pointer hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
-            onClick={logOut}
+            onClick={() => logout(setIsLoggedIn, navigate)}
           >
             <FaRegUser /> Log Out
-          </li>
+          </LiElement>
         ) : (
-          <li
-          // onClick={() => navigate("/login")}
-          >
+          <LiElement>
             <NavLink
               className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded "
               to="/login"
@@ -70,7 +70,7 @@ function Navbar() {
             >
               <FaUser /> Log In
             </NavLink>
-          </li>
+          </LiElement>
         )}
 
         <li className="cursor-pointer hover:bg-gray-300 p-2 rounded">Stuff</li>
@@ -78,5 +78,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

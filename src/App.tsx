@@ -18,6 +18,7 @@ import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 
 function App() {
   const navigate = useNavigate();
+
   useEffect(() => {}, [navigate]);
 
   return (
@@ -38,7 +39,7 @@ function App() {
 
           <MainNav />
           <AnimatePresence mode="wait">
-            <Routes>
+            <Routes key={location.pathname}>
               <Route path="/" element={<Landing />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />

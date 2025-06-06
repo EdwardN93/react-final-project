@@ -60,7 +60,7 @@
       "fuelType": "Motorină",
       "category": "Autoturism M1",
       "department": "Logistică",
-      "user": "Laurentiu Nedelcul",
+      "user": "Laurentiu Nedelcu",
       "status": "Activa",
       "id": 6
     },
@@ -74,7 +74,7 @@
       "category": "Autoturism M1",
       "department": "Marketing",
       "user": "Seda Koek",
-      "status": "Vanduta",
+      "status": "Activa",
       "id": 7
     },
     {
@@ -85,7 +85,7 @@
       "engineCapacity": "1198",
       "fuelType": "Motorină",
       "category": "Autoutilitara N1",
-      "department": "Cafenele",
+      "department": "Service",
       "user": "Nedelciu Alexandru",
       "status": "Activa",
       "id": 8
@@ -102,6 +102,19 @@
       "user": "Marian Stelea",
       "status": "Activa",
       "id": 9
+    },
+    {
+      "plateNumber": "B82JDS",
+      "carBrand": "Mercedes",
+      "carName": "E-Class",
+      "vinNumber": "MRCDOI4324",
+      "engineCapacity": "2997",
+      "fuelType": "Benzină",
+      "category": "Autoturism M1",
+      "department": "Administrativ",
+      "user": "Cocker Joe",
+      "status": "Activa",
+      "id": 10
     }
   ]
 }

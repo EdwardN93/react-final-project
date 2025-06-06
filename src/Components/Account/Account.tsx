@@ -43,7 +43,6 @@ export function Account() {
   }, []);
 
   function getToModifyAccountDetailsPage() {
-    console.log("clickd");
     navigate("/change-account-details");
   }
 

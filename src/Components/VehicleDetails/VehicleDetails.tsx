@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Car } from "../Types/Types";
+import { motion } from "framer-motion";
 
 export default function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
@@ -29,39 +30,46 @@ export default function VehicleDetails() {
   if (!car) return <div className="p-6">Loading car data...</div>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">
-        Vehicle Details - {car.plateNumber}
-      </h2>
-      <ul className="space-y-2">
-        <li>
-          <strong>Brand:</strong> {car.carBrand}
-        </li>
-        <li>
-          <strong>Model:</strong> {car.carName}
-        </li>
-        <li>
-          <strong>VIN:</strong> {car.vinNumber}
-        </li>
-        <li>
-          <strong>Combustibil:</strong> {car.fuelType}
-        </li>
-        <li>
-          <strong>Capacitate Motor:</strong> {car.engineCapacity} cmc
-        </li>
-        <li>
-          <strong>Categorie:</strong> {car.category}
-        </li>
-        <li>
-          <strong>Departament:</strong> {car.department}
-        </li>
-        <li>
-          <strong>Utilizator:</strong> {car.user}
-        </li>
-        <li>
-          <strong>Status:</strong> {car.status}
-        </li>
-      </ul>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="p-6">
+        <h2 className="text-xl font-bold mb-4">
+          Vehicle Details - {car.plateNumber}
+        </h2>
+        <ul className="space-y-2">
+          <li>
+            <strong>Brand:</strong> {car.carBrand}
+          </li>
+          <li>
+            <strong>Model:</strong> {car.carName}
+          </li>
+          <li>
+            <strong>VIN:</strong> {car.vinNumber}
+          </li>
+          <li>
+            <strong>Combustibil:</strong> {car.fuelType}
+          </li>
+          <li>
+            <strong>Capacitate Motor:</strong> {car.engineCapacity} cmc
+          </li>
+          <li>
+            <strong>Categorie:</strong> {car.category}
+          </li>
+          <li>
+            <strong>Departament:</strong> {car.department}
+          </li>
+          <li>
+            <strong>Utilizator:</strong> {car.user}
+          </li>
+          <li>
+            <strong>Status:</strong> {car.status}
+          </li>
+        </ul>
+      </div>
+    </motion.div>
   );
 }

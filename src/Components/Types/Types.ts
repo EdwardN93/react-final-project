@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type Car = {
   id?: number;
   plateNumber?: string;
@@ -10,4 +12,11 @@ export type Car = {
   department?: string;
   user?: string;
   status?: string;
+};
+
+// li Element for SideNav
+export type LiElementProps = {
+  children?: ReactNode;
+  className?: string;
+  onClick?: () => void;
 };
