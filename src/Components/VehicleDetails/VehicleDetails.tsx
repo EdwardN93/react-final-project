@@ -29,6 +29,18 @@ export default function VehicleDetails() {
   if (!token) return <div className="p-6 text-red-600">Please log in.</div>;
   if (!car) return <div className="p-6">Loading car data...</div>;
 
+  const carDetails = [
+    { label: "Brand", value: car.carBrand },
+    { label: "Model", value: car.carName },
+    { label: "VIN", value: car.vinNumber },
+    { label: "Combustibil", value: car.fuelType },
+    { label: "Capacitate Motor", value: `${car.engineCapacity} cmc` },
+    { label: "Categorie", value: car.category },
+    { label: "Departament", value: car.department },
+    { label: "Utilizator", value: car.user },
+    { label: "Status", value: car.status },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -41,33 +53,11 @@ export default function VehicleDetails() {
           Vehicle Details - {car.plateNumber}
         </h2>
         <ul className="space-y-2">
-          <li>
-            <strong>Brand:</strong> {car.carBrand}
-          </li>
-          <li>
-            <strong>Model:</strong> {car.carName}
-          </li>
-          <li>
-            <strong>VIN:</strong> {car.vinNumber}
-          </li>
-          <li>
-            <strong>Combustibil:</strong> {car.fuelType}
-          </li>
-          <li>
-            <strong>Capacitate Motor:</strong> {car.engineCapacity} cmc
-          </li>
-          <li>
-            <strong>Categorie:</strong> {car.category}
-          </li>
-          <li>
-            <strong>Departament:</strong> {car.department}
-          </li>
-          <li>
-            <strong>Utilizator:</strong> {car.user}
-          </li>
-          <li>
-            <strong>Status:</strong> {car.status}
-          </li>
+          {carDetails.map(({ label, value }) => (
+            <li key={label}>
+              <strong>{label}:</strong> {value}
+            </li>
+          ))}
         </ul>
       </div>
     </motion.div>
