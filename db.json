@@ -36,7 +36,7 @@
       "department": "Logistică",
       "user": "Gugiu Daniel",
       "status": "Activa",
-      "nextRevDate": "2025-10-08",
+      "nextRevDate": "2025-07-15",
       "id": 4
     },
     {
@@ -92,7 +92,7 @@
       "department": "Service",
       "user": "Nedelciu Alexandru",
       "status": "Activa",
-      "nextRevDate": "2025-06-08",
+      "nextRevDate": "2026-06-09",
       "id": 8
     },
     {
@@ -120,7 +120,7 @@
       "department": "Administrativ",
       "user": "Cocker Joe",
       "status": "Activa",
-      "nextRevDate": "2025-06-07",
+      "nextRevDate": "2026-06-07",
       "id": 10
     },
     {
@@ -134,7 +134,7 @@
       "department": "Vânzări",
       "user": "Marian Marinu",
       "status": "Activa",
-      "nextRevDate": "2025-06-17",
+      "nextRevDate": "2026-06-17",
       "id": 11
     }
   ]

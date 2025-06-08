@@ -38,21 +38,23 @@ function App() {
 
           <MainNav />
           <AnimatePresence mode="wait">
-            <Routes key={location.pathname}>
-              <Route path="/" element={<Landing />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register-car" element={<RegisterCar />} />
-              <Route path="/vehicles/:id" element={<VehicleDetails />} />
-              <Route path="/modify-car/:id" element={<ModifyCar />} />
-              <Route path="/account" element={<Account />} />
-              <Route
-                path="/change-account-details"
-                element={<ChangeAccountDetails />}
-              />
-            </Routes>
-            <Footer />
+            <motion.div>
+              <Routes key={location.pathname}>
+                <Route path="/" element={<Landing />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register-car" element={<RegisterCar />} />
+                <Route path="/vehicles/:id" element={<VehicleDetails />} />
+                <Route path="/modify-car/:id" element={<ModifyCar />} />
+                <Route path="/account" element={<Account />} />
+                <Route
+                  path="/change-account-details"
+                  element={<ChangeAccountDetails />}
+                />
+              </Routes>
+            </motion.div>
           </AnimatePresence>
+          <Footer />
         </div>
       </main>
     </div>
