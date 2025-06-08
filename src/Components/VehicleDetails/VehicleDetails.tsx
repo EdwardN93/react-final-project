@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
+import { intlDate, compareDates } from "../functions/getDate";
 
 export default function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
@@ -39,6 +40,14 @@ export default function VehicleDetails() {
     { label: "Departament", value: car.department },
     { label: "Utilizator", value: car.user },
     { label: "Status", value: car.status },
+    {
+      label: "Data următoarei revizii",
+      value: intlDate(car?.nextRevDate ? car.nextRevDate : ""),
+    },
+    {
+      label: "Timp rămas până la revizie (zile)",
+      value: compareDates(car?.nextRevDate ? car.nextRevDate : ""),
+    },
   ];
 
   return (
@@ -53,11 +62,19 @@ export default function VehicleDetails() {
           Vehicle Details - {car.plateNumber}
         </h2>
         <ul className="space-y-2">
-          {carDetails.map(({ label, value }) => (
-            <li key={label}>
-              <strong>{label}:</strong> {value}
-            </li>
-          ))}
+          {carDetails.map(({ label, value }) => {
+            const revizie = label === "Timp rămas până la revizie (zile)";
+            const isUrgent =
+              revizie && typeof value === "number" && value <= 30;
+            return (
+              <li
+                key={label}
+                className={isUrgent ? "text-red-600 font-semibold" : ""}
+              >
+                <strong>{label}:</strong> {value}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </motion.div>

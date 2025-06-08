@@ -12,6 +12,7 @@ export type Car = {
   department?: string;
   user?: string;
   status?: string;
+  nextRevDate?: string;
 };
 
 // li Element for SideNav

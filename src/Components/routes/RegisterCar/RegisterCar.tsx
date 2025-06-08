@@ -21,6 +21,7 @@ export function RegisterCar() {
       department,
       user,
       status,
+      nextRevDate,
     } = formData;
 
     const car: Car = {
@@ -34,6 +35,7 @@ export function RegisterCar() {
       department: department.value,
       user: user.value,
       status: status.value,
+      nextRevDate: nextRevDate.value,
     };
 
     registerCar(car);
@@ -152,6 +154,34 @@ export function RegisterCar() {
           </div>
 
           <div className="mb-4">
+            <label htmlFor="user" className="block mb-1 font-medium">
+              Nume utilizator mașină<span className="text-red-600">*</span>
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              type="text"
+              name="user"
+              id=""
+              placeholder="Utilizator"
+              required
+            ></input>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="nextRevDate" className="block mb-1 font-medium">
+              Data Revezie<span className="text-red-600">*</span>
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              type="date"
+              name="nextRevDate"
+              id="nextRevDate"
+              placeholder="Utilizator"
+              required
+            ></input>
+          </div>
+
+          <div className="mb-4">
             <label htmlFor="fuelType" className="block mb-1 font-medium">
               Combustibil<span className="text-red-600">*</span>
             </label>
@@ -204,20 +234,6 @@ export function RegisterCar() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="user" className="block mb-1 font-medium">
-              Nume utilizator mașină<span className="text-red-600">*</span>
-            </label>
-            <input
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-              type="text"
-              name="user"
-              id=""
-              placeholder="Utilizator"
-              required
-            ></input>
-          </div>
-
-          <div className="mb-4">
             <label htmlFor="status" className="block mb-1 font-medium">
               Status Mașină<span className="text-red-600">*</span>
             </label>
@@ -229,6 +245,7 @@ export function RegisterCar() {
               <option value="Vanduta">Vândută</option>
             </select>
           </div>
+
           <div className="flex justify-center gap-2">
             <Button text="Renunta" color="red" width onClick={discardChanges} />
             <Button text="Adaugă" width />

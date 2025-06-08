@@ -36,6 +36,7 @@
       "department": "Logistică",
       "user": "Gugiu Daniel",
       "status": "Activa",
+      "nextRevDate": "2025-10-08",
       "id": 4
     },
     {
@@ -49,6 +50,7 @@
       "department": "Logistică",
       "user": "Marian Sirbu",
       "status": "Activa",
+      "nextRevDate": "2025-10-06",
       "id": 5
     },
     {
@@ -62,6 +64,7 @@
       "department": "Logistică",
       "user": "Laurentiu Nedelcu",
       "status": "Activa",
+      "nextRevDate": "2026-08-07",
       "id": 6
     },
     {
@@ -75,6 +78,7 @@
       "department": "Marketing",
       "user": "Seda Koek",
       "status": "Activa",
+      "nextRevDate": "2026-03-18",
       "id": 7
     },
     {
@@ -88,6 +92,7 @@
       "department": "Service",
       "user": "Nedelciu Alexandru",
       "status": "Activa",
+      "nextRevDate": "2025-06-08",
       "id": 8
     },
     {
@@ -101,6 +106,7 @@
       "department": "Vânzări",
       "user": "Marian Stelea",
       "status": "Activa",
+      "nextRevDate": "2025-07-04",
       "id": 9
     },
     {
@@ -114,7 +120,22 @@
       "department": "Administrativ",
       "user": "Cocker Joe",
       "status": "Activa",
+      "nextRevDate": "2025-06-07",
       "id": 10
+    },
+    {
+      "plateNumber": "B99TCH",
+      "carBrand": "Nissan",
+      "carName": "Juke",
+      "vinNumber": "NSSNJK23932",
+      "engineCapacity": "1197",
+      "fuelType": "Benzină",
+      "category": "Autoturism M1",
+      "department": "Vânzări",
+      "user": "Marian Marinu",
+      "status": "Activa",
+      "nextRevDate": "2025-06-17",
+      "id": 11
     }
   ]
 }

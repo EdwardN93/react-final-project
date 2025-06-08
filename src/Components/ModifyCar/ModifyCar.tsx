@@ -20,6 +20,7 @@ export function ModifyCar() {
     department: "",
     user: "",
     status: "",
+    nextRevDate: "",
   });
 
   useEffect(() => {
@@ -101,6 +102,7 @@ export function ModifyCar() {
             { id: "vinNumber", label: "Serie șasiu" },
             { id: "engineCapacity", label: "Capacitate cilindrică" },
             { id: "user", label: "Nume utilizator mașină" },
+            { id: "nextRevDate", label: "Data revizie" },
           ].map(({ id, label }) => (
             <div className="mb-4" key={id}>
               <label htmlFor={id} className="block mb-1 font-medium">
@@ -108,7 +110,7 @@ export function ModifyCar() {
                 <span className="text-red-600">*</span>
               </label>
               <input
-                type="text"
+                type={id === "nextRevDate" ? "date" : "text"}
                 id={id}
                 name={id}
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"

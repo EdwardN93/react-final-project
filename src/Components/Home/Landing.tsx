@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
+import { compareDates, intlDate } from "../functions/getDate";
 
 export default function Landing() {
   const location = useLocation();
@@ -227,25 +228,35 @@ export default function Landing() {
                 </td>
               </tr>
             ) : (
-              filteredCars.map((car: Car) => (
-                <tr
-                  key={car.id}
-                  className="hover:bg-sky-300 hover:cursor-pointer"
-                  onClick={() => navigate(`/vehicles/${car.id}`)}
-                >
-                  <Row carDetail={car.id} />
-                  <Row carDetail={car.plateNumber} />
-                  <Row carDetail={car.carBrand} />
-                  <Row carDetail={car.carName} />
-                  <Row carDetail={car.vinNumber} />
-                  <Row carDetail={car.fuelType} />
-                  <Row carDetail={car.engineCapacity} />
-                  <Row carDetail={car.category} />
-                  <Row carDetail={car.department} />
-                  <Row carDetail={car.user} />
-                  <Row carDetail={car.status} />
-                </tr>
-              ))
+              filteredCars.map((car: Car) => {
+                const urgent = car?.nextRevDate
+                  ? compareDates(car.nextRevDate) <= 30
+                  : false;
+
+                return (
+                  <tr
+                    key={car.id}
+                    className={
+                      urgent
+                        ? `bg-red-300 hover:bg-red-200 hover:cursor-pointer`
+                        : "hover:bg-sky-300 hover:cursor-pointer"
+                    }
+                    onClick={() => navigate(`/vehicles/${car.id}`)}
+                  >
+                    <Row carDetail={car.id} />
+                    <Row carDetail={car.plateNumber} />
+                    <Row carDetail={car.carBrand} />
+                    <Row carDetail={car.carName} />
+                    <Row carDetail={car.vinNumber} />
+                    <Row carDetail={car.fuelType} />
+                    <Row carDetail={car.engineCapacity} />
+                    <Row carDetail={car.category} />
+                    <Row carDetail={car.department} />
+                    <Row carDetail={car.user} />
+                    <Row carDetail={car.status} />
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>

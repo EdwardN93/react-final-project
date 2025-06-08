@@ -20,7 +20,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {}, [navigate]);
-
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       <ScrollToTop />
