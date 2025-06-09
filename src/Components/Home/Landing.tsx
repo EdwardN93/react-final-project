@@ -70,9 +70,10 @@ export default function Landing() {
     })
   );
 
-  function Row({ carDetail }: any) {
+  function Row({ carDetail }) {
     return <td className="p-2 border text-center">{carDetail}</td>;
   }
+  0;
 
   if (!token) {
     return (

@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation } from "react-router";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
 import Landing from "./Components/Home/Landing";
 import SideNav from "./Components/SideNav/SideNav";
 import MainNav from "./Components/MainNav/MainNav";
-import Footer from "./Components/footer/Footer";
+import Footer from "./Components/Footer/Footer";
 import { Account } from "./Components/Account/Account";
 import { ChangeAccountDetails } from "./Components/Account/ChangeAccountDetails/ChangeAccountDetails";
 import VehicleDetails from "./Components/VehicleDetails/VehicleDetails";
@@ -23,12 +22,11 @@ function App() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       <ScrollToTop />
-      {/* Sidebar */}
+
       <aside className="w-full md:w-44 bg-gray-200 p-4 md:sticky md:top-0 md:h-screen ">
         <SideNav />
       </aside>
 
-      {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-gray-50">
         <div className="p-6">
           <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
