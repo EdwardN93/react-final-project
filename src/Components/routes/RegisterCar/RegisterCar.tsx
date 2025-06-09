@@ -113,7 +113,7 @@ export function RegisterCar() {
 
           <div className="mb-4">
             <label htmlFor="carName" className="block mb-1 font-medium">
-              Denumire mașină<span className="text-red-600">*</span>
+              Model<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
@@ -161,15 +161,29 @@ export function RegisterCar() {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
               type="text"
               name="user"
-              id=""
+              id="user"
               placeholder="Utilizator"
               required
             ></input>
           </div>
 
           <div className="mb-4">
+            <label htmlFor="kilometers" className="block mb-1 font-medium">
+              Kilometri mașină<span className="text-red-600">*</span>
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              type="text"
+              name="kilometers"
+              id="kilometers"
+              placeholder="120,000"
+              required
+            ></input>
+          </div>
+
+          <div className="mb-4">
             <label htmlFor="nextRevDate" className="block mb-1 font-medium">
-              Data Revizie<span className="text-red-600">*</span>
+              Data revizie<span className="text-red-600">*</span>
             </label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -219,6 +233,7 @@ export function RegisterCar() {
             </label>
             <select
               name="department"
+              id="department"
               className="p-2 rounded hover:cursor-pointer border"
               required
             >
@@ -239,6 +254,7 @@ export function RegisterCar() {
             </label>
             <select
               name="status"
+              id="status"
               className="p-2 rounded hover:cursor-pointer border"
             >
               <option value="Activa">Activă</option>

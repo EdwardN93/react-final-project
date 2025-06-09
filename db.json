@@ -37,6 +37,8 @@
       "user": "Gugiu Daniel",
       "status": "Activa",
       "nextRevDate": "2025-07-15",
+      "kilometers": "145,080",
+
       "id": 4
     },
     {
@@ -51,6 +53,8 @@
       "user": "Marian Sirbu",
       "status": "Activa",
       "nextRevDate": "2025-10-06",
+      "kilometers": "44,513",
+
       "id": 5
     },
     {
@@ -65,6 +69,8 @@
       "user": "Laurentiu Nedelcu",
       "status": "Activa",
       "nextRevDate": "2026-08-07",
+      "kilometers": "150,000",
+
       "id": 6
     },
     {
@@ -79,6 +85,7 @@
       "user": "Seda Koek",
       "status": "Activa",
       "nextRevDate": "2026-03-18",
+      "kilometers": "70,000",
       "id": 7
     },
     {
@@ -93,6 +100,8 @@
       "user": "Nedelciu Alexandru",
       "status": "Activa",
       "nextRevDate": "2026-06-09",
+      "kilometers": "42,872",
+
       "id": 8
     },
     {
@@ -107,6 +116,8 @@
       "user": "Marian Stelea",
       "status": "Activa",
       "nextRevDate": "2025-07-04",
+      "kilometers": "8,511",
+
       "id": 9
     },
     {
@@ -121,6 +132,7 @@
       "user": "Cocker Joe",
       "status": "Activa",
       "nextRevDate": "2026-06-07",
+      "kilometers": "21,874",
       "id": 10
     },
     {
@@ -135,6 +147,7 @@
       "user": "Marian Marinu",
       "status": "Activa",
       "nextRevDate": "2026-06-17",
+      "kilometers": "25,477",
       "id": 11
     }
   ]

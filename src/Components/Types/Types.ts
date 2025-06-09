@@ -13,6 +13,7 @@ export type Car = {
   user?: string;
   status?: string;
   nextRevDate?: string;
+  kilometers?: string;
 };
 
 // li Element for SideNav

@@ -31,15 +31,17 @@ export default function VehicleDetails() {
   if (!car) return <div className="p-6">Loading car data...</div>;
 
   const carDetails = [
-    { label: "Brand", value: car.carBrand },
+    { label: "Marcă", value: car.carBrand },
     { label: "Model", value: car.carName },
-    { label: "VIN", value: car.vinNumber },
+    { label: "Serie șasiu", value: car.vinNumber },
     { label: "Combustibil", value: car.fuelType },
-    { label: "Capacitate Motor", value: `${car.engineCapacity} cmc` },
+    { label: "Capacitate motor", value: `${car.engineCapacity} cmc` },
     { label: "Categorie", value: car.category },
     { label: "Departament", value: car.department },
     { label: "Utilizator", value: car.user },
     { label: "Status", value: car.status },
+    { label: "Kilometri", value: car.kilometers },
+
     {
       label: "Data următoarei revizii",
       value: intlDate(car?.nextRevDate ? car.nextRevDate : ""),
@@ -59,7 +61,7 @@ export default function VehicleDetails() {
     >
       <div className="p-6">
         <h2 className="text-xl font-bold mb-4">
-          Vehicle Details - {car.plateNumber}
+          Detalii Vehicul - {car.plateNumber}
         </h2>
         <ul className="space-y-2">
           {carDetails.map(({ label, value }) => {
@@ -69,7 +71,11 @@ export default function VehicleDetails() {
             return (
               <li
                 key={label}
-                className={isUrgent ? "text-red-600 font-semibold" : ""}
+                className={
+                  isUrgent
+                    ? "text-red-600 font-semibold grid grid-cols-2"
+                    : "grid grid-cols-4"
+                }
               >
                 <strong>{label}:</strong> {value}
               </li>
