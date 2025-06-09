@@ -73,8 +73,8 @@ export default function VehicleDetails() {
                 key={label}
                 className={
                   isUrgent
-                    ? "text-red-600 font-semibold grid grid-cols-2"
-                    : "grid grid-cols-4"
+                    ? "text-red-600 font-semibold grid grid-cols-3"
+                    : "grid grid-cols-3"
                 }
               >
                 <strong>{label}:</strong> {value}
