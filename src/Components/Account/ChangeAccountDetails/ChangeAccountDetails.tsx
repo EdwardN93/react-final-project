@@ -3,14 +3,9 @@ import { getCurrentUser, getAccessToken } from "../../routes/auth/Login/utils";
 import { Button } from "../../Button/Button";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-export function ChangeAccountDetails() {
-  type User = {
-    email: string;
-    firstName: string;
-    lastName: string;
-    id: number;
-  };
+import { User } from "../../Types/Types";
 
+export function ChangeAccountDetails() {
   const [getUser, setGetUser] = useState<null | User>();
   const navigate = useNavigate();
 

@@ -1,4 +1,4 @@
-import { EventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Car, ColProp } from "../Types/Types";
 import { motion } from "framer-motion";
@@ -120,6 +120,7 @@ export default function Landing() {
               <th className="p-2 border">Utilizator</th>
               <th className="p-2 border">Status</th>
             </tr>
+            {/* START INPUTS FOR SEARCH FILTERS */}
             <tr>
               <td className="p-2 border" />
               <td className="p-2 border">
@@ -219,6 +220,7 @@ export default function Landing() {
                 />
               </td>
             </tr>
+            {/* END INPUTS FOR SEARCH FILTERS */}
           </thead>
           <tbody>
             {filteredCars.length === 0 ? (

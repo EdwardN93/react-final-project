@@ -22,6 +22,15 @@ export type LiElementProps = {
   onClick?: () => void;
 };
 
+// ColProp for Landing.tsx
 export type ColProp = {
   carDetail?: number | string | null | undefined;
+};
+
+// User for account
+export type User = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: number;
 };

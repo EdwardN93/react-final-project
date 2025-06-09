@@ -169,7 +169,7 @@ export function RegisterCar() {
 
           <div className="mb-4">
             <label htmlFor="nextRevDate" className="block mb-1 font-medium">
-              Data Revezie<span className="text-red-600">*</span>
+              Data Revizie<span className="text-red-600">*</span>
             </label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
