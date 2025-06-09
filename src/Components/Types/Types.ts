@@ -21,3 +21,7 @@ export type LiElementProps = {
   className?: string;
   onClick?: () => void;
 };
+
+export type ColProp = {
+  carDetail?: number | string | null | undefined;
+};

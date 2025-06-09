@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { EventHandler, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Car } from "../Types/Types";
+import { Car, ColProp } from "../Types/Types";
 import { motion } from "framer-motion";
-import { compareDates, intlDate } from "../functions/getDate";
+import { compareDates } from "../functions/getDate";
 
 export default function Landing() {
   const location = useLocation();
@@ -70,10 +70,9 @@ export default function Landing() {
     })
   );
 
-  function Row({ carDetail }) {
+  function TableCol({ carDetail }: ColProp) {
     return <td className="p-2 border text-center">{carDetail}</td>;
   }
-  0;
 
   if (!token) {
     return (
@@ -110,15 +109,15 @@ export default function Landing() {
               >
                 ID {sorter ? "↓" : "↑"}
               </th>
-              <th className="p-2 border">Plate Number</th>
-              <th className="p-2 border">Brand</th>
+              <th className="p-2 border">Numar Inmatriculare</th>
+              <th className="p-2 border">Marca</th>
               <th className="p-2 border">Model</th>
-              <th className="p-2 border">VIN</th>
-              <th className="p-2 border">Fuel Type</th>
-              <th className="p-2 border">Engine (cc)</th>
-              <th className="p-2 border">Category</th>
+              <th className="p-2 border">Serie Sasiu</th>
+              <th className="p-2 border">Combustibil</th>
+              <th className="p-2 border">Capacitate Motor</th>
+              <th className="p-2 border">Categorie</th>
               <th className="p-2 border">Department</th>
-              <th className="p-2 border">Assigned To</th>
+              <th className="p-2 border">Utilizator</th>
               <th className="p-2 border">Status</th>
             </tr>
             <tr>
@@ -244,17 +243,13 @@ export default function Landing() {
                     }
                     onClick={() => navigate(`/vehicles/${car.id}`)}
                   >
-                    <Row carDetail={car.id} />
-                    <Row carDetail={car.plateNumber} />
-                    <Row carDetail={car.carBrand} />
-                    <Row carDetail={car.carName} />
-                    <Row carDetail={car.vinNumber} />
-                    <Row carDetail={car.fuelType} />
-                    <Row carDetail={car.engineCapacity} />
-                    <Row carDetail={car.category} />
-                    <Row carDetail={car.department} />
-                    <Row carDetail={car.user} />
-                    <Row carDetail={car.status} />
+                    <TableCol carDetail={car.id} />
+                    {Object.keys(filters).map((field) => (
+                      <TableCol
+                        key={field}
+                        carDetail={car[field as keyof Car]}
+                      />
+                    ))}
                   </tr>
                 );
               })
