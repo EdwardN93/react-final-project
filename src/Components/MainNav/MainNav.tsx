@@ -63,7 +63,9 @@ function Navbar() {
             <Button
               text="Sterge mașină"
               color="red"
-              onClick={() => deleteCar()}
+              onClick={() => {
+                confirm("Sigur vrei sa ștergi mașina?") ? deleteCar() : "";
+              }}
             />
           </li>
         )}

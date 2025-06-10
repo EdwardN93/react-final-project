@@ -41,7 +41,6 @@ export default function VehicleDetails() {
     { label: "Utilizator", value: car.user },
     { label: "Status", value: car.status },
     { label: "Kilometri", value: car.kilometers },
-
     {
       label: "Data următoarei revizii",
       value: intlDate(car?.nextRevDate ? car.nextRevDate : ""),
@@ -60,7 +59,7 @@ export default function VehicleDetails() {
       transition={{ duration: 0.3 }}
     >
       <div className="p-6">
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span2 ">
           Detalii Vehicul - {car.plateNumber}
         </h2>
         <ul className="space-y-2">
@@ -73,8 +72,8 @@ export default function VehicleDetails() {
                 key={label}
                 className={
                   isUrgent
-                    ? "text-red-600 font-semibold grid grid-cols-3"
-                    : "grid grid-cols-3"
+                    ? "text-red-600 font-semibold grid sm:grid-cols-3 grid-cols-1"
+                    : "grid sm:grid-cols-3 grid-cols-1"
                 }
               >
                 <strong>{label}:</strong> {value}

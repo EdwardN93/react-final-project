@@ -36,9 +36,8 @@
       "department": "Logistică",
       "user": "Gugiu Daniel",
       "status": "Activa",
-      "nextRevDate": "2025-07-15",
+      "nextRevDate": "2025-06-20",
       "kilometers": "145,080",
-
       "id": 4
     },
     {
@@ -54,7 +53,6 @@
       "status": "Activa",
       "nextRevDate": "2025-10-06",
       "kilometers": "44,513",
-
       "id": 5
     },
     {
@@ -70,7 +68,6 @@
       "status": "Activa",
       "nextRevDate": "2026-08-07",
       "kilometers": "150,000",
-
       "id": 6
     },
     {
@@ -101,54 +98,37 @@
       "status": "Activa",
       "nextRevDate": "2026-06-09",
       "kilometers": "42,872",
-
       "id": 8
     },
     {
-      "plateNumber": "B66TCH",
-      "carBrand": "Nissan",
-      "carName": "Juke",
-      "vinNumber": "NSSJK284292",
-      "engineCapacity": "1198",
+      "plateNumber": "IF57TCH",
+      "carBrand": "Volkswagen",
+      "carName": "Golf",
+      "vinNumber": "VW898987D",
+      "engineCapacity": "998",
       "fuelType": "Benzină",
-      "category": "Autoturism M1G",
-      "department": "Vânzări",
-      "user": "Marian Stelea",
+      "category": "Autoturism M1",
+      "department": "Logistică",
+      "user": "Marcus Aiurelius",
       "status": "Activa",
-      "nextRevDate": "2025-07-04",
-      "kilometers": "8,511",
-
+      "nextRevDate": "2025-06-19",
+      "kilometers": "46,982",
       "id": 9
     },
     {
-      "plateNumber": "B82JDS",
-      "carBrand": "Mercedes",
-      "carName": "E-Class",
-      "vinNumber": "MRCDOI4324",
-      "engineCapacity": "2997",
-      "fuelType": "Benzină",
-      "category": "Autoturism M1",
-      "department": "Administrativ",
-      "user": "Cocker Joe",
-      "status": "Activa",
-      "nextRevDate": "2026-06-07",
-      "kilometers": "21,874",
-      "id": 10
-    },
-    {
-      "plateNumber": "B99TCH",
-      "carBrand": "Nissan",
-      "carName": "Juke",
-      "vinNumber": "NSSNJK23932",
-      "engineCapacity": "1197",
+      "plateNumber": "IF98TCH",
+      "carBrand": "Volkswagen",
+      "carName": "Polo",
+      "vinNumber": "VWPO234223",
+      "engineCapacity": "998",
       "fuelType": "Benzină",
       "category": "Autoturism M1",
       "department": "Vânzări",
-      "user": "Marian Marinu",
+      "user": "Aortus Pulmonarus",
       "status": "Activa",
-      "nextRevDate": "2026-06-17",
-      "kilometers": "25,477",
-      "id": 11
+      "nextRevDate": "2025-07-30",
+      "kilometers": "66,874",
+      "id": 10
     }
   ]
 }

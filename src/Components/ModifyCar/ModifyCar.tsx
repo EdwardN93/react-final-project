@@ -21,6 +21,7 @@ export function ModifyCar() {
     user: "",
     status: "",
     nextRevDate: "",
+    kilometers: "",
   });
 
   useEffect(() => {
@@ -103,6 +104,7 @@ export function ModifyCar() {
             { id: "engineCapacity", label: "Capacitate cilindrică" },
             { id: "user", label: "Nume utilizator mașină" },
             { id: "nextRevDate", label: "Data revizie" },
+            { id: "kilometers", label: "Kilometri mașină" },
           ].map(({ id, label }) => (
             <div className="mb-4" key={id}>
               <label htmlFor={id} className="block mb-1 font-medium">
@@ -133,6 +135,7 @@ export function ModifyCar() {
             </label>
             <select
               name="fuelType"
+              id="fuelType"
               className="p-2 rounded hover:cursor-pointer border"
               value={formState.fuelType}
               onChange={(e) =>
@@ -152,6 +155,7 @@ export function ModifyCar() {
             </label>
             <select
               name="category"
+              id="category"
               className="p-2 rounded hover:cursor-pointer border"
               value={formState.category}
               onChange={(e) =>
@@ -170,6 +174,7 @@ export function ModifyCar() {
               Selectează departament<span className="text-red-600">*</span>
             </label>
             <select
+              id="department"
               name="department"
               className="p-2 rounded hover:cursor-pointer border"
               value={formState.department}
@@ -198,6 +203,7 @@ export function ModifyCar() {
             </label>
             <select
               name="status"
+              id="status"
               className="p-2 rounded hover:cursor-pointer border "
               value={formState.status}
               onChange={(e) =>

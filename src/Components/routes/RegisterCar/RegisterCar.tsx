@@ -22,6 +22,7 @@ export function RegisterCar() {
       user,
       status,
       nextRevDate,
+      kilometers,
     } = formData;
 
     const car: Car = {
@@ -36,6 +37,7 @@ export function RegisterCar() {
       user: user.value,
       status: status.value,
       nextRevDate: nextRevDate.value,
+      kilometers: kilometers.value,
     };
 
     registerCar(car);

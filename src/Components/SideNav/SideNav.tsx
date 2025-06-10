@@ -17,13 +17,6 @@ export default function SideNav() {
     setIsLoggedIn(!!localStorage.getItem("user"));
   }, [location]);
 
-  // const logOut = () => {
-  //   localStorage.removeItem("user");
-  //   localStorage.removeItem("token");
-  //   setIsLoggedIn(false);
-  //   navigate("/login");
-  // };
-
   function LiElement({ children, ...props }: LiElementProps) {
     return <li {...props}>{children}</li>;
   }
@@ -72,8 +65,6 @@ export default function SideNav() {
             </NavLink>
           </LiElement>
         )}
-
-        <li className="cursor-pointer hover:bg-gray-300 p-2 rounded">Stuff</li>
       </menu>
     </nav>
   );
