@@ -30,8 +30,10 @@ export type ColProp = {
 
 // User for account
 export type User = {
-  email: string;
-  firstName: string;
-  lastName: string;
-  id: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  id?: number;
+  password?: string;
+  reTypePassword?: string;
 };
