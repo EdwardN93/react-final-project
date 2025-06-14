@@ -9,9 +9,9 @@
     },
     {
       "email": "bacha@kha.com",
-      "password": "$2a$10$GdO60159R2Ws3UUDcQxYyuJrkyiOwCGz6iCiVprt6susycu..P21y",
-      "firstName": "Bahart",
-      "lastName": "Bachakarat",
+      "password": "$2a$10$1zwb9Ry9Umr4lJMBn8r8zOs0MoH8VZrNydFuE.xT4TKrb3rUwfaHC",
+      "firstName": "TestUser",
+      "lastName": "TestUser",
       "role": 2,
       "id": 7
     },

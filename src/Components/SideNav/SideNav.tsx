@@ -50,7 +50,7 @@ export default function SideNav() {
         {isLoggedIn ? (
           <LiElement
             className=" flex cursor-pointer hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
-            onClick={() => logout(setIsLoggedIn, navigate)}
+            onClick={() => logout(setIsLoggedIn, navigate, true)}
           >
             <FaRegUser /> Log Out
           </LiElement>
