@@ -12,13 +12,17 @@ const validationSchema = z
     lastName: z.string().min(1, "Please tell us your last name"),
     email: z.email("Invalid email"),
     password: z.string().min(6, "Password must contain at least 6 characters"),
-    reTypePassword: z
+    retypePassword: z
       .string()
       .min(6, "Password must contain at least 6 characters"),
   })
-  .refine((data) => data.password === data.reTypePassword, {
+  .refine((data) => data.password === data.retypePassword, {
     message: "Passwords don't match",
     path: ["reTypePassword"],
+  })
+  .refine((data) => data.email === getCurrentUser().email, {
+    message: "Email is incorrect",
+    path: ["email"],
   });
 
 function validateForm<T extends ZodObject>(
@@ -32,28 +36,25 @@ function validateForm<T extends ZodObject>(
   return null;
 }
 
+type SchemaObject = z.infer<typeof validationSchema>;
+type ErrorObject = Record<keyof SchemaObject, string[]>;
+type Errors = Partial<ErrorObject>;
+
 export function ChangeAccountDetails() {
+  const [errors, setErrors] = useState<null | Errors>(null);
   const [getUser, setGetUser] = useState<null | User>();
   const navigate = useNavigate();
 
-  async function onEditChange(e: FormEvent<HTMLFormElement>) {
+  async function handleAccountChange(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const formDetails = Object.fromEntries(formData.entries());
-    const errors = validateForm(formDetails, validationSchema);
+    const newErrors = validateForm(formDetails, validationSchema);
 
-    if (errors) {
-      console.log(errors);
+    if (newErrors) {
+      setErrors(newErrors);
       return;
-    }
-
-    if (formDetails.password !== formDetails.reTypePassword) {
-      return alert("Passwords don't match");
-    }
-
-    if (formDetails.email !== getUser?.email) {
-      return alert("Email is incorrect. Please provide your email");
     }
 
     try {
@@ -103,7 +104,7 @@ export function ChangeAccountDetails() {
     >
       <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col ">
         <form
-          onSubmit={onEditChange}
+          onSubmit={handleAccountChange}
           className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
         >
           <h2 className="text-2xl font-semibold mb-6 text-center">
@@ -121,7 +122,9 @@ export function ChangeAccountDetails() {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             />
           </div>
-
+          {errors?.firstName && (
+            <p className="text-red-600 mb-2">{errors.firstName[0]}</p>
+          )}
           <div className="mb-4">
             <label htmlFor="lastName" className="block mb-1 font-medium">
               Change Last Name
@@ -133,7 +136,9 @@ export function ChangeAccountDetails() {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             />
           </div>
-
+          {errors?.lastName && (
+            <p className="text-red-600 mb-2">{errors.lastName[0]}</p>
+          )}
           <div className="mb-4">
             <label htmlFor="email" className="block mb-1 font-medium">
               Email
@@ -145,7 +150,9 @@ export function ChangeAccountDetails() {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             />
           </div>
-
+          {errors?.email && (
+            <p className="text-red-600 mb-2">{errors.email[0]}</p>
+          )}
           <div className="mb-4">
             <label htmlFor="password" className="block mb-1 font-medium">
               Password
@@ -157,18 +164,23 @@ export function ChangeAccountDetails() {
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             />
           </div>
-
+          {errors?.password && (
+            <p className="text-red-600 mb-2">{errors.password[0]}</p>
+          )}
           <div className="mb-6">
-            <label htmlFor="reTypePassword" className="block mb-1 font-medium">
+            <label htmlFor="retypePassword" className="block mb-1 font-medium">
               Confirm Password
             </label>
             <input
               type="password"
-              id="reTypePassword"
-              name="reTypePassword"
+              id="retypePassword"
+              name="retypePassword"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
             />
           </div>
+          {errors?.retypePassword && (
+            <p className="text-red-600 mb-2">{errors.retypePassword[0]}</p>
+          )}
           <div className="flex flex-row gap-2">
             <Button
               text="Anulează"
