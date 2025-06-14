@@ -6,6 +6,14 @@ import { motion } from "framer-motion";
 import { User } from "../../Types/Types";
 import { z, ZodObject } from "zod/v4";
 
+const initialDefaultValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  retypePassword: "",
+};
+
 const validationSchema = z
   .object({
     firstName: z.string().min(1, "Please tell us your name"),
@@ -18,7 +26,7 @@ const validationSchema = z
   })
   .refine((data) => data.password === data.retypePassword, {
     message: "Passwords don't match",
-    path: ["reTypePassword"],
+    path: ["retypePassword"],
   })
   .refine((data) => data.email === getCurrentUser().email, {
     message: "Email is incorrect",
@@ -43,6 +51,7 @@ type Errors = Partial<ErrorObject>;
 export function ChangeAccountDetails() {
   const [errors, setErrors] = useState<null | Errors>(null);
   const [getUser, setGetUser] = useState<null | User>();
+  const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
   const navigate = useNavigate();
 
   async function handleAccountChange(e: FormEvent<HTMLFormElement>) {
@@ -56,6 +65,8 @@ export function ChangeAccountDetails() {
       setErrors(newErrors);
       return;
     }
+    setDefaultValues(formDetails as typeof defaultValues);
+    setErrors(null);
 
     try {
       const response = await fetch(
@@ -88,6 +99,19 @@ export function ChangeAccountDetails() {
       alert(error.message);
     }
   }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!errors) return;
+
+    const formValues = new FormData(e.target.form!);
+    const newErrors = validateForm(
+      Object.fromEntries(formValues),
+      validationSchema
+    );
+
+    setErrors(newErrors);
+  }
+
   function discardChanges() {
     navigate("/account");
   }
@@ -120,10 +144,12 @@ export function ChangeAccountDetails() {
               id="firstName"
               name="firstName"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.firstName}
+              onChange={handleInputChange}
             />
           </div>
           {errors?.firstName && (
-            <p className="text-red-600 mb-2">{errors.firstName[0]}</p>
+            <p className="text-red-600 mb-4">{errors.firstName[0]}</p>
           )}
           <div className="mb-4">
             <label htmlFor="lastName" className="block mb-1 font-medium">
@@ -134,10 +160,12 @@ export function ChangeAccountDetails() {
               id="lastName"
               name="lastName"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.lastName}
+              onChange={handleInputChange}
             />
           </div>
           {errors?.lastName && (
-            <p className="text-red-600 mb-2">{errors.lastName[0]}</p>
+            <p className="text-red-600 mb-4">{errors.lastName[0]}</p>
           )}
           <div className="mb-4">
             <label htmlFor="email" className="block mb-1 font-medium">
@@ -148,10 +176,12 @@ export function ChangeAccountDetails() {
               id="email"
               name="email"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.email}
+              onChange={handleInputChange}
             />
           </div>
           {errors?.email && (
-            <p className="text-red-600 mb-2">{errors.email[0]}</p>
+            <p className="text-red-600 mb-4">{errors.email[0]}</p>
           )}
           <div className="mb-4">
             <label htmlFor="password" className="block mb-1 font-medium">
@@ -162,10 +192,12 @@ export function ChangeAccountDetails() {
               id="password"
               name="password"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.password}
+              onChange={handleInputChange}
             />
           </div>
           {errors?.password && (
-            <p className="text-red-600 mb-2">{errors.password[0]}</p>
+            <p className="text-red-600 mb-4">{errors.password[0]}</p>
           )}
           <div className="mb-6">
             <label htmlFor="retypePassword" className="block mb-1 font-medium">
@@ -176,10 +208,12 @@ export function ChangeAccountDetails() {
               id="retypePassword"
               name="retypePassword"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.retypePassword}
+              onChange={handleInputChange}
             />
           </div>
           {errors?.retypePassword && (
-            <p className="text-red-600 mb-2">{errors.retypePassword[0]}</p>
+            <p className="text-red-600 mb-4">{errors.retypePassword[0]}</p>
           )}
           <div className="flex flex-row gap-2">
             <Button
