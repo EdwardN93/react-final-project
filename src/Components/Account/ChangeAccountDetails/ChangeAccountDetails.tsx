@@ -44,9 +44,11 @@ function validateForm<T extends ZodObject>(
   return null;
 }
 
-type SchemaObject = z.infer<typeof validationSchema>;
-type ErrorObject = Record<keyof SchemaObject, string[]>;
-type Errors = Partial<ErrorObject>;
+// type SchemaObject = z.infer<typeof validationSchema>;
+// type ErrorObject = Record<keyof SchemaObject, string[]>;
+// type Errors = Partial<ErrorObject>;
+
+type Errors = Partial<Record<keyof z.infer<typeof validationSchema>, string[]>>;
 
 export function ChangeAccountDetails() {
   const [errors, setErrors] = useState<null | Errors>(null);
@@ -132,7 +134,7 @@ export function ChangeAccountDetails() {
           className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
         >
           <h2 className="text-2xl font-semibold mb-6 text-center">
-            Change Password
+            Schimbă date cont
           </h2>
 
           <div className="mb-4">

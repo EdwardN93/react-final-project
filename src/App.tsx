@@ -39,7 +39,7 @@ function App() {
       <main className="flex-1 overflow-y-auto bg-gray-50">
         <div className="p-6">
           <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
-            <h2 className="text-2xl font-semibold mb-4">My Car Logistic App</h2>
+            <h2 className="text-2xl font-semibold mb-4">Car Logistic App</h2>
             <UserMenu />
           </div>
 
