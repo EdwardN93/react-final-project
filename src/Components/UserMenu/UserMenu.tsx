@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAccessToken } from "../routes/auth/Login/utils";
 import { useLocation, useNavigate } from "react-router";
 import { FaUser } from "react-icons/fa";
+import { Button } from "../Button/Button";
 
 export function UserMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

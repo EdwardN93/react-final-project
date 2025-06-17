@@ -60,7 +60,7 @@ export const Register = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col ">
+      <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col">
         <form
           onSubmit={register}
           className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"

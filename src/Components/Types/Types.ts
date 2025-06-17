@@ -36,4 +36,5 @@ export type User = {
   id?: number;
   password?: string;
   reTypePassword?: string;
+  role?: number | string;
 };

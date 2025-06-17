@@ -15,6 +15,7 @@ import { Register } from "./Components/routes/auth/Register/Register";
 import { Login } from "./Components/routes/auth/Login/Login";
 import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 import { logout } from "./Components/routes/auth/Logout/Logout";
+import { CustomModal } from "./Components/Modal/Modal";
 
 function App() {
   const navigate = useNavigate();
@@ -37,12 +38,12 @@ function App() {
       </aside>
 
       <main className="flex-1 overflow-y-auto bg-gray-50">
+        <div className="flex w-full items-center justify-center mt-5"></div>
         <div className="p-6">
           <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
             <h2 className="text-2xl font-semibold mb-4">Car Logistic App</h2>
             <UserMenu />
           </div>
-
           <MainNav />
           <AnimatePresence mode="wait">
             <motion.div>

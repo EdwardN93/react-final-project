@@ -7,9 +7,9 @@ import { User } from "../../Types/Types";
 import { z, ZodObject } from "zod/v4";
 
 const initialDefaultValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
+  firstName: getCurrentUser().firstName,
+  lastName: getCurrentUser().lastName,
+  email: getCurrentUser().email,
   password: "",
   retypePassword: "",
 };
@@ -54,6 +54,7 @@ export function ChangeAccountDetails() {
   const [errors, setErrors] = useState<null | Errors>(null);
   const [getUser, setGetUser] = useState<null | User>();
   const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   async function handleAccountChange(e: FormEvent<HTMLFormElement>) {
@@ -117,6 +118,12 @@ export function ChangeAccountDetails() {
   function discardChanges() {
     navigate("/account");
   }
+
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
+    console.log(showPassword);
+  }
+
   useEffect(() => {
     setGetUser(getCurrentUser);
   }, []);
@@ -190,7 +197,7 @@ export function ChangeAccountDetails() {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -206,7 +213,7 @@ export function ChangeAccountDetails() {
               Confirm Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="retypePassword"
               name="retypePassword"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -225,6 +232,17 @@ export function ChangeAccountDetails() {
               onClick={discardChanges}
             />
             <Button text="Confirmă" width />
+          </div>
+          <div className="flex items-center gap-2 mt-4">
+            <input
+              className="w-4 h-4"
+              type="checkbox"
+              name="showPassword"
+              id="showPassword"
+              checked={showPassword}
+              onChange={handleShowPassword}
+            />
+            <label htmlFor="showPassword">Show Password</label>
           </div>
         </form>
       </div>
