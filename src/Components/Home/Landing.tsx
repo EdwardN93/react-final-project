@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { Car, ColProp } from "../Types/Types";
 import { motion } from "framer-motion";
 import { compareDates } from "../functions/getDate";
+import { useAuthContext } from "../routes/auth/AuthContext";
 
 export default function Landing() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>([]);
-  const [token, setToken] = useState<string | null>(null);
   const [sorter, setSorter] = useState<boolean>(false);
+  const { accessToken } = useAuthContext();
   const [filters, setFilters] = useState({
     plateNumber: "",
     carBrand: "",
@@ -24,32 +24,29 @@ export default function Landing() {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setToken(token);
-    if (token) {
-      fetchCars(token);
+    async function fetchCars(token: string) {
+      try {
+        const response = await fetch("http://localhost:3000/vehicles", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const data = await response.json();
+        setCars(data);
+      } catch (error) {
+        console.error("Failed to fetch cars:", error);
+      }
     }
-  }, [location]);
-
-  async function fetchCars(token: string) {
-    try {
-      const response = await fetch("http://localhost:3000/vehicles", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok)
-        throw new Error(`HTTP error! Status: ${response.status}`);
-
-      const data = await response.json();
-      setCars(data);
-    } catch (error) {
-      console.error("Failed to fetch cars:", error);
+    if (accessToken) {
+      fetchCars(accessToken);
     }
-  }
+  }, []);
 
   function sortAscDescId(sorter: boolean) {
     const sorted = [...cars].sort((a, b) =>
@@ -74,7 +71,7 @@ export default function Landing() {
     return <td className="p-2 border text-center">{carDetail}</td>;
   }
 
-  if (!token) {
+  if (!accessToken) {
     return (
       <div className="p-6 text-center text-red-600 font-semibold">
         Please log in to view the vehicle list.

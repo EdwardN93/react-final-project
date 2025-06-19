@@ -22,6 +22,14 @@
       "lastName": "Nedelcu",
       "role": 1,
       "id": 8
+    },
+    {
+      "email": "edw@edw.com",
+      "password": "$2a$10$k4bqeKJPvLW5OnNVFC3SleaaOaB5kcvhfYb.PEuPvohznzHOYR/Ii",
+      "firstName": "Eduard",
+      "lastName": "Nedelcu",
+      "role": 1,
+      "id": 9
     }
   ],
   "vehicles": [

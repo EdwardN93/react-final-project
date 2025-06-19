@@ -1,56 +1,92 @@
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
+import { z } from "zod/v4";
+import { AuthResponse } from "../../../Types/Types";
+import { validateForm, ValidationErrors } from "../../../utils/validation";
+import { useAuthContext } from "../AuthContext";
+import { useRedirectWhenLoggedIn } from "../useRedirectWhenLogIn";
+import { useState } from "react";
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const validationSchema = z
+  .object({
+    email: z.email("Please enter a valid email address."),
+    password: z
+      .string()
+      .min(6, "Your password should be at least 6 characters long."),
+    retypePassword: z
+      .string()
+      .min(6, "Your password should be at least 6 characters long."),
+    firstName: z.string().min(1, "Please tell us your first name."),
+    lastName: z.string().min(1, "Please tell us your last name."),
+  })
+  .refine((data) => data.password === data.retypePassword, {
+    message: "The passwords did not match.",
+    path: ["retypePassword"],
+  });
+
+const initialDefaultValues = {
+  email: "",
+  password: "",
+  retypePassword: "",
+  firstName: "",
+  lastName: "",
+};
 
 export const Register = () => {
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState<null | ValidationErrors<
+    typeof validationSchema
+  >>(null);
+  const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
 
-  const register = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const willRedirect = useRedirectWhenLoggedIn();
+  const { login } = useAuthContext();
 
-    const formData = event.currentTarget;
-    const { firstName, lastName, email, password, reTypePassword } = formData;
+  if (willRedirect) {
+    return null;
+  }
 
-    if (
-      (password as HTMLInputElement).value !==
-      (reTypePassword as HTMLInputElement).value
-    ) {
-      alert("Passwords don't match");
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!errors) {
+      return;
+    }
+    const formValues = new FormData(e.target.form!);
+    const newErrors = validateForm(
+      Object.fromEntries(formValues.entries()),
+      validationSchema
+    );
+
+    setErrors(newErrors);
+  }
+
+  async function handleRegister(formData: FormData) {
+    const values = Object.fromEntries(formData.entries());
+    const errors = validateForm(values, validationSchema);
+
+    if (errors) {
+      setErrors(errors);
+      setDefaultValues(values as typeof defaultValues);
       return;
     }
 
-    const user = {
-      firstName: (firstName as HTMLInputElement).value,
-      lastName: (lastName as HTMLInputElement).value,
-      email: (email as HTMLInputElement).value,
-      password: (password as HTMLInputElement).value,
-      role: 2,
+    setErrors(null);
+    setDefaultValues(initialDefaultValues);
+
+    delete values.retypePassword;
+    const valuesWithRole = {
+      ...values,
+      role: 0,
     };
+    console.log(valuesWithRole);
 
-    try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+    const data = await fetch(`${apiUrl}/register`, {
+      method: "POST",
+      body: JSON.stringify(valuesWithRole),
+      headers: { "Content-type": "application/json" },
+    }).then((res) => res.json() as Promise<AuthResponse>);
 
-      const payload = await response.json();
-
-      if (!response.ok) {
-        throw new Error(`Error: ${JSON.stringify(payload)}`);
-      }
-
-      alert("Your account was created successfully!");
-      navigate("/");
-    } catch (error: any) {
-      console.log("Network or server error:", error.message);
-      alert(error.message);
-    }
-  };
-
-  function goToLogin() {
-    navigate("/login");
+    login(data);
   }
 
   return (
@@ -62,8 +98,12 @@ export const Register = () => {
     >
       <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col">
         <form
-          onSubmit={register}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleRegister(new FormData(e.currentTarget));
+          }}
           className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
+          noValidate
         >
           <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
 
@@ -76,8 +116,13 @@ export const Register = () => {
               id="firstName"
               name="firstName"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.firstName}
+              onChange={handleInputChange}
             />
           </div>
+          {errors?.firstName && (
+            <p className="text-red-600 mb-4">{errors.firstName[0]}</p>
+          )}
 
           <div className="mb-4">
             <label htmlFor="lastName" className="block mb-1 font-medium">
@@ -88,8 +133,13 @@ export const Register = () => {
               id="lastName"
               name="lastName"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.lastName}
+              onChange={handleInputChange}
             />
           </div>
+          {errors?.lastName && (
+            <p className="text-red-600 mb-4">{errors.lastName[0]}</p>
+          )}
 
           <div className="mb-4">
             <label htmlFor="email" className="block mb-1 font-medium">
@@ -100,8 +150,13 @@ export const Register = () => {
               id="email"
               name="email"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.email}
+              onChange={handleInputChange}
             />
           </div>
+          {errors?.email && (
+            <p className="text-red-600 mb-4">{errors.email[0]}</p>
+          )}
 
           <div className="mb-4">
             <label htmlFor="password" className="block mb-1 font-medium">
@@ -112,18 +167,25 @@ export const Register = () => {
               id="password"
               name="password"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.password}
+              onChange={handleInputChange}
             />
           </div>
+          {errors?.password && (
+            <p className="text-red-600 mb-4">{errors.password[0]}</p>
+          )}
 
           <div className="mb-6">
-            <label htmlFor="reTypePassword" className="block mb-1 font-medium">
+            <label htmlFor="retypePassword" className="block mb-1 font-medium">
               Confirm Password
             </label>
             <input
               type="password"
-              id="reTypePassword"
-              name="reTypePassword"
+              name="retypePassword"
+              id="retypePassword"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              defaultValue={defaultValues.retypePassword}
+              onChange={handleInputChange}
             />
           </div>
 
@@ -139,7 +201,7 @@ export const Register = () => {
             Already have an account? Log in{" "}
             <span
               className="text-blue-600 hover:cursor-pointer md:text-center"
-              onClick={goToLogin}
+              // onClick={goToLogin}
             >
               HERE
             </span>

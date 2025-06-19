@@ -38,3 +38,18 @@ export type User = {
   reTypePassword?: string;
   role?: number | string;
 };
+
+export type AuthStateValue = {
+  accessToken: null | string;
+  user: null | User;
+};
+
+export type AuthContextValue = AuthStateValue & {
+  login: (value: AuthResponse) => void;
+  logout: () => void;
+};
+
+// O SINGURA SURSA DE ADEVAR !!
+export type AuthResponse = {
+  [K in keyof AuthStateValue]: NonNullable<AuthStateValue[K]>;
+};

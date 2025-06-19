@@ -4,18 +4,14 @@ import { FaChartBar, FaRegUser, FaUser } from "react-icons/fa";
 import { LiElementProps } from "../Types/Types";
 import { logout } from "../routes/auth/Logout/Logout";
 import "./SideNav.css";
+import { useAuthContext } from "../routes/auth/AuthContext";
 
 export default function SideNav() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { user, logout } = useAuthContext();
 
-  const [isLoggedIn, setIsLoggedIn] = useState<string | boolean | null>(
-    localStorage.getItem("user")
-  );
-
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("user"));
-  }, [location]);
+  function handleLogout() {
+    logout();
+  }
 
   function LiElement({ children, ...props }: LiElementProps) {
     return <li {...props}>{children}</li>;
@@ -33,7 +29,7 @@ export default function SideNav() {
             <FaChartBar /> Home
           </NavLink>
         </LiElement>
-        {isLoggedIn ? (
+        {user ? (
           ""
         ) : (
           <LiElement>
@@ -47,10 +43,11 @@ export default function SideNav() {
           </LiElement>
         )}
 
-        {isLoggedIn ? (
+        {user ? (
           <LiElement
             className=" flex cursor-pointer hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
-            onClick={() => logout(setIsLoggedIn, navigate, true)}
+            // onClick={() => logout(setIsLoggedIn, navigate, true)}
+            onClick={handleLogout}
           >
             <FaRegUser /> Log Out
           </LiElement>

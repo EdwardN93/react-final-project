@@ -1,52 +1,73 @@
 import { useNavigate } from "react-router";
+import { z } from "zod/v4";
 import { motion } from "framer-motion";
+import { useAuthContext } from "../AuthContext";
+import { validateForm, ValidationErrors } from "../../../utils/validation";
+import { useRedirectWhenLoggedIn } from "../useRedirectWhenLogIn";
+import { useState } from "react";
+import { AuthResponse } from "../../../Types/Types";
 
-export const Login = () => {
-  const navigate = useNavigate();
+const apiUrl = import.meta.env.VITE_API_URL;
 
-  const login = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+const validationSchema = z.object({
+  email: z.email("Please enter a valid email address."),
+  password: z
+    .string()
+    .min(6, "Your password should be at least 6 characters long."),
+});
 
-    const formData = event.currentTarget;
-    const email = (formData.email as HTMLInputElement).value;
-    const password = (formData.password as HTMLInputElement).value;
+const initialDefaultValues = {
+  email: "",
+  password: "",
+};
+export function Login() {
+  const [errors, setErrors] = useState<null | ValidationErrors<
+    typeof validationSchema
+  >>(null);
+  const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
 
-    if (!email || !password) {
-      alert("Please fill in all fields");
+  const willRedirect = useRedirectWhenLoggedIn();
+  const { login } = useAuthContext();
+
+  if (willRedirect) {
+    return null;
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!errors) {
+      return;
+    }
+    const formValues = new FormData(e.target.form!);
+    const newErrors = validateForm(
+      Object.fromEntries(formValues.entries()),
+      validationSchema
+    );
+    console.log(newErrors);
+
+    setErrors(newErrors);
+  }
+
+  async function handleLogin(formData: FormData) {
+    const values = Object.fromEntries(formData.entries());
+    const errors = validateForm(values, validationSchema);
+
+    if (errors) {
+      setErrors(errors);
+      setDefaultValues(values as typeof defaultValues);
       return;
     }
 
-    const user = { email, password };
+    setErrors(null);
+    setDefaultValues(initialDefaultValues);
 
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+    const data = await fetch(`${apiUrl}/login`, {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-type": "application/json" },
+    }).then((res) => res.json() as Promise<AuthResponse>);
 
-      const payload = await response.json();
-
-      if (!response.ok) {
-        throw new Error(payload.message || "Login failed");
-      }
-
-      localStorage.setItem("token", payload.accessToken);
-      localStorage.setItem("user", JSON.stringify(payload.user));
-
-      alert("Logged in successfully!");
-      navigate("/");
-    } catch (error: any) {
-      alert("Login failed: " + error.message);
-    }
-  };
-
-  function goToRegister() {
-    navigate("/register");
+    login(data);
   }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -56,7 +77,10 @@ export const Login = () => {
     >
       <div className="flex justify-center items-center min-h-screen px-4 mb-10 flex-col">
         <form
-          onSubmit={login}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin(new FormData(e.currentTarget));
+          }}
           className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mb-10"
         >
           <h2 className="text-2xl font-semibold mb-6 text-center">Log In</h2>
@@ -97,7 +121,7 @@ export const Login = () => {
             Don't have an account? Register{" "}
             <span
               className="text-blue-600 hover:cursor-pointer md:text-center"
-              onClick={goToRegister}
+              // onClick={goToRegister}
             >
               HERE
             </span>
@@ -106,4 +130,4 @@ export const Login = () => {
       </div>
     </motion.div>
   );
-};
+}

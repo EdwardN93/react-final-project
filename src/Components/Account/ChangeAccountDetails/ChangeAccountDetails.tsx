@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import { User } from "../../Types/Types";
 import { z, ZodObject } from "zod/v4";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const initialDefaultValues = {
-  firstName: getCurrentUser().firstName,
-  lastName: getCurrentUser().lastName,
-  email: getCurrentUser().email,
+  firstName: getCurrentUser()?.firstName ? getCurrentUser()?.firstName : "",
+  lastName: getCurrentUser()?.lastName ? getCurrentUser()?.lastName : "",
+  email: getCurrentUser()?.email ? getCurrentUser().email : "",
   password: "",
   retypePassword: "",
 };

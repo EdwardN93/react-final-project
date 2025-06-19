@@ -16,56 +16,61 @@ import { Login } from "./Components/routes/auth/Login/Login";
 import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 import { logout } from "./Components/routes/auth/Logout/Logout";
 import { CustomModal } from "./Components/Modal/Modal";
+import { NotFound } from "./Components/NotFound/NotFound";
+import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 
 function App() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation(); // for AnimatePresence key
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | string | null>(
-    localStorage.getItem("token") ? true : null
-  );
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean | string | null>(
+  //   localStorage.getItem("token") ? true : null
+  // );
 
-  useEffect(() => {
-    // Auto logout if token is expired
-    logout(setIsLoggedIn, navigate); // This will only log out if expired
-  }, [navigate]);
+  // useEffect(() => {
+  //   // Auto logout if token is expired
+  //   logout(setIsLoggedIn, navigate); // This will only log out if expired
+  // }, [navigate]);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
-      <ScrollToTop />
+    <AuthContextProvider>
+      <div className="flex flex-col md:flex-row min-h-screen">
+        <ScrollToTop />
 
-      <aside className="w-full md:w-44 bg-gray-200 p-4 md:sticky md:top-0 md:h-screen ">
-        <SideNav />
-      </aside>
+        <aside className="w-full md:w-44 bg-gray-200 p-4 md:sticky md:top-0 md:h-screen ">
+          <SideNav />
+        </aside>
 
-      <main className="flex-1 overflow-y-auto bg-gray-50">
-        <div className="flex w-full items-center justify-center mt-5"></div>
-        <div className="p-6">
-          <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
-            <h2 className="text-2xl font-semibold mb-4">Car Logistic App</h2>
-            <UserMenu />
+        <main className="flex-1 overflow-y-auto bg-gray-50">
+          <div className="flex w-full items-center justify-center mt-5"></div>
+          <div className="p-6">
+            <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
+              <h2 className="text-2xl font-semibold mb-4">Car Logistic App</h2>
+              <UserMenu />
+            </div>
+            <MainNav />
+            <AnimatePresence mode="wait">
+              <motion.div>
+                <Routes key={location.pathname}>
+                  <Route path="/" element={<Landing />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register-car" element={<RegisterCar />} />
+                  <Route path="/vehicles/:id" element={<VehicleDetails />} />
+                  <Route path="/modify-car/:id" element={<ModifyCar />} />
+                  <Route path="/account" element={<Account />} />
+                  <Route
+                    path="/change-account-details"
+                    element={<ChangeAccountDetails />}
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </motion.div>
+            </AnimatePresence>
+            <Footer />
           </div>
-          <MainNav />
-          <AnimatePresence mode="wait">
-            <motion.div>
-              <Routes key={location.pathname}>
-                <Route path="/" element={<Landing />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register-car" element={<RegisterCar />} />
-                <Route path="/vehicles/:id" element={<VehicleDetails />} />
-                <Route path="/modify-car/:id" element={<ModifyCar />} />
-                <Route path="/account" element={<Account />} />
-                <Route
-                  path="/change-account-details"
-                  element={<ChangeAccountDetails />}
-                />
-              </Routes>
-            </motion.div>
-          </AnimatePresence>
-          <Footer />
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </AuthContextProvider>
   );
 }
 
