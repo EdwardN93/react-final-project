@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
-import { getAccessToken } from "../routes/auth/Login/utils";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { FaUser } from "react-icons/fa";
-import { Button } from "../Button/Button";
+import { useAuthContext } from "../routes/auth/AuthContext";
 
 export function UserMenu() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const { accessToken } = useAuthContext();
 
-  useEffect(() => {
-    const token = getAccessToken();
-    setIsLoggedIn(!!token);
-  }, [location]);
-
-  return isLoggedIn ? (
+  return accessToken ? (
     <div>
       <span
         className="text-xl text-sky-400 hover:text-sky-600 hover:cursor-pointer"

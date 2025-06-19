@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, NavLink, useNavigate } from "react-router";
 import { FaChartBar, FaRegUser, FaUser } from "react-icons/fa";
 import { LiElementProps } from "../Types/Types";
-import { logout } from "../routes/auth/Logout/Logout";
 import "./SideNav.css";
 import { useAuthContext } from "../routes/auth/AuthContext";
 

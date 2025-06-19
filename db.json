@@ -25,7 +25,7 @@
     },
     {
       "email": "edw@edw.com",
-      "password": "$2a$10$k4bqeKJPvLW5OnNVFC3SleaaOaB5kcvhfYb.PEuPvohznzHOYR/Ii",
+      "password": "$2a$10$nX4ZcKxRBBEEC0K1kapOtOAFg2i/UrnRha5NVlBymEKIxYsd6jAGW",
       "firstName": "Eduard",
       "lastName": "Nedelcu",
       "role": 1,
@@ -92,21 +92,6 @@
       "nextRevDate": "2026-03-18",
       "kilometers": "70,000",
       "id": 7
-    },
-    {
-      "plateNumber": "IF44TCH",
-      "carBrand": "Renault",
-      "carName": "Express",
-      "vinNumber": "RNLT2838923",
-      "engineCapacity": "1198",
-      "fuelType": "Motorină",
-      "category": "Autoutilitara N1",
-      "department": "Service",
-      "user": "Nedelciu Alexandru",
-      "status": "Activa",
-      "nextRevDate": "2026-06-09",
-      "kilometers": "42,872",
-      "id": 8
     },
     {
       "plateNumber": "IF57TCH",

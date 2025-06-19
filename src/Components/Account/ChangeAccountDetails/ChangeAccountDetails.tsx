@@ -1,20 +1,12 @@
-import { FormEvent, useEffect, useState } from "react";
-import { getCurrentUser, getAccessToken } from "../../routes/auth/Login/utils";
+import { FormEvent, useState } from "react";
+import { getCurrentUser } from "../../routes/auth/Login/utils";
 import { Button } from "../../Button/Button";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import { User } from "../../Types/Types";
 import { z, ZodObject } from "zod/v4";
+import { useAuthContext } from "../../routes/auth/AuthContext";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-
-const initialDefaultValues = {
-  firstName: getCurrentUser()?.firstName ? getCurrentUser()?.firstName : "",
-  lastName: getCurrentUser()?.lastName ? getCurrentUser()?.lastName : "",
-  email: getCurrentUser()?.email ? getCurrentUser().email : "",
-  password: "",
-  retypePassword: "",
-};
 
 const validationSchema = z
   .object({
@@ -30,7 +22,7 @@ const validationSchema = z
     message: "Passwords don't match",
     path: ["retypePassword"],
   })
-  .refine((data) => data.email === getCurrentUser().email, {
+  .refine((data) => data.email === getCurrentUser().user.email, {
     message: "Email is incorrect",
     path: ["email"],
   });
@@ -46,15 +38,20 @@ function validateForm<T extends ZodObject>(
   return null;
 }
 
-// type SchemaObject = z.infer<typeof validationSchema>;
-// type ErrorObject = Record<keyof SchemaObject, string[]>;
-// type Errors = Partial<ErrorObject>;
-
 type Errors = Partial<Record<keyof z.infer<typeof validationSchema>, string[]>>;
 
 export function ChangeAccountDetails() {
+  const { user, accessToken } = useAuthContext();
+
+  const initialDefaultValues = {
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
+    password: "",
+    retypePassword: "",
+  };
+
   const [errors, setErrors] = useState<null | Errors>(null);
-  const [getUser, setGetUser] = useState<null | User>();
   const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -74,22 +71,19 @@ export function ChangeAccountDetails() {
     setErrors(null);
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/users/${getUser?.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getAccessToken()}`,
-          },
-          body: JSON.stringify({
-            firstName: formDetails.firstName,
-            lastName: formDetails.lastName,
-            email: formDetails.email,
-            password: formDetails.password,
-          }),
-        }
-      );
+      const response = await fetch(`${apiUrl}/users/${user?.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          firstName: formDetails.firstName,
+          lastName: formDetails.lastName,
+          email: formDetails.email,
+          password: formDetails.password,
+        }),
+      });
 
       const payload = await response.json();
 
@@ -125,10 +119,6 @@ export function ChangeAccountDetails() {
     setShowPassword(!showPassword);
     console.log(showPassword);
   }
-
-  useEffect(() => {
-    setGetUser(getCurrentUser);
-  }, []);
 
   return (
     <motion.div

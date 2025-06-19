@@ -2,9 +2,10 @@ import { useNavigate } from "react-router";
 import { Button } from "../../Button/Button";
 import { Car } from "../../Types/Types";
 import { motion } from "framer-motion";
+import { useAuthContext } from "../auth/AuthContext";
 
 export function RegisterCar() {
-  const token = localStorage.getItem("token");
+  const { accessToken } = useAuthContext();
   const navigate = useNavigate();
 
   function sendFormDetails(event: React.FormEvent<HTMLFormElement>) {
@@ -51,7 +52,7 @@ export function RegisterCar() {
     const options = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json",
       },
       body: JSON.stringify(car),

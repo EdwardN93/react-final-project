@@ -2,35 +2,27 @@
 // 1 - admin;
 // 2 - user
 
-import { useEffect, useState } from "react";
-import { getCurrentUser, getAccessToken } from "../routes/auth/Login/utils";
+import { useEffect } from "react";
 import { Button } from "../Button/Button";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import { User } from "../Types/Types";
+import { useAuthContext } from "../routes/auth/AuthContext";
 
 export function Account() {
-  const [user, setUser] = useState<User | null>();
+  const { user, accessToken } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getAccountDetails() {
-      const token = getAccessToken();
-      const userDetails = getCurrentUser();
-      if (!token || !userDetails) return alert("You have to be logged in !");
+      if (!accessToken || !user) return alert("You have to be logged in !");
 
-      const getUser = await fetch(
-        `http://localhost:3000/users/${userDetails.id}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-type": "application/json",
-          },
-        }
-      );
-      const userData = await getUser.json();
-      setUser(userData);
+      await fetch(`http://localhost:3000/users/${user.id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-type": "application/json",
+        },
+      }).then((res) => res.json());
     }
     getAccountDetails();
   }, []);

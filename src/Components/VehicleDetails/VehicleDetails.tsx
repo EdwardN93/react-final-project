@@ -3,32 +3,47 @@ import { useParams } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
+import { useAuthContext } from "../routes/auth/AuthContext";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>(null);
-  const token = localStorage.getItem("token");
+  const { accessToken } = useAuthContext();
 
   useEffect(() => {
     async function getCarFromApi(id: string) {
-      const url = `http://localhost:3000/vehicles/${id}`;
+      const url = `${apiUrl}/vehicles/${id}`;
 
       const options = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-type": "application/json",
         },
       };
 
-      const response = await fetch(url, options);
-      const data = await response.json();
-      setCar(data);
+      try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        setCar(data);
+      } catch (error) {
+        console.error("Error fetching car:", error);
+      }
     }
-    if (token && token) getCarFromApi(id!);
-  }, [id, token]);
 
-  if (!token) return <div className="p-6 text-red-600">Please log in.</div>;
-  if (!car) return <div className="p-6">Loading car data...</div>;
+    if (id && accessToken) {
+      getCarFromApi(id);
+    }
+  }, [id, accessToken]);
+
+  if (!accessToken) {
+    return <div className="p-6 text-red-600">Please log in.</div>;
+  }
+
+  if (!car) {
+    return <div className="p-6">Loading car data...</div>;
+  }
 
   const carDetails = [
     { label: "Marcă", value: car.carBrand },
@@ -43,11 +58,11 @@ export default function VehicleDetails() {
     { label: "Kilometri", value: car.kilometers },
     {
       label: "Data următoarei revizii",
-      value: intlDate(car?.nextRevDate ? car.nextRevDate : ""),
+      value: intlDate(car.nextRevDate || ""),
     },
     {
       label: "Timp rămas până la revizie (zile)",
-      value: compareDates(car?.nextRevDate ? car.nextRevDate : ""),
+      value: compareDates(car.nextRevDate || ""),
     },
   ];
 
@@ -59,14 +74,15 @@ export default function VehicleDetails() {
       transition={{ duration: 0.3 }}
     >
       <div className="p-6">
-        <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span2 ">
+        <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span-2">
           Detalii Vehicul - {car.plateNumber}
         </h2>
         <ul className="space-y-2">
           {carDetails.map(({ label, value }) => {
-            const revizie = label === "Timp rămas până la revizie (zile)";
+            const isRevizie = label === "Timp rămas până la revizie (zile)";
             const isUrgent =
-              revizie && typeof value === "number" && value <= 30;
+              isRevizie && typeof value === "number" && value <= 30;
+
             return (
               <li
                 key={label}
