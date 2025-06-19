@@ -38,7 +38,7 @@ export default function VehicleDetails() {
   }, [id, accessToken]);
 
   if (!accessToken) {
-    return <div className="p-6 text-red-600">Please log in.</div>;
+    return <div className="p-6 text-red-600">Please log in</div>;
   }
 
   if (!car) {
@@ -79,10 +79,10 @@ export default function VehicleDetails() {
         </h2>
         <ul className="space-y-2">
           {carDetails.map(({ label, value }) => {
-            const isRevizie = label === "Timp rămas până la revizie (zile)";
+            const isRevision = label === "Timp rămas până la revizie (zile)";
             const isUrgent =
-              isRevizie && typeof value === "number" && value <= 30;
-
+              isRevision && typeof value === "number" && value <= 30;
+            // const pastRevision = ;
             return (
               <li
                 key={label}

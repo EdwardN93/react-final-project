@@ -39,6 +39,7 @@ export const Register = () => {
     typeof validationSchema
   >>(null);
   const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
+  const [showPassword, setShowPassword] = useState(false);
 
   const willRedirect = useRedirectWhenLoggedIn();
   const { login } = useAuthContext();
@@ -87,6 +88,10 @@ export const Register = () => {
     }).then((res) => res.json() as Promise<AuthResponse>);
 
     login(data);
+  }
+
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
   }
 
   return (
@@ -163,7 +168,7 @@ export const Register = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -180,7 +185,7 @@ export const Register = () => {
               Confirm Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="retypePassword"
               id="retypePassword"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
@@ -189,9 +194,21 @@ export const Register = () => {
             />
           </div>
 
+          <div className="flex items-center gap-2 mt-4">
+            <input
+              className="w-4 h-4"
+              type="checkbox"
+              name="showPassword"
+              id="showPassword"
+              checked={showPassword}
+              onChange={handleShowPassword}
+            />
+            <label htmlFor="showPassword">Show Password</label>
+          </div>
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition mt-4"
           >
             Register
           </button>

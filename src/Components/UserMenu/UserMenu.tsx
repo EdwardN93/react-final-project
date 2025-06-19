@@ -4,10 +4,11 @@ import { useAuthContext } from "../routes/auth/AuthContext";
 
 export function UserMenu() {
   const navigate = useNavigate();
-  const { accessToken } = useAuthContext();
+  const { user, accessToken } = useAuthContext();
 
   return accessToken ? (
-    <div>
+    <div className="flex gap-4">
+      Hello {user?.firstName}
       <span
         className="text-xl text-sky-400 hover:text-sky-600 hover:cursor-pointer"
         onClick={() => navigate("/account")}
