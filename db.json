@@ -122,6 +122,21 @@
       "nextRevDate": "2025-07-30",
       "kilometers": "66,874",
       "id": 10
+    },
+    {
+      "plateNumber": "IF17TCH",
+      "carBrand": "Renault",
+      "carName": "Express",
+      "vinNumber": "RNO922021",
+      "engineCapacity": "1197",
+      "fuelType": "Motorină",
+      "category": "Autoutilitara N1",
+      "department": "Logistică",
+      "user": "Caram Baramitru",
+      "status": "Activa",
+      "nextRevDate": "2025-06-26",
+      "kilometers": "154,879",
+      "id": 11
     }
   ]
 }

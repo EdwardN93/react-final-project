@@ -61,7 +61,7 @@ export default function VehicleDetails() {
       value: intlDate(car.nextRevDate || ""),
     },
     {
-      label: "Timp rămas până la revizie (zile)",
+      label: "Zile rămase până la revizie",
       value: compareDates(car.nextRevDate || ""),
     },
   ];
@@ -79,10 +79,12 @@ export default function VehicleDetails() {
         </h2>
         <ul className="space-y-2">
           {carDetails.map(({ label, value }) => {
-            const isRevision = label === "Timp rămas până la revizie (zile)";
+            const isRevision = label === "Zile rămase până la revizie";
             const isUrgent =
               isRevision && typeof value === "number" && value <= 30;
-            // const pastRevision = ;
+            const pastRevision =
+              isRevision && typeof value === "number" && value < 0;
+
             return (
               <li
                 key={label}
@@ -92,7 +94,13 @@ export default function VehicleDetails() {
                     : "grid sm:grid-cols-3 grid-cols-1"
                 }
               >
-                <strong>{label}:</strong> {value}
+                <strong>
+                  {pastRevision
+                    ? `Zile întârziere în efectuarea reviziei`
+                    : label}
+                  :
+                </strong>{" "}
+                {pastRevision ? -value : value}
               </li>
             );
           })}
