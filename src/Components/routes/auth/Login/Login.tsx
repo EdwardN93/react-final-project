@@ -94,9 +94,12 @@ export function Login() {
               id="email"
               name="email"
               className="w-full border rounded px-3 py-2"
+              onChange={handleInputChange}
             />
           </div>
-
+          {errors?.email && (
+            <p className="text-red-600 mb-4">{errors.email[0]}</p>
+          )}
           <div className="mb-4">
             <label htmlFor="password" className="block mb-1 font-medium">
               Password
@@ -106,8 +109,12 @@ export function Login() {
               id="password"
               name="password"
               className="w-full border rounded px-3 py-2"
+              onChange={handleInputChange}
             />
           </div>
+          {errors?.password && (
+            <p className="text-red-600 mb-4">{errors.password[0]}</p>
+          )}
 
           <button
             type="submit"

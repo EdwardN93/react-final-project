@@ -1,6 +1,10 @@
 import { useNavigate, useLocation } from "react-router";
 import { Button } from "../Button/Button";
 import { useAuthContext } from "../routes/auth/AuthContext";
+import { useState } from "react";
+import { CustomModal } from "../Modal/Modal";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Navbar() {
   const navigate = useNavigate();
@@ -9,16 +13,20 @@ function Navbar() {
   const id = segments[1] === "vehicles" ? segments[2] : null;
   const { user, accessToken } = useAuthContext();
 
-  async function deleteCar() {
-    fetch(`http://localhost:3000/vehicles/${segments[2]}`, {
+  const [showModal, setShowModal] = useState(false);
+
+  async function handleDeleteCar() {
+    fetch(`${apiUrl}/vehicles/${segments[2]}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    alert("Car successfully deleted !");
-    navigate("/");
+  }
+
+  function handleCancel() {
+    setShowModal(false);
   }
 
   return accessToken ? (
@@ -47,13 +55,23 @@ function Navbar() {
             <Button
               text="Sterge mașină"
               color="red"
-              onClick={() => {
-                confirm("Sigur vrei sa ștergi mașina?") ? deleteCar() : "";
-              }}
+              onClick={() => setShowModal(true)}
             />
           </li>
         )}
       </ul>
+      {showModal && (
+        <CustomModal
+          title="Șterge mașină"
+          message="Ești sigur că vrei să ștergi mașina?"
+          onConfirm={() => {
+            handleDeleteCar();
+            handleCancel();
+            navigate("/");
+          }}
+          onCancel={handleCancel}
+        />
+      )}
     </nav>
   ) : null;
 }

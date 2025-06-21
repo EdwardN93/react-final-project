@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
 import Landing from "./Components/Home/Landing";
@@ -14,28 +13,16 @@ import { UserMenu } from "./Components/UserMenu/UserMenu";
 import { Register } from "./Components/routes/auth/Register/Register";
 import { Login } from "./Components/routes/auth/Login/Login";
 import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
-import { logout } from "./Components/routes/auth/Logout/Logout";
-import { CustomModal } from "./Components/Modal/Modal";
 import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 
 function App() {
-  // const navigate = useNavigate();
-  const location = useLocation(); // for AnimatePresence key
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean | string | null>(
-  //   localStorage.getItem("token") ? true : null
-  // );
-
-  // useEffect(() => {
-  //   // Auto logout if token is expired
-  //   logout(setIsLoggedIn, navigate); // This will only log out if expired
-  // }, [navigate]);
+  const location = useLocation();
 
   return (
     <AuthContextProvider>
       <div className="flex flex-col md:flex-row min-h-screen">
         <ScrollToTop />
-
         <aside className="w-full md:w-44 bg-gray-200 p-4 md:sticky md:top-0 md:h-screen ">
           <SideNav />
         </aside>

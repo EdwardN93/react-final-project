@@ -4,6 +4,7 @@ import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
+import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -73,39 +74,43 @@ export default function VehicleDetails() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="p-6">
-        <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span-2">
-          Detalii Vehicul - {car.plateNumber}
-        </h2>
-        <ul className="space-y-2">
-          {carDetails.map(({ label, value }) => {
-            const isRevision = label === "Zile rămase până la revizie";
-            const isUrgent =
-              isRevision && typeof value === "number" && value <= 30;
-            const pastRevision =
-              isRevision && typeof value === "number" && value < 0;
+      {!accessToken ? (
+        <NotLoggedIn />
+      ) : (
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span-2">
+            Detalii Vehicul - {car.plateNumber}
+          </h2>
+          <ul className="space-y-2">
+            {carDetails.map(({ label, value }) => {
+              const isRevision = label === "Zile rămase până la revizie";
+              const isUrgent =
+                isRevision && typeof value === "number" && value <= 30;
+              const pastRevision =
+                isRevision && typeof value === "number" && value < 0;
 
-            return (
-              <li
-                key={label}
-                className={
-                  isUrgent
-                    ? "text-red-600 font-semibold grid sm:grid-cols-3 grid-cols-1"
-                    : "grid sm:grid-cols-3 grid-cols-1"
-                }
-              >
-                <strong>
-                  {pastRevision
-                    ? `Zile întârziere în efectuarea reviziei`
-                    : label}
-                  :
-                </strong>{" "}
-                {pastRevision ? -value : value}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+              return (
+                <li
+                  key={label}
+                  className={
+                    isUrgent
+                      ? "text-red-600 font-semibold grid sm:grid-cols-3 grid-cols-1"
+                      : "grid sm:grid-cols-3 grid-cols-1"
+                  }
+                >
+                  <strong>
+                    {pastRevision
+                      ? `Zile întârziere în efectuarea reviziei`
+                      : label}
+                    :
+                  </strong>{" "}
+                  {pastRevision ? -value : value}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </motion.div>
   );
 }

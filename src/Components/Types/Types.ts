@@ -53,3 +53,10 @@ export type AuthContextValue = AuthStateValue & {
 export type AuthResponse = {
   [K in keyof AuthStateValue]: NonNullable<AuthStateValue[K]>;
 };
+
+export type ModalProps = {
+  title: string;
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+};
