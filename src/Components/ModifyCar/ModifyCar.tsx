@@ -3,9 +3,12 @@ import { useNavigate, useParams } from "react-router";
 import { Button } from "../Button/Button";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
+import { useAuthContext } from "../routes/auth/AuthContext";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export function ModifyCar() {
-  const token = localStorage.getItem("token");
+  const { accessToken } = useAuthContext();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
@@ -31,11 +34,11 @@ export function ModifyCar() {
   }, [id]);
 
   async function getCarFromId(id: string) {
-    const url = `http://localhost:3000/vehicles/${id}`;
+    const url = `${apiUrl}/vehicles/${id}`;
     const options = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json",
       },
     };
@@ -61,7 +64,7 @@ export function ModifyCar() {
     const options = {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json",
       },
       body: JSON.stringify(car),
