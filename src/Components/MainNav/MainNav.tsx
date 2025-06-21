@@ -40,6 +40,13 @@ function Navbar() {
             />
           </li>
         )}
+        {location.pathname === "/account" && (
+          <Button
+            text="Modifică date cont"
+            onClick={() => navigate("/change-account-details")}
+            color="green"
+          />
+        )}
 
         {id && user?.role === 1 && (
           <li>

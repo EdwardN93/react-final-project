@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { useLocation, NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { FaChartBar, FaRegUser, FaUser } from "react-icons/fa";
 import { LiElementProps } from "../Types/Types";
-import "./SideNav.css";
 import { useAuthContext } from "../routes/auth/AuthContext";
+import "./SideNav.css";
 
 export default function SideNav() {
   const { user, logout } = useAuthContext();
 
   function handleLogout() {
-    logout();
+    logout("/login");
   }
 
   function LiElement({ children, ...props }: LiElementProps) {

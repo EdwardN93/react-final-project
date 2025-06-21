@@ -3,7 +3,6 @@
 // 2 - user
 
 import { useEffect } from "react";
-import { Button } from "../Button/Button";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../routes/auth/AuthContext";
@@ -30,10 +29,6 @@ export function Account() {
     getAccountDetails();
   }, []);
 
-  function getToModifyAccountDetailsPage() {
-    navigate("/change-account-details");
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -41,11 +36,6 @@ export function Account() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Button
-        text="Modifică date cont"
-        onClick={getToModifyAccountDetailsPage}
-        color="green"
-      />
       {!accessToken ? (
         <NotLoggedIn />
       ) : (

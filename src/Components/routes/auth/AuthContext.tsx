@@ -7,7 +7,7 @@ import {
 
 const AuthContext = createContext<null | AuthContextValue>(null);
 
-const initialContextValue = {
+const initialContextValue: AuthStateValue = {
   accessToken: null,
   user: null,
 };
@@ -20,7 +20,6 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     if (!fromStorage) {
       return initialContextValue;
     }
-
     return JSON.parse(fromStorage);
   });
 
@@ -29,15 +28,37 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(storageKey, JSON.stringify(value));
   }
 
-  function logout() {
-    setAuth(initialContextValue);
-    localStorage.removeItem(storageKey);
+  function logout(path: string) {
+    const accessToken = auth.accessToken;
+
+    try {
+      if (accessToken) {
+        const payload = JSON.parse(atob(accessToken.split(".")[1]));
+        const isExpired = payload.exp * 1000 < Date.now();
+
+        if (isExpired) {
+          console.log("Session expired");
+        } else {
+          console.log("Manual logout");
+        }
+      }
+    } catch (err) {
+      console.error("Invalid token format", err);
+    } finally {
+      setAuth(initialContextValue);
+      localStorage.removeItem(storageKey);
+      window.location.href = path;
+    }
   }
 
+  const contextValue: AuthContextValue = {
+    ...auth,
+    login,
+    logout,
+  };
+
   return (
-    <AuthContext.Provider value={{ ...auth, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
 
@@ -45,9 +66,8 @@ export function useAuthContext() {
   const ctx = useContext(AuthContext);
   if (!ctx) {
     throw new Error(
-      "useAuthContext should only be used in children of AuthContextProvider"
+      "useAuthContext must be used within an AuthContextProvider"
     );
   }
-
   return ctx;
 }
