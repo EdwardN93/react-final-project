@@ -159,7 +159,7 @@ export function ChangeAccountDetails() {
 
             <div className="mb-4">
               <label htmlFor="firstName" className="block mb-1 font-medium">
-                Change First Name
+                Schimbă Prenumele
               </label>
               <input
                 type="text"
@@ -175,7 +175,7 @@ export function ChangeAccountDetails() {
             )}
             <div className="mb-4">
               <label htmlFor="lastName" className="block mb-1 font-medium">
-                Change Last Name
+                Schimbă Numele
               </label>
               <input
                 type="text"

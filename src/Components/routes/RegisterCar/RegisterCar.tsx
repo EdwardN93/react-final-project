@@ -4,10 +4,17 @@ import { Car } from "../../Types/Types";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../auth/AuthContext";
 import { NotLoggedIn } from "../../NotLoggedIn/NotLoggedIn";
+import { CustomModal } from "../../Modal/Modal";
+import { useState } from "react";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export function RegisterCar() {
   const { accessToken } = useAuthContext();
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   function sendFormDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,13 +49,13 @@ export function RegisterCar() {
       kilometers: kilometers.value,
     };
 
-    registerCar(car);
+    handleRegisterCar(car);
 
     event.currentTarget.reset();
   }
 
-  async function registerCar(car: Car) {
-    const url = "http://localhost:3000/vehicles";
+  async function handleRegisterCar(car: Car) {
+    const url = `${apiUrl}/vehicles`;
 
     const options = {
       method: "POST",
@@ -59,15 +66,24 @@ export function RegisterCar() {
       body: JSON.stringify(car),
     };
 
-    const response = await fetch(url, options);
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setShowModal(true);
+      setModalMessage("Masina adaugata cu succes!");
 
-    const data = await response.json();
-
-    alert("Car successfuly added !");
-    navigate("/");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setShowModal(true);
+      setModalMessage(error);
+    }
   }
 
-  function discardChanges() {
+  function handleDiscardChanges() {
     navigate("/");
   }
 
@@ -280,9 +296,15 @@ export function RegisterCar() {
                 text="Renunta"
                 color="red"
                 width
-                onClick={discardChanges}
+                onClick={handleDiscardChanges}
               />
-              <Button text="Adaugă" width />
+              <Button
+                text="Adaugă"
+                width
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              />
             </div>
 
             <div>
@@ -292,6 +314,15 @@ export function RegisterCar() {
               </p>
             </div>
           </form>
+          {showModal && (
+            <CustomModal
+              title={modalMessage}
+              confirmBtnMessage="Confirma"
+              onConfirm={() => {
+                setShowModal(false);
+              }}
+            />
+          )}
         </div>
       )}
     </motion.div>

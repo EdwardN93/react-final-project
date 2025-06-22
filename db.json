@@ -77,6 +77,21 @@
       "nextRevDate": "2026-08-07",
       "kilometers": "150,000",
       "id": 6
+    },
+    {
+      "plateNumber": "IF07TCH",
+      "carBrand": "Nissan",
+      "carName": "X-Trail",
+      "vinNumber": "NSSNX88334R",
+      "engineCapacity": "1998",
+      "fuelType": "Benzină",
+      "category": "Autoturism M1",
+      "department": "Marketing",
+      "user": "Seda Koek",
+      "status": "Activa",
+      "nextRevDate": "2026-07-01",
+      "kilometers": "145,080",
+      "id": 7
     }
   ]
 }
