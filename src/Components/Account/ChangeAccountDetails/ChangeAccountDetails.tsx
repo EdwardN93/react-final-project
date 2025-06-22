@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { z, ZodObject } from "zod/v4";
 import { useAuthContext } from "../../routes/auth/AuthContext";
 import { NotLoggedIn } from "../../NotLoggedIn/NotLoggedIn";
+import { CustomModal } from "../../Modal/Modal";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -42,7 +43,7 @@ function validateForm<T extends ZodObject>(
 type Errors = Partial<Record<keyof z.infer<typeof validationSchema>, string[]>>;
 
 export function ChangeAccountDetails() {
-  const { user, accessToken } = useAuthContext();
+  const { user, accessToken, login } = useAuthContext();
 
   const initialDefaultValues = {
     firstName: user?.firstName,
@@ -55,6 +56,8 @@ export function ChangeAccountDetails() {
   const [errors, setErrors] = useState<null | Errors>(null);
   const [defaultValues, setDefaultValues] = useState(initialDefaultValues);
   const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   async function handleAccountChange(e: FormEvent<HTMLFormElement>) {
@@ -92,11 +95,26 @@ export function ChangeAccountDetails() {
         throw new Error(`Error: ${JSON.stringify(payload)}`);
       }
 
-      alert("Your account details changed successfuly !");
-      navigate("/account");
+      if (!accessToken) {
+        throw new Error("No access token available");
+      }
+
+      login({
+        accessToken,
+        user: {
+          ...user!,
+          firstName: formDetails.firstName as string,
+          lastName: formDetails.lastName as string,
+          email: formDetails.email as string,
+        },
+      });
+
+      setShowModal(true);
+      setModalMessage("Your account details changed successfuly !");
     } catch (error: any) {
       console.log("Network or server error:", error.message);
-      alert(error.message);
+      setShowModal(true);
+      setModalMessage(error.message);
     }
   }
 
@@ -112,13 +130,12 @@ export function ChangeAccountDetails() {
     setErrors(newErrors);
   }
 
-  function discardChanges() {
+  function handleDiscardChanges() {
     navigate("/account");
   }
 
   function handleShowPassword() {
     setShowPassword(!showPassword);
-    console.log(showPassword);
   }
 
   return (
@@ -228,7 +245,7 @@ export function ChangeAccountDetails() {
                 text="Anulează"
                 color="red"
                 width
-                onClick={discardChanges}
+                onClick={handleDiscardChanges}
               />
               <Button text="Confirmă" width />
             </div>
@@ -244,6 +261,15 @@ export function ChangeAccountDetails() {
               <label htmlFor="showPassword">Show Password</label>
             </div>
           </form>
+          {showModal && (
+            <CustomModal
+              title={modalMessage}
+              confirmBtnMessage="Confirmă"
+              onConfirm={() => {
+                navigate("/account");
+              }}
+            />
+          )}
         </div>
       )}
     </motion.div>

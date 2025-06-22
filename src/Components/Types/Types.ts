@@ -55,8 +55,11 @@ export type AuthResponse = {
 };
 
 export type ModalProps = {
-  title: string;
-  message: string;
+  title: string | null;
+  message?: string | null;
+  showCancelBtn?: boolean;
+  confirmBtnMessage?: string;
+  declineBtnMessage?: string;
   onConfirm: () => void;
-  onCancel: () => void;
+  onCancel?: () => void;
 };
