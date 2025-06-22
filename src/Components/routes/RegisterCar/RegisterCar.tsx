@@ -6,8 +6,20 @@ import { useAuthContext } from "../auth/AuthContext";
 import { NotLoggedIn } from "../../NotLoggedIn/NotLoggedIn";
 import { CustomModal } from "../../Modal/Modal";
 import { useState } from "react";
+import { z, ZodObject } from "zod/v4";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+
+const validationSchema = z.object({
+  plateNumber: z.string().min(1, "Introdu numărul mașinii sub forma B423ABC"),
+  carBrand: z.string().min(1, "Introdu marca mașinii"),
+  carName: z.string().min(1, "Introdu modelul mașinii"),
+  vinNumber: z.string().min(1, "Introdu seria de șasiu a mașinii"),
+  engineCapacity: z.string().min(1, "Introdu capacitatea motorului"),
+  user: z.string().min(1, "Introdu numele utilizatorului mașinii"),
+  nextRevDate: z.date().min(1, "Selectează data următoarei revizii"),
+  kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
+});
 
 export function RegisterCar() {
   const { accessToken } = useAuthContext();
@@ -293,7 +305,7 @@ export function RegisterCar() {
             </div>
             <div className="flex justify-center gap-2">
               <Button
-                text="Renunta"
+                text="Renunță"
                 color="red"
                 width
                 onClick={handleDiscardChanges}
@@ -317,7 +329,7 @@ export function RegisterCar() {
           {showModal && (
             <CustomModal
               title={modalMessage}
-              confirmBtnMessage="Confirma"
+              confirmBtnMessage="Confirmă"
               onConfirm={() => {
                 setShowModal(false);
               }}
