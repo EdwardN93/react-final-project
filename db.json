@@ -17,13 +17,8 @@
     },
     {
       "email": "edward.n934@gmail.asa",
-<<<<<<< HEAD
-      "password": "$2a$10$rXZMk1bSzLGl.jux3qkmheWT.meokBSlF4kcejOlP4cJFQd/1UZMK",
-      "firstName": "Eduards",
-=======
-      "password": "$2a$10$rfiGqWhMa42J20lS8D4R2uaC2y6pcCCq0WJHSWSSB3P15FgqK7PBu",
+      "password": "$2a$10$aRDLpjTTI4lFN2zd4uLMuew05xHHrUIdgOuMsR5c5weWjG5kbbYpe",
       "firstName": "Eduard",
->>>>>>> 94e4e1341894a520ff425f800ac211cddc2ae72e
       "lastName": "Nedelcu",
       "role": 1,
       "id": 8
