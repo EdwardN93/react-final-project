@@ -3,7 +3,6 @@
 // 2 - user
 
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
@@ -12,7 +11,6 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export function Account() {
   const { user, accessToken } = useAuthContext();
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function getAccountDetails() {

@@ -76,6 +76,9 @@ function Navbar() {
             handleCancel();
             navigate("/");
           }}
+          confirmBtnMessage="DA"
+          showCancelBtn
+          declineBtnMessage="NU"
           onCancel={handleCancel}
         />
       )}

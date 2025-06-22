@@ -61,7 +61,7 @@ export function ModifyCar() {
   }
 
   async function editCar(car: Car) {
-    const url = `http://localhost:3000/vehicles/${id}`;
+    const url = `${apiUrl}/vehicles/${id}`;
     const options = {
       method: "PUT",
       headers: {
