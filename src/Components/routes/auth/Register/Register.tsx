@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { z } from "zod/v4";
 import { AuthResponse } from "../../../Types/Types";
@@ -216,12 +216,12 @@ export const Register = () => {
         <div className="">
           <p>
             Already have an account? Log in{" "}
-            <span
+            <NavLink
               className="text-blue-600 hover:cursor-pointer md:text-center"
-              // onClick={goToLogin}
+              to="/login"
             >
               HERE
-            </span>
+            </NavLink>
           </p>
         </div>
       </div>

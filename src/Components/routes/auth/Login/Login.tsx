@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { z } from "zod/v4";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../AuthContext";
@@ -126,12 +126,12 @@ export function Login() {
         <div className="">
           <p>
             Don't have an account? Register{" "}
-            <span
+            <NavLink
               className="text-blue-600 hover:cursor-pointer md:text-center"
-              // onClick={goToRegister}
+              to="/register"
             >
               HERE
-            </span>
+            </NavLink>
           </p>
         </div>
       </div>
