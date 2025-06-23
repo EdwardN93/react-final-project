@@ -12,7 +12,7 @@ export type Car = {
   department?: string;
   user?: string;
   status?: string;
-  nextRevDate?: string;
+  nextRevDate?: string | Date;
   kilometers?: string;
 };
 

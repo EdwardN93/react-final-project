@@ -21,45 +21,76 @@ const validationSchema = z.object({
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
 });
 
+function validateForm<T extends ZodObject>(
+  formValues: Record<string, FormDataEntryValue>,
+  validationSchema: T
+) {
+  const result = validationSchema.safeParse(formValues);
+  if (result.error) {
+    return z.flattenError(result.error).fieldErrors;
+  }
+  return null;
+}
+
+type Errors = Partial<Record<keyof z.infer<typeof validationSchema>, string[]>>;
+
 export function RegisterCar() {
   const { accessToken } = useAuthContext();
   const navigate = useNavigate();
+  const [errors, setErrors] = useState<null | Errors>(null);
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
   function sendFormDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = event.currentTarget;
-    const {
-      plateNumber,
-      carBrand,
-      carName,
-      vinNumber,
-      engineCapacity,
-      fuelType,
-      category,
-      department,
-      user,
-      status,
-      nextRevDate,
-      kilometers,
-    } = formData;
+    const formData = new FormData(event.currentTarget);
 
-    const car: Car = {
-      plateNumber: plateNumber.value.toUpperCase().split(" ").join(""),
-      carBrand: carBrand.value,
-      carName: carName.value,
-      vinNumber: vinNumber.value,
-      engineCapacity: engineCapacity.value,
-      fuelType: fuelType.value,
-      category: category.value,
-      department: department.value,
-      user: user.value,
-      status: status.value,
-      nextRevDate: nextRevDate.value,
-      kilometers: kilometers.value,
+    const rawFormDetails = Object.fromEntries(formData.entries());
+    const stringFormDetails = Object.fromEntries(
+      Object.entries(rawFormDetails).map(([key, value]) => [
+        key,
+        value.toString(),
+      ])
+    );
+
+    const formDetails = {
+      ...rawFormDetails,
+      plateNumber: rawFormDetails.plateNumber?.toString().trim(),
+      carBrand: rawFormDetails.carBrand?.toString().trim(),
+      carName: rawFormDetails.carName?.toString().trim(),
+      vinNumber: rawFormDetails.vinNumber?.toString().trim(),
+      engineCapacity: rawFormDetails.engineCapacity?.toString().trim(),
+      fuelType: rawFormDetails.fuelType?.toString().trim(),
+      category: rawFormDetails.category?.toString().trim(),
+      department: rawFormDetails.department?.toString().trim(),
+      user: rawFormDetails.user?.toString().trim(),
+      status: rawFormDetails.status?.toString().trim(),
+      nextRevDate: new Date(rawFormDetails.nextRevDate?.toString() || ""),
+      kilometers: rawFormDetails.kilometers?.toString().trim(),
     };
+
+    const newErrors = validateForm(stringFormDetails, validationSchema);
+    if (newErrors) {
+      setErrors(newErrors);
+      return;
+    }
+    const car: Car = {
+      plateNumber: formDetails.plateNumber.toUpperCase().replace(/\s/g, ""),
+      carBrand: formDetails.carBrand,
+      carName: formDetails.carName,
+      vinNumber: formDetails.vinNumber,
+      engineCapacity: formDetails.engineCapacity,
+      fuelType: formDetails.fuelType,
+      category: formDetails.category,
+      department: formDetails.department,
+      user: formDetails.user,
+      status: formDetails.status,
+      nextRevDate: formDetails.nextRevDate,
+      kilometers: formDetails.kilometers,
+    };
+
+    setErrors(null);
 
     handleRegisterCar(car);
 
@@ -116,6 +147,7 @@ export function RegisterCar() {
           <form
             onSubmit={sendFormDetails}
             className="grid grid-cols-1 gap-4 bg-white p-8 rounded-lg shadow-md w-full max-w-max mb-10"
+            noValidate
           >
             <div>
               <div className="mb-4">
