@@ -110,7 +110,7 @@ export function ChangeAccountDetails() {
       });
 
       setShowModal(true);
-      setModalMessage("Your account details changed successfuly !");
+      setModalMessage("Datele modificate cu succes!");
     } catch (error: any) {
       console.log("Network or server error:", error.message);
       setShowModal(true);

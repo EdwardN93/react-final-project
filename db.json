@@ -17,7 +17,7 @@
     },
     {
       "email": "edward.n934@gmail.asa",
-      "password": "$2a$10$aRDLpjTTI4lFN2zd4uLMuew05xHHrUIdgOuMsR5c5weWjG5kbbYpe",
+      "password": "$2a$10$mb1GwT.87TvBL9xM1r7NGu4gTGtBGdH15T47LAX7/AWFuY9NLGyOG",
       "firstName": "Eduard",
       "lastName": "Nedelcu",
       "role": 1,
@@ -104,7 +104,7 @@
       "department": "Administrativ",
       "user": "Papadocle Mamanuanu",
       "status": "Activa",
-      "nextRevDate": "2025-07-11T00:00:00.000Z",
+      "nextRevDate": "2025-06-27",
       "kilometers": "125,544",
       "id": 8
     },
@@ -134,7 +134,7 @@
       "department": "Administrativ",
       "user": "Ratoiu Valentin",
       "status": "Activa",
-      "nextRevDate": "2025-07-10T00:00:00.000Z",
+      "nextRevDate": "2025-07-10",
       "kilometers": "241,321",
       "id": 10
     },
@@ -149,7 +149,7 @@
       "department": "Logistică",
       "user": "Manea Manea",
       "status": "Activa",
-      "nextRevDate": "2026-07-08T00:00:00.000Z",
+      "nextRevDate": "2025-07-10",
       "kilometers": "122,872",
       "id": 11
     },

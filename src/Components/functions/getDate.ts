@@ -2,7 +2,7 @@ export function getDate() {
   return new Date();
 }
 
-export function intlDate(date: string) {
+export function intlDate(date: string | Date) {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "short",
@@ -12,7 +12,7 @@ export function intlDate(date: string) {
   return new Date(date).toLocaleDateString("ro-RO", options);
 }
 
-export function compareDates(date: string) {
+export function compareDates(date: string | Date) {
   const today = getDate();
   const newDate = new Date(date);
   today.setHours(0, 0, 0, 0);

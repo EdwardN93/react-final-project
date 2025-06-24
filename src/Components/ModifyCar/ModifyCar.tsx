@@ -5,6 +5,7 @@ import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
+import { CustomModal } from "../Modal/Modal";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -12,6 +13,9 @@ export function ModifyCar() {
   const { accessToken } = useAuthContext();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
 
   const [formState, setFormState] = useState<Car>({
     plateNumber: "",
@@ -75,8 +79,12 @@ export function ModifyCar() {
     const data = await response.json();
 
     console.log("Updated", data);
-    alert("Vehicul modificat cu succes !");
-    navigate("/");
+    setModalTitle("Vehicul modificat cu succes !");
+    setShowModal(true);
+  }
+
+  function handleConfirmModal() {
+    setShowModal(false);
   }
 
   function discardChanges() {
@@ -251,6 +259,15 @@ export function ModifyCar() {
               obligatorii!
             </p>
           </form>
+          {showModal && (
+            <CustomModal
+              title={modalTitle}
+              onConfirm={() => {
+                handleConfirmModal();
+                navigate("/");
+              }}
+            />
+          )}
         </div>
       )}
     </motion.div>
