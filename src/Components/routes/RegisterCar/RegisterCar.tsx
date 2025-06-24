@@ -11,15 +11,26 @@ import { z, ZodObject } from "zod/v4";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const validationSchema = z.object({
-  plateNumber: z.string().min(1, "Introdu numărul mașinii sub forma B423ABC"),
+  plateNumber: z.string().min(4, "Introdu numărul mașinii sub forma B423ABC"),
   carBrand: z.string().min(1, "Introdu marca mașinii"),
   carName: z.string().min(1, "Introdu modelul mașinii"),
   vinNumber: z.string().min(1, "Introdu seria de șasiu a mașinii"),
   engineCapacity: z.string().min(1, "Introdu capacitatea motorului"),
   user: z.string().min(1, "Introdu numele utilizatorului mașinii"),
-  nextRevDate: z.date().min(1, "Selectează data următoarei revizii"),
+  nextRevDate: z.string().min(1, "Selectează data următoarei revizii"),
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
 });
+
+const initialDefaultValues = {
+  plateNumber: "",
+  carBrand: "",
+  carName: "",
+  vinNumber: "",
+  engineCapacity: "",
+  user: "",
+  nextRevDate: "",
+  kilometers: "",
+};
 
 function validateForm<T extends ZodObject>(
   formValues: Record<string, FormDataEntryValue>,
@@ -40,6 +51,7 @@ export function RegisterCar() {
   const [errors, setErrors] = useState<null | Errors>(null);
 
   const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
   function sendFormDetails(event: React.FormEvent<HTMLFormElement>) {
@@ -73,13 +85,16 @@ export function RegisterCar() {
     const newErrors = validateForm(stringFormDetails, validationSchema);
     if (newErrors) {
       setErrors(newErrors);
+      setModalTitle("Câmpurile nu sunt complete");
+      setModalMessage("Asigură-te că ai toate câmpurile completate corect");
+
       return;
     }
     const car: Car = {
       plateNumber: formDetails.plateNumber.toUpperCase().replace(/\s/g, ""),
       carBrand: formDetails.carBrand,
       carName: formDetails.carName,
-      vinNumber: formDetails.vinNumber,
+      vinNumber: formDetails.vinNumber.toUpperCase(),
       engineCapacity: formDetails.engineCapacity,
       fuelType: formDetails.fuelType,
       category: formDetails.category,
@@ -115,15 +130,24 @@ export function RegisterCar() {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
+      setModalTitle("Mașină adaugată cu succes!");
+      setModalMessage("");
       setShowModal(true);
-      setModalMessage("Masina adaugata cu succes!");
-
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
       setShowModal(true);
-      setModalMessage(error);
     }
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!errors) return;
+
+    const formValues = new FormData(e.target.form!);
+    const newErrors = validateForm(
+      Object.fromEntries(formValues),
+      validationSchema
+    );
+
+    setErrors(newErrors);
   }
 
   function handleDiscardChanges() {
@@ -160,10 +184,12 @@ export function RegisterCar() {
                   name="plateNumber"
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   placeholder="Ex. B100TCH"
-                  required
+                  onChange={handleInputChange}
                 />
+                {errors?.plateNumber && (
+                  <p className="text-red-600 mb-4">{errors.plateNumber[0]}</p>
+                )}
               </div>
-
               <div className="mb-4">
                 <label htmlFor="carBrand" className="block mb-1 font-medium">
                   Marcă<span className="text-red-600">*</span>
@@ -174,8 +200,11 @@ export function RegisterCar() {
                   name="carBrand"
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   placeholder="Dacia"
-                  required
+                  onChange={handleInputChange}
                 />
+                {errors?.carBrand && (
+                  <p className="text-red-600 mb-4">{errors.carBrand[0]}</p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -188,8 +217,11 @@ export function RegisterCar() {
                   name="carName"
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   placeholder="Logan"
-                  required
+                  onChange={handleInputChange}
                 />
+                {errors?.carName && (
+                  <p className="text-red-600 mb-4">{errors.carName[0]}</p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -202,8 +234,11 @@ export function RegisterCar() {
                   name="vinNumber"
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   placeholder="DC9234JMAX"
-                  required
+                  onChange={handleInputChange}
                 />
+                {errors?.vinNumber && (
+                  <p className="text-red-600 mb-4">{errors.vinNumber[0]}</p>
+                )}
               </div>
             </div>
             <div>
@@ -220,8 +255,13 @@ export function RegisterCar() {
                   name="engineCapacity"
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   placeholder="1197"
-                  required
+                  onChange={handleInputChange}
                 />
+                {errors?.engineCapacity && (
+                  <p className="text-red-600 mb-4">
+                    {errors.engineCapacity[0]}
+                  </p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -234,8 +274,11 @@ export function RegisterCar() {
                   name="user"
                   id="user"
                   placeholder="Utilizator"
-                  required
-                ></input>
+                  onChange={handleInputChange}
+                />
+                {errors?.user && (
+                  <p className="text-red-600 mb-4">{errors.user[0]}</p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -248,8 +291,11 @@ export function RegisterCar() {
                   name="kilometers"
                   id="kilometers"
                   placeholder="120,000"
-                  required
-                ></input>
+                  onChange={handleInputChange}
+                />
+                {errors?.kilometers && (
+                  <p className="text-red-600 mb-4">{errors.kilometers[0]}</p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -262,8 +308,11 @@ export function RegisterCar() {
                   name="nextRevDate"
                   id="nextRevDate"
                   placeholder="Utilizator"
-                  required
-                ></input>
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
               </div>
             </div>
 
@@ -360,10 +409,12 @@ export function RegisterCar() {
           </form>
           {showModal && (
             <CustomModal
-              title={modalMessage}
+              title={modalTitle}
+              message={modalMessage}
               confirmBtnMessage="Confirmă"
               onConfirm={() => {
                 setShowModal(false);
+                if (!errors) navigate("/");
               }}
             />
           )}
