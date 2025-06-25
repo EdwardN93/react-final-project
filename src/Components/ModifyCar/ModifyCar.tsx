@@ -59,6 +59,7 @@ export function ModifyCar() {
     const carToSend: Car = {
       ...formState,
       plateNumber: formState?.plateNumber?.toUpperCase().split(" ").join(""),
+      vinNumber: formState?.vinNumber?.toUpperCase().split("").join(""),
     };
 
     editCar(carToSend);
