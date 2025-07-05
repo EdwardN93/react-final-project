@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { Car, ColProp } from "../Types/Types";
 import { motion } from "framer-motion";
-import { compareDates } from "../functions/getDate";
+import { compareDates, intlDate } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
 import { Pagination } from "../utils/Pagination";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -27,6 +28,13 @@ export default function Landing() {
     user: "",
     status: "",
   });
+
+  const [tooltip, setTooltip] = useState<{
+    visible: boolean;
+    x: number;
+    y: number;
+    text: string;
+  }>({ visible: false, x: 0, y: 0, text: "" });
 
   const [totalCount, setTotalCount] = useState(0);
   const [params] = useSearchParams();
@@ -262,6 +270,28 @@ export default function Landing() {
                           : "hover:bg-sky-300"
                       }`}
                       onClick={() => navigate(`/vehicles/${car.id}`)}
+                      onMouseEnter={(e) => {
+                        if (isPastDue) {
+                          setTooltip({
+                            visible: true,
+                            x: e.clientX,
+                            y: e.clientY,
+                            text: "Trecută de data reviziei",
+                          });
+                        } else if (alert) {
+                          setTooltip({
+                            visible: true,
+                            x: e.clientX,
+                            y: e.clientY,
+                            text: `Data reviziei: ${intlDate(
+                              car.nextRevDate!
+                            )}`,
+                          });
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        setTooltip((prev) => ({ ...prev, visible: false }));
+                      }}
                     >
                       <TableCol carDetail={car.id} />
                       {Object.keys(filters).map((field) => (
@@ -284,6 +314,14 @@ export default function Landing() {
               page={page}
               setPage={setPage}
             />
+          )}
+          {tooltip.visible && (
+            <div
+              className="fixed px-2 py-1 bg-black text-white text-sm rounded pointer-events-none z-50"
+              style={{ top: tooltip.y + 10, left: tooltip.x + 10 }}
+            >
+              {tooltip.text}
+            </div>
           )}
         </div>
       )}
