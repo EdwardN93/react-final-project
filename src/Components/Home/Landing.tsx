@@ -81,7 +81,11 @@ export default function Landing() {
   );
 
   function TableCol({ carDetail }: ColProp) {
-    return <td className="p-2 border text-center">{carDetail}</td>;
+    const displayValue =
+      carDetail instanceof Date
+        ? carDetail.toLocaleDateString()
+        : carDetail ?? "";
+    return <td className="p-2 border text-center">{displayValue}</td>;
   }
 
   function handlePageLimit(limit: number) {
@@ -242,18 +246,21 @@ export default function Landing() {
                 </tr>
               ) : (
                 filteredCars.map((car: Car) => {
-                  const urgent = car?.nextRevDate
+                  const isPastDue = compareDates(car.nextRevDate!) < 0;
+                  const alert = car?.nextRevDate
                     ? compareDates(car.nextRevDate) <= 30
                     : false;
 
                   return (
                     <tr
                       key={car.id}
-                      className={
-                        urgent
-                          ? `bg-red-300 hover:bg-red-200 hover:cursor-pointer`
-                          : "hover:bg-sky-300 hover:cursor-pointer"
-                      }
+                      className={`hover:cursor-pointer ${
+                        isPastDue
+                          ? "bg-red-300 hover:bg-red-200"
+                          : alert
+                          ? "bg-yellow-300 hover:bg-yellow-200"
+                          : "hover:bg-sky-300"
+                      }`}
                       onClick={() => navigate(`/vehicles/${car.id}`)}
                     >
                       <TableCol carDetail={car.id} />

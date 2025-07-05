@@ -25,7 +25,7 @@ export type LiElementProps = {
 
 // ColProp for Landing.tsx
 export type ColProp = {
-  carDetail?: number | string | null | undefined;
+  carDetail?: number | string | null | undefined | Date;
 };
 
 // User for account

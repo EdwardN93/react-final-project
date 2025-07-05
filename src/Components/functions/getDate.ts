@@ -13,7 +13,7 @@ export function intlDate(date: string | Date) {
 }
 
 export function compareDates(date: string | Date) {
-  const today = getDate();
+  const today = new Date();
   const newDate = new Date(date);
   today.setHours(0, 0, 0, 0);
   newDate.setHours(0, 0, 0, 0);
