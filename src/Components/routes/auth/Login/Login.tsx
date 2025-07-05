@@ -6,6 +6,7 @@ import { validateForm, ValidationErrors } from "../../../utils/validation";
 import { useRedirectWhenLoggedIn } from "../useRedirectWhenLogIn";
 import { useState } from "react";
 import { AuthResponse } from "../../../Types/Types";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -67,6 +68,7 @@ export function Login() {
     }).then((res) => res.json() as Promise<AuthResponse>);
 
     login(data);
+    toast.success("Te-ai logat cu succes!");
   }
   return (
     <motion.div
@@ -125,12 +127,12 @@ export function Login() {
         </form>
         <div className="">
           <p>
-            Don't have an account? Register{" "}
+            Nu ai cont? Înregistrează-te{" "}
             <NavLink
               className="text-blue-600 hover:cursor-pointer md:text-center"
               to="/register"
             >
-              HERE
+              AICI
             </NavLink>
           </p>
         </div>

@@ -30,6 +30,14 @@
       "lastName": "Nedelcu",
       "role": 1,
       "id": 9
+    },
+    {
+      "email": "m@m.com",
+      "password": "$2a$10$yCIqyaFjXqJbt7Ip/o9.rewxGIQVek3gotptmbtgs3ISoDAg4MV22",
+      "firstName": "Man",
+      "lastName": "OfWonder",
+      "role": 0,
+      "id": 10
     }
   ],
   "vehicles": [
@@ -167,6 +175,36 @@
       "nextRevDate": "2027-12-06T00:00:00.000Z",
       "kilometers": "145,080",
       "id": 12
+    },
+    {
+      "plateNumber": "IF31TCH",
+      "carBrand": "Renault",
+      "carName": "Express",
+      "vinNumber": "RNOLT28383",
+      "engineCapacity": "1499",
+      "fuelType": "Motorină",
+      "category": "Autoutilitara N1",
+      "department": "Logistică",
+      "user": "Gica Goga",
+      "status": "Activa",
+      "nextRevDate": "2026-11-05T00:00:00.000Z",
+      "kilometers": "123,231",
+      "id": 13
+    },
+    {
+      "plateNumber": "IF98TCH",
+      "carBrand": "Dacia",
+      "carName": "Dokker",
+      "vinNumber": "DCIA381401",
+      "engineCapacity": "1198",
+      "fuelType": "Motorină",
+      "category": "Autoutilitara N1",
+      "department": "Logistică",
+      "user": "Fanda Bonda",
+      "status": "Activa",
+      "nextRevDate": "2025-07-31T00:00:00.000Z",
+      "kilometers": "320,192",
+      "id": 14
     }
   ]
 }

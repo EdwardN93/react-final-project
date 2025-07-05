@@ -21,17 +21,6 @@ const validationSchema = z.object({
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
 });
 
-const initialDefaultValues = {
-  plateNumber: "",
-  carBrand: "",
-  carName: "",
-  vinNumber: "",
-  engineCapacity: "",
-  user: "",
-  nextRevDate: "",
-  kilometers: "",
-};
-
 function validateForm<T extends ZodObject>(
   formValues: Record<string, FormDataEntryValue>,
   validationSchema: T

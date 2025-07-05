@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { Car, ColProp } from "../Types/Types";
 import { motion } from "framer-motion";
 import { compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
+import { Pagination } from "../utils/Pagination";
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Landing() {
+  const [limitPerPage, setLimitPerPage] = useState(5);
   const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>([]);
   const [sorter, setSorter] = useState<boolean>(false);
@@ -24,20 +28,28 @@ export default function Landing() {
     status: "",
   });
 
+  const [totalCount, setTotalCount] = useState(0);
+  const [params] = useSearchParams();
+  // const page = Number(params.get("page") || 1);
+  const [page, setPage] = useState(Number(params.get("page") || 1));
+
   useEffect(() => {
     async function fetchCars(token: string) {
       try {
-        const response = await fetch("http://localhost:3000/vehicles", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `${apiUrl}/vehicles?_page=${page}&_limit=${limitPerPage}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok)
           throw new Error(`HTTP error! Status: ${response.status}`);
-
+        setTotalCount(Number(response.headers.get("X-Total-Count")));
         const data = await response.json();
         setCars(data);
       } catch (error) {
@@ -47,7 +59,7 @@ export default function Landing() {
     if (accessToken) {
       fetchCars(accessToken);
     }
-  }, []);
+  }, [page, limitPerPage]);
 
   function sortAscDescId(sorter: boolean) {
     const sorted = [...cars].sort((a, b) =>
@@ -70,6 +82,10 @@ export default function Landing() {
 
   function TableCol({ carDetail }: ColProp) {
     return <td className="p-2 border text-center">{carDetail}</td>;
+  }
+
+  function handlePageLimit(limit: number) {
+    setLimitPerPage(limit);
   }
 
   return (
@@ -253,6 +269,15 @@ export default function Landing() {
               )}
             </tbody>
           </table>
+          {totalCount && (
+            <Pagination
+              itemsPerPage={limitPerPage}
+              totalCount={totalCount}
+              handlePageLimit={handlePageLimit}
+              page={page}
+              setPage={setPage}
+            />
+          )}
         </div>
       )}
     </motion.div>

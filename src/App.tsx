@@ -15,6 +15,7 @@ import { Login } from "./Components/routes/auth/Login/Login";
 import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const location = useLocation();
@@ -53,6 +54,7 @@ function App() {
                 </Routes>
               </motion.div>
             </AnimatePresence>
+            <ToastContainer />
             <Footer />
           </div>
         </main>

@@ -6,6 +6,7 @@ import { validateForm, ValidationErrors } from "../../../utils/validation";
 import { useAuthContext } from "../AuthContext";
 import { useRedirectWhenLoggedIn } from "../useRedirectWhenLogIn";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -88,6 +89,7 @@ export const Register = () => {
     }).then((res) => res.json() as Promise<AuthResponse>);
 
     login(data);
+    toast.success("Contul tau a fost înregistrat cu succes !");
   }
 
   function handleShowPassword() {
@@ -215,13 +217,14 @@ export const Register = () => {
         </form>
         <div className="">
           <p>
-            Already have an account? Log in{" "}
+            Ai deja cont? Click{" "}
             <NavLink
               className="text-blue-600 hover:cursor-pointer md:text-center"
               to="/login"
             >
-              HERE
-            </NavLink>
+              AICI
+            </NavLink>{" "}
+            pentru a intra in cont.
           </p>
         </div>
       </div>
