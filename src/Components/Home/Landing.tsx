@@ -274,15 +274,15 @@ export function Landing() {
                         if (isPastDue) {
                           setTooltip({
                             visible: true,
-                            x: e.clientX,
-                            y: e.clientY,
+                            x: e.clientX + 20,
+                            y: e.clientY - 50,
                             text: "Trecută de data reviziei",
                           });
                         } else if (alert) {
                           setTooltip({
                             visible: true,
-                            x: e.clientX,
-                            y: e.clientY,
+                            x: e.clientX + 20,
+                            y: e.clientY - 50,
                             text: `Data reviziei: ${intlDate(
                               car.nextRevDate!
                             )}`,
