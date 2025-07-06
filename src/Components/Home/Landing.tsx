@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export default function Landing() {
+export function Landing() {
   const [limitPerPage, setLimitPerPage] = useState(5);
   const navigate = useNavigate();
   const [cars, setCars] = useState<Car[]>([]);
@@ -117,7 +117,7 @@ export default function Landing() {
         >
           <table className="min-w-full border border-gray-300">
             <caption className="caption-top font-bold text-lg mb-8">
-              All Company Cars
+              Afișare mașini
             </caption>
             <thead className="bg-gray-200">
               <tr>
@@ -264,10 +264,10 @@ export default function Landing() {
                       key={car.id}
                       className={`hover:cursor-pointer ${
                         isPastDue
-                          ? "bg-red-300 hover:bg-red-200"
+                          ? "bg-red-300 hover:bg-red-200 duration-300 transition-all"
                           : alert
-                          ? "bg-yellow-300 hover:bg-yellow-200"
-                          : "hover:bg-sky-300"
+                          ? "bg-yellow-300 hover:bg-yellow-200 duration-300 transition-all"
+                          : "hover:bg-sky-300 duration-300 transition-all"
                       }`}
                       onClick={() => navigate(`/vehicles/${car.id}`)}
                       onMouseEnter={(e) => {

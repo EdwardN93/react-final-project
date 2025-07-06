@@ -10,7 +10,7 @@ export function UserMenu() {
     <div className="flex gap-4">
       Hello {user?.firstName}
       <span
-        className="text-xl text-sky-400 hover:text-sky-600 hover:cursor-pointer"
+        className="text-xl text-sky-400 hover:text-sky-600 hover:cursor-pointer transition-all duration-300"
         onClick={() => navigate("/account")}
       >
         <FaUser />

@@ -37,9 +37,9 @@ export function Pagination({
         to={{
           search: `?page=${page - 1}`,
         }}
-        className="hover:text-red-500"
+        className="border rounded px-2 py-1 hover:bg-sky-100 hover:border-blue-300 hover:text-blue-600 transition-colors duration-200"
       >
-        &laquo; Prev
+        &laquo; Înapoi
       </Link>
     );
   }
@@ -67,13 +67,17 @@ export function Pagination({
           to={{
             search: `?page=${i}`,
           }}
+          className="border border-gray-300 rounded px-3 py-1 mx-1 text-sm hover:border-blue-300 hover:bg-sky-100 hover:text-blue-600 transition-colors duration-200"
         >
           {i}
         </Link>
       );
     } else {
       jsx.push(
-        <span className="text-red-500" key={i}>
+        <span
+          className="px-3 py-1 mx-1 text-sm border border-red-300 rounded bg-red-100 text-red-600 font-semibold shadow-inner"
+          key={i}
+        >
           {i}
         </span>
       );
@@ -101,16 +105,20 @@ export function Pagination({
         to={{
           search: `?page=${page + 1}`,
         }}
-        className="hover:text-red-500"
+        className="border rounded px-2 py-1 hover:bg-sky-100 hover:border-blue-300 hover:text-blue-600 transition-colors duration-200"
       >
-        Next &raquo;
+        Înainte &raquo;
       </Link>
     );
   }
 
   return (
-    <div className="mt-4 flex gap-4 items-center justify-between text-blue-700">
-      <div>
+    <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-blue-700">
+      {/* Items per page selector */}
+      <div className="flex items-center gap-2">
+        <label htmlFor="perPage" className="text-sm font-medium">
+          Rezultate pe pagină:
+        </label>
         <select
           name="perPage"
           id="perPage"
@@ -119,13 +127,16 @@ export function Pagination({
             navigate("/?page=1");
           }}
           value={itemsPerPage}
+          className="px-3 py-1 text-sm border border-gray-300 rounded bg-white hover:bg-sky-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
         >
           <option value="5">5</option>
           <option value="10">10</option>
         </select>
       </div>
-      <div className=" flex items-center justify-center mt-4 gap-4">
-        Page: {jsx}
+
+      {/* Pagination */}
+      <div className="flex items-center justify-center flex-wrap gap-2 text-sm">
+        Pagina: {jsx}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
-import Landing from "./Components/Home/Landing";
+import { Landing } from "./Components/Home/Landing";
 import SideNav from "./Components/SideNav/SideNav";
 import MainNav from "./Components/MainNav/MainNav";
 import { Footer } from "./Components/Footer/Footer";
