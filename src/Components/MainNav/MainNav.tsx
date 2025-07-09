@@ -66,6 +66,15 @@ function Navbar() {
             />
           </li>
         )}
+        {id && user?.role === 1 && (
+          <li>
+            <Button
+              text="Adauga reparatii"
+              color="green"
+              onClick={() => navigate(`/repairs/${id}`)}
+            />
+          </li>
+        )}
       </ul>
       {showModal && (
         <CustomModal

@@ -92,6 +92,7 @@ export function RegisterCar() {
       status: formDetails.status,
       nextRevDate: formDetails.nextRevDate,
       kilometers: formDetails.kilometers,
+      repairs: [],
     };
 
     setErrors(null);

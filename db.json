@@ -54,7 +54,21 @@
       "status": "Activa",
       "nextRevDate": "2026-06-20",
       "kilometers": "145,080",
-      "id": 4
+      "id": 4,
+      "repairs": [
+        {
+          "intervention": "Schimb placute de frana",
+          "cost": "200"
+        },
+        {
+          "intervention": "Schimb ulei",
+          "cost": "150"
+        },
+        {
+          "intervention": "Schimb placute frana",
+          "cost": "800"
+        }
+      ]
     },
     {
       "plateNumber": "IF29TCH",
@@ -205,6 +219,22 @@
       "nextRevDate": "2025-07-31T00:00:00.000Z",
       "kilometers": "320,192",
       "id": 14
+    },
+    {
+      "plateNumber": "IF68TCH",
+      "carBrand": "Nissan",
+      "carName": "Juke",
+      "vinNumber": "NSSN442092KS",
+      "engineCapacity": "1197",
+      "fuelType": "Hibrid",
+      "category": "Autoturism M1",
+      "department": "Vânzări",
+      "user": "Utilizer Testo",
+      "status": "Activa",
+      "nextRevDate": "2025-08-26T00:00:00.000Z",
+      "kilometers": "15,156",
+      "repairs": [],
+      "id": 15
     }
   ]
 }

@@ -14,6 +14,7 @@ export type Car = {
   status?: string;
   nextRevDate?: string | Date;
   kilometers?: string;
+  repairs?: string[];
 };
 
 // li Element for SideNav

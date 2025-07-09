@@ -16,6 +16,7 @@ import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 import { ToastContainer } from "react-toastify";
+import AddRepairs from "./Components/AddRepairs/AddRepairs";
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/vehicles/:id" element={<VehicleDetails />} />
                   <Route path="/modify-car/:id" element={<ModifyCar />} />
                   <Route path="/account" element={<Account />} />
+                  <Route path="/repairs/:id" element={<AddRepairs />} />
                   <Route
                     path="/change-account-details"
                     element={<ChangeAccountDetails />}
