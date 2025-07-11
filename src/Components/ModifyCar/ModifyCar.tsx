@@ -89,7 +89,7 @@ export function ModifyCar() {
   }
 
   function discardChanges() {
-    navigate("/");
+    navigate(-1);
   }
 
   return (
@@ -243,6 +243,7 @@ export function ModifyCar() {
               </div>
             </div>
             <div className="flex flex-row gap-2">
+              <Button text="Confirmă" width />
               <Button
                 text="Anulează"
                 color="red"
@@ -252,7 +253,6 @@ export function ModifyCar() {
                   discardChanges();
                 }}
               />
-              <Button text="Confirmă" width />
             </div>
 
             <p className="text-xs mt-4">

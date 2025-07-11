@@ -51,9 +51,18 @@ function Navbar() {
         {id && user?.role === 1 && (
           <li>
             <Button
-              text="Modifică mașină"
+              text="Modifică date tehnice"
               color="green"
               onClick={() => navigate(`/modify-car/${id}`)}
+            />
+          </li>
+        )}
+        {id && user?.role === 1 && (
+          <li>
+            <Button
+              text="Adaugă reparații"
+              color="green"
+              onClick={() => navigate(`/repairs/${id}`)}
             />
           </li>
         )}
@@ -63,15 +72,6 @@ function Navbar() {
               text="Sterge mașină"
               color="red"
               onClick={() => setShowModal(true)}
-            />
-          </li>
-        )}
-        {id && user?.role === 1 && (
-          <li>
-            <Button
-              text="Adauga reparatii"
-              color="green"
-              onClick={() => navigate(`/repairs/${id}`)}
             />
           </li>
         )}

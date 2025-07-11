@@ -5,12 +5,13 @@ import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
+import { literal } from "zod/v4";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
-  const [car, setCar] = useState<Car | null>(null);
+  const [car, setCar] = useState<Car | null>();
   const { accessToken } = useAuthContext();
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function VehicleDetails() {
         const response = await fetch(url, options);
         const data = await response.json();
         setCar(data);
+        console.log(car);
       } catch (error) {
         console.error("Error fetching car:", error);
       }
@@ -77,38 +79,79 @@ export default function VehicleDetails() {
       {!accessToken ? (
         <NotLoggedIn />
       ) : (
-        <div className="p-6">
-          <h2 className="text-xl font-bold mb-4 grid grid-cols-3 col-span-2">
-            Detalii Vehicul - {car.plateNumber}
+        <div className="p-6 max-w-6xl mx-auto space-y-10">
+          <h2 className="text-3xl font-bold border-b pb-4">
+            Vehicul: {car.plateNumber}
           </h2>
-          <ul className="space-y-2">
-            {carDetails.map(({ label, value }) => {
-              const isRevision = label === "Zile rămase până la revizie";
-              const isUrgent =
-                isRevision && typeof value === "number" && value <= 30;
-              const pastRevision =
-                isRevision && typeof value === "number" && value < 0;
 
-              return (
-                <li
-                  key={label}
-                  className={
-                    isUrgent
-                      ? "text-red-600 font-semibold grid sm:grid-cols-3 grid-cols-1"
-                      : "grid sm:grid-cols-3 grid-cols-1"
-                  }
-                >
-                  <strong>
-                    {pastRevision
-                      ? `Zile întârziere în efectuarea reviziei`
-                      : label}
-                    :
-                  </strong>{" "}
-                  {pastRevision ? -value : value}
-                </li>
-              );
-            })}
-          </ul>
+          {/* Car Details Section */}
+          <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+            <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+              Date Tehnice
+            </h3>
+            <dl className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+              {carDetails.map(({ label, value }) => {
+                const isRevision = label === "Zile rămase până la revizie";
+                const isUrgent =
+                  isRevision && typeof value === "number" && value <= 30;
+                const pastRevision =
+                  isRevision && typeof value === "number" && value < 0;
+
+                return (
+                  <div key={label} className="flex flex-col">
+                    <dt className="text-gray-500 font-medium">
+                      {pastRevision
+                        ? "Zile întârziere în efectuarea reviziei"
+                        : label}
+                    </dt>
+                    <dd
+                      className={`${
+                        isUrgent
+                          ? "text-red-600 font-semibold"
+                          : "text-gray-800"
+                      }`}
+                    >
+                      {pastRevision ? -value : value}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </section>
+
+          {/* Repairs Section */}
+          <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+            <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+              Intervenții & Costuri
+            </h3>
+            {car.repairs && car.repairs.length > 0 ? (
+              <ul className="space-y-3">
+                {car.repairs.map((repair, i) => (
+                  <li
+                    key={i}
+                    className="flex justify-between border-b pb-2 text-sm"
+                  >
+                    <span className="text-gray-700">{repair.intervention}</span>
+                    <span className="text-gray-900 font-semibold">
+                      {repair.cost} RON
+                    </span>
+                  </li>
+                ))}
+                <div className="w-full text-right">
+                  <span className="text-gray-900 font-semibold">
+                    Total costuri:{" "}
+                    {car.repairs
+                      .reduce((acc, val) => acc + Number(val.cost), 0)
+                      .toLocaleString()}{" "}
+                    RON
+                  </span>
+                </div>
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-sm italic">Nicio intervenție.</p>
+            )}
+            {}
+          </section>
         </div>
       )}
     </motion.div>

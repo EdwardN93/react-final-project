@@ -100,6 +100,10 @@ export default function AddRepairs() {
     setErrors(newErrors);
   }
 
+  function handleDiscard() {
+    navigate(-1);
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -154,13 +158,10 @@ export default function AddRepairs() {
           {errors?.cost && (
             <p className="text-red-600 mb-4">{errors.cost[0]}</p>
           )}
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition mt-4"
-          >
-            Register
-          </button>
+          <div className="flex gap-2">
+            <Button text="Adaugă reparație" width />
+            <Button text="Anulează" color="red" width onClick={handleDiscard} />
+          </div>
         </form>
       </div>
     </motion.div>

@@ -241,13 +241,13 @@ export function ChangeAccountDetails() {
               <p className="text-red-600 mb-4">{errors.retypePassword[0]}</p>
             )}
             <div className="flex flex-row gap-2">
+              <Button text="Confirmă" width />
               <Button
                 text="Anulează"
                 color="red"
                 width
                 onClick={handleDiscardChanges}
               />
-              <Button text="Confirmă" width />
             </div>
             <div className="flex items-center gap-2 mt-4">
               <input

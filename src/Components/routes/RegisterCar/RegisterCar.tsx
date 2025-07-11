@@ -91,7 +91,7 @@ export function RegisterCar() {
       user: formDetails.user,
       status: formDetails.status,
       nextRevDate: formDetails.nextRevDate,
-      kilometers: formDetails.kilometers,
+      kilometers: formDetails.kilometers.replace(".", ","),
       repairs: [],
     };
 
@@ -376,17 +376,17 @@ export function RegisterCar() {
             </div>
             <div className="flex justify-center gap-2">
               <Button
-                text="Renunță"
-                color="red"
-                width
-                onClick={handleDiscardChanges}
-              />
-              <Button
                 text="Adaugă"
                 width
                 onClick={() => {
                   setShowModal(true);
                 }}
+              />
+              <Button
+                text="Renunță"
+                color="red"
+                width
+                onClick={handleDiscardChanges}
               />
             </div>
 

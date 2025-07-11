@@ -67,6 +67,10 @@
         {
           "intervention": "Schimb placute frana",
           "cost": "800"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "915"
         }
       ]
     },
@@ -83,7 +87,13 @@
       "status": "Activa",
       "nextRevDate": "2025-10-06",
       "kilometers": "44,513",
-      "id": 5
+      "id": 5,
+      "repairs": [
+        {
+          "intervention": "Schimb placute de frana",
+          "cost": "320"
+        }
+      ]
     },
     {
       "plateNumber": "B34TCH",

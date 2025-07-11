@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
 
+type Repairs = {
+  cost: string;
+  intervention: string;
+};
+
 export type Car = {
   id?: number;
   plateNumber?: string;
@@ -14,7 +19,7 @@ export type Car = {
   status?: string;
   nextRevDate?: string | Date;
   kilometers?: string;
-  repairs?: string[];
+  repairs?: Repairs[];
 };
 
 // li Element for SideNav
