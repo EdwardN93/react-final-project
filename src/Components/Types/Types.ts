@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 type Repairs = {
+  repairAtKm: string;
   cost: string;
   intervention: string;
 };

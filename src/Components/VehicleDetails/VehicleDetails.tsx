@@ -99,7 +99,7 @@ export default function VehicleDetails() {
 
                 return (
                   <div key={label} className="flex flex-col">
-                    <dt className="text-gray-500 font-medium">
+                    <dt className="text-gray-800 font-medium">
                       {pastRevision
                         ? "Zile întârziere în efectuarea reviziei"
                         : label}
@@ -129,10 +129,13 @@ export default function VehicleDetails() {
                 {car.repairs.map((repair, i) => (
                   <li
                     key={i}
-                    className="flex justify-between border-b pb-2 text-sm"
+                    className="grid grid-cols-3 border-b pb-2 text-sm"
                   >
                     <span className="text-gray-700">{repair.intervention}</span>
-                    <span className="text-gray-900 font-semibold">
+                    <span className="text-gray-700 text-center">
+                      Kilometri: {repair.repairAtKm}
+                    </span>
+                    <span className="text-gray-900 font-semibold text-right">
                       {repair.cost} RON
                     </span>
                   </li>
@@ -150,7 +153,6 @@ export default function VehicleDetails() {
             ) : (
               <p className="text-gray-500 text-sm italic">Nicio intervenție.</p>
             )}
-            {}
           </section>
         </div>
       )}

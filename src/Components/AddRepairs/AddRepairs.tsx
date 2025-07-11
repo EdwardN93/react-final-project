@@ -13,11 +13,15 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const validationSchema = z.object({
   intervention: z.string().min(1, "Adaugă intervenție"),
   cost: z.string().min(2, "Adaugă costul reparației"),
+  repairAtKm: z
+    .string()
+    .min(1, "Adaugă numarul de kilometri la momentul reparației"),
 });
 
 const initialDefaultValues = {
   intervention: "",
   cost: "",
+  repairAtKm: "",
 };
 
 export default function AddRepairs() {
@@ -67,6 +71,7 @@ export default function AddRepairs() {
     const newRepair = {
       intervention: values.intervention,
       cost: values.cost,
+      repairAtKm: String(values.repairAtKm).replace(".", ","),
     };
 
     const updatedCar = {
@@ -137,10 +142,10 @@ export default function AddRepairs() {
               onChange={handleInputChange}
               placeholder="Ex. Schimb placuțe de frână"
             />
+            {errors?.intervention && (
+              <p className="text-red-600 mb-4">{errors.intervention[0]}</p>
+            )}
           </div>
-          {errors?.intervention && (
-            <p className="text-red-600 mb-4">{errors.intervention[0]}</p>
-          )}
 
           <div className="mb-4">
             <label htmlFor="cost" className="block mb-1 font-medium">
@@ -151,13 +156,32 @@ export default function AddRepairs() {
               id="cost"
               name="cost"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              placeholder="1001"
               defaultValue={defaultValues.cost}
               onChange={handleInputChange}
             />
+            {errors?.cost && (
+              <p className="text-red-600 mb-4">{errors.cost[0]}</p>
+            )}
           </div>
-          {errors?.cost && (
-            <p className="text-red-600 mb-4">{errors.cost[0]}</p>
-          )}
+
+          <div className="mb-4">
+            <label htmlFor="repairAtKm" className="block mb-1 font-medium">
+              Kilometri la momentul reparatiei / interventiei
+            </label>
+            <input
+              type="text"
+              id="repairAtKm"
+              name="repairAtKm"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+              placeholder="100,4"
+              defaultValue={defaultValues.repairAtKm}
+              onChange={handleInputChange}
+            />
+            {errors?.repairAtKm && (
+              <p className="text-red-600 mb-4">{errors.repairAtKm[0]}</p>
+            )}
+          </div>
           <div className="flex gap-2">
             <Button text="Adaugă reparație" width />
             <Button text="Anulează" color="red" width onClick={handleDiscard} />

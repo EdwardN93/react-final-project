@@ -58,19 +58,33 @@
       "repairs": [
         {
           "intervention": "Schimb placute de frana",
-          "cost": "200"
+          "cost": "200",
+          "repairAtKm": "55,100"
         },
         {
           "intervention": "Schimb ulei",
-          "cost": "150"
+          "cost": "150",
+          "repairAtKm": "89,982"
         },
         {
           "intervention": "Schimb placute frana",
-          "cost": "800"
+          "cost": "800",
+          "repairAtKm": "100,025"
         },
         {
           "intervention": "Revizie",
-          "cost": "915"
+          "cost": "915",
+          "repairAtKm": "128,100"
+        },
+        {
+          "intervention": "Schimb filtru de particule",
+          "cost": "2100",
+          "repairAtKm": "131,190"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "887",
+          "repairAtKm": "143,100"
         }
       ]
     },
@@ -91,7 +105,18 @@
       "repairs": [
         {
           "intervention": "Schimb placute de frana",
-          "cost": "320"
+          "cost": "320",
+          "repairAtKm": "31,448"
+        },
+        {
+          "intervention": "Schimb baterie",
+          "cost": "675",
+          "repairAtKm": "38,232"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "935",
+          "repairAtKm": "42,100"
         }
       ]
     },
