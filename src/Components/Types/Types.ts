@@ -53,7 +53,7 @@ export type AuthStateValue = {
 
 export type AuthContextValue = AuthStateValue & {
   login: (value: AuthResponse) => void;
-  logout: (path: string) => void;
+  logout: () => void;
 };
 
 // O SINGURA SURSA DE ADEVAR !!

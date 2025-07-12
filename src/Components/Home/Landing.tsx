@@ -294,12 +294,21 @@ export function Landing() {
                       }}
                     >
                       <TableCol carDetail={car.id} />
-                      {Object.keys(filters).map((field) => (
-                        <TableCol
-                          key={field}
-                          carDetail={car[field as keyof Car]}
-                        />
-                      ))}
+                      {Object.keys(filters).map((field) => {
+                        const value = car[field as keyof Car];
+
+                        if (Array.isArray(value))
+                          return <TableCol key={field} carDetail="-" />;
+
+                        return (
+                          <TableCol
+                            key={field}
+                            carDetail={
+                              value as string | number | Date | null | undefined
+                            }
+                          />
+                        );
+                      })}
                     </tr>
                   );
                 })

@@ -8,7 +8,7 @@ export default function SideNav() {
   const { user, logout } = useAuthContext();
 
   function handleLogout() {
-    logout("/login");
+    logout();
   }
 
   function LiElement({ children, ...props }: LiElementProps) {

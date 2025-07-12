@@ -1,7 +1,3 @@
-// User Roles:
-// 1 - admin;
-// 2 - user
-
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../routes/auth/AuthContext";
@@ -24,6 +20,7 @@ export function Account() {
         },
       }).then((res) => res.json());
     }
+
     getAccountDetails();
   }, []);
 
@@ -37,18 +34,36 @@ export function Account() {
       {!accessToken ? (
         <NotLoggedIn />
       ) : (
-        <div className="flex flex-col justify-center mt-6">
-          <h1 className="text-lg">User Details</h1>
-          <span>
-            Nume: {user?.firstName} {user?.lastName}
-          </span>
-          <span>Email: {user?.email}</span>
-          <span>Tip cont: {user?.role === 1 ? "Admin" : "User"}</span>
-          <span>
-            Doar tipul de cont <strong>ADMIN</strong> poate adăuga / modifica /
-            șterge datele mașinilor<span className="text-red-600">*</span>
-          </span>
-          <div className="flex mt-6"></div>
+        <div className="flex justify-center items-center px-4 mb-10 mt-10">
+          <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-xl">
+            <h2 className="text-2xl font-semibold mb-6 text-center">
+              Detalii Cont
+            </h2>
+
+            <div className="space-y-4 text-gray-700 text-base">
+              <div>
+                <span className="font-medium">Nume:</span> {user?.firstName}{" "}
+                {user?.lastName}
+              </div>
+              <div>
+                <span className="font-medium">Email:</span> {user?.email}
+              </div>
+              <div>
+                <span className="font-medium">Tip cont:</span>{" "}
+                <span
+                  className={
+                    user?.role === 1 ? "text-green-600 font-semibold" : ""
+                  }
+                >
+                  {user?.role === 1 ? "Admin" : "User"}
+                </span>
+              </div>
+              <div className="text-sm text-red-600">
+                * Doar utilizatorii cu rol <strong>ADMIN</strong> pot adăuga,
+                modifica sau șterge datele vehiculelor.
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </motion.div>

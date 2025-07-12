@@ -306,7 +306,7 @@ export function RegisterCar() {
               </div>
             </div>
 
-            <div className="flex gap-6 items-center justify-center text-center">
+            <div className="flex gap-6 items-center justify-center flex-col lg:flex-row text-center">
               <div className="mb-4">
                 <label htmlFor="fuelType" className="block mb-1 font-medium">
                   Combustibil<span className="text-red-600">*</span>

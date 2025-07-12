@@ -133,7 +133,13 @@ export function ModifyCar() {
                     name={id}
                     className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                     required
-                    value={(formState as any)[id]}
+                    value={
+                      id === "nextRevDate" && formState.nextRevDate
+                        ? new Date(formState.nextRevDate)
+                            .toISOString()
+                            .split("T")[0]
+                        : (formState as any)[id]
+                    }
                     onChange={(e) =>
                       setFormState((prev) => ({
                         ...prev,
@@ -145,7 +151,7 @@ export function ModifyCar() {
               ))}
             </div>
             {/** SELECTS */}
-            <div className="flex gap-6 items-center justify-center text-center">
+            <div className="flex gap-6 items-center justify-center flex-col md:flex-row text-center">
               <div className="mb-4">
                 <label htmlFor="fuelType" className="block mb-1 font-medium">
                   Combustibil<span className="text-red-600">*</span>

@@ -38,6 +38,15 @@
       "lastName": "OfWonder",
       "role": 0,
       "id": 10
+    },
+    {
+      "email": "e@e.com",
+      "password": "$2a$10$fCPnr1UtjMNAsITpHI2Nm.JovEemUWp0Jh9WC77g508u4klSviN.G",
+      "firstName": "Edart",
+      "lastName": "Edd",
+      "showPassword": "on",
+      "role": 0,
+      "id": 11
     }
   ],
   "vehicles": [
@@ -148,7 +157,19 @@
       "status": "Activa",
       "nextRevDate": "2026-07-01",
       "kilometers": "145,080",
-      "id": 7
+      "id": 7,
+      "repairs": [
+        {
+          "intervention": "Schimb placute de frana",
+          "cost": "875",
+          "repairAtKm": "121,000"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "1350",
+          "repairAtKm": "131,200"
+        }
+      ]
     },
     {
       "plateNumber": "IF98TCH",

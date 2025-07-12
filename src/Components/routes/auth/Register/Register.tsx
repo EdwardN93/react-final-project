@@ -80,7 +80,6 @@ export const Register = () => {
       ...values,
       role: 0,
     };
-    console.log(valuesWithRole);
 
     const data = await fetch(`${apiUrl}/register`, {
       method: "POST",

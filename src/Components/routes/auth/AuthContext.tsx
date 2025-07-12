@@ -1,4 +1,12 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   AuthContextValue,
   AuthResponse,
@@ -15,40 +23,53 @@ const initialContextValue: AuthStateValue = {
 const storageKey = "user";
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
+  const navigate = useNavigate();
+
   const [auth, setAuth] = useState<AuthStateValue>(() => {
     const fromStorage = localStorage.getItem(storageKey);
-    if (!fromStorage) {
+    if (!fromStorage) return initialContextValue;
+
+    const token = JSON.parse(fromStorage).accessToken;
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const isExpired = payload.exp * 1000 < Date.now();
+      if (isExpired) return initialContextValue;
+    } catch {
       return initialContextValue;
     }
+
     return JSON.parse(fromStorage);
   });
+
+  useEffect(() => {
+    const fromStorage = localStorage.getItem(storageKey);
+    if (fromStorage) {
+      const token = JSON.parse(fromStorage).accessToken;
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const isExpired = payload.exp * 1000 < Date.now();
+
+        if (isExpired) {
+          toast("Sesiunea a expirat. Loghează-te din nou");
+          logout();
+          navigate("/login");
+        }
+      } catch {
+        logout();
+        navigate("/login");
+      }
+    }
+  }, []);
 
   function login(value: AuthResponse) {
     setAuth(value);
     localStorage.setItem(storageKey, JSON.stringify(value));
   }
 
-  function logout(path: string) {
-    const accessToken = auth.accessToken;
-
-    try {
-      if (accessToken) {
-        const payload = JSON.parse(atob(accessToken.split(".")[1]));
-        const isExpired = payload.exp * 1000 < Date.now();
-
-        if (isExpired) {
-          console.log("Session expired");
-        } else {
-          console.log("Manual logout");
-        }
-      }
-    } catch (err) {
-      console.error("Invalid token format", err);
-    } finally {
-      setAuth(initialContextValue);
-      localStorage.removeItem(storageKey);
-      window.location.href = path;
-    }
+  function logout() {
+    setAuth(initialContextValue);
+    localStorage.removeItem(storageKey);
+    navigate("/login");
   }
 
   const contextValue: AuthContextValue = {

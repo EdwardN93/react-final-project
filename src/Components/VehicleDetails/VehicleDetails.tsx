@@ -29,7 +29,6 @@ export default function VehicleDetails() {
         const response = await fetch(url, options);
         const data = await response.json();
         setCar(data);
-        console.log(car);
       } catch (error) {
         console.error("Error fetching car:", error);
       }
@@ -136,7 +135,7 @@ export default function VehicleDetails() {
                       Kilometri: {repair.repairAtKm}
                     </span>
                     <span className="text-gray-900 font-semibold text-right">
-                      {repair.cost} RON
+                      {Number(repair.cost).toLocaleString()} RON
                     </span>
                   </li>
                 ))}

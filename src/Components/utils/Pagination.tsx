@@ -131,6 +131,7 @@ export function Pagination({
         >
           <option value="5">5</option>
           <option value="10">10</option>
+          <option value={totalCount}>Toate</option>
         </select>
       </div>
 
