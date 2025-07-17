@@ -29,45 +29,54 @@ export function Landing() {
     status: "",
   });
 
-  const [tooltip, setTooltip] = useState<{
-    visible: boolean;
-    x: number;
-    y: number;
-    text: string;
-  }>({ visible: false, x: 0, y: 0, text: "" });
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    text: "",
+  });
 
   const [totalCount, setTotalCount] = useState(0);
   const [params] = useSearchParams();
-  // const page = Number(params.get("page") || 1);
   const [page, setPage] = useState(Number(params.get("page") || 1));
 
   useEffect(() => {
     async function fetchCars(token: string) {
       try {
-        const response = await fetch(
-          `${apiUrl}/vehicles?_page=${page}&_limit=${limitPerPage}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
+        const areFiltersActive = Object.values(filters).some(
+          (val) => val !== ""
         );
+
+        const url = areFiltersActive
+          ? `${apiUrl}/vehicles`
+          : `${apiUrl}/vehicles?_page=${page}&_limit=${limitPerPage}`;
+
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok)
           throw new Error(`HTTP error! Status: ${response.status}`);
-        setTotalCount(Number(response.headers.get("X-Total-Count")));
+
+        if (!areFiltersActive) {
+          setTotalCount(Number(response.headers.get("X-Total-Count")));
+        }
+
         const data = await response.json();
         setCars(data);
       } catch (error) {
+        toast.error(`Failed to fetch cars: ${error}`);
         console.error("Failed to fetch cars:", error);
       }
     }
     if (accessToken) {
       fetchCars(accessToken);
     }
-  }, [page, limitPerPage]);
+  }, [accessToken, page, limitPerPage, filters]);
 
   function sortAscDescId(sorter: boolean) {
     const sorted = [...cars].sort((a, b) =>
@@ -83,7 +92,7 @@ export function Landing() {
   const filteredCars = cars.filter((car) =>
     Object.entries(filters).every(([key, value]) => {
       if (!value) return true;
-      const carValue = car[key as keyof typeof car];
+      const carValue = car[key as keyof Car];
       return carValue?.toString().toLowerCase().includes(value.toLowerCase());
     })
   );
@@ -99,6 +108,8 @@ export function Landing() {
   function handlePageLimit(limit: number) {
     setLimitPerPage(limit);
   }
+
+  const areFiltersActive = Object.values(filters).some((val) => val !== "");
 
   return (
     <motion.div
@@ -141,114 +152,24 @@ export function Landing() {
                 <th className="p-2 border">Utilizator</th>
                 <th className="p-2 border">Status</th>
               </tr>
-              {/* START INPUTS FOR SEARCH FILTERS */}
               <tr>
                 <td className="p-2 border" />
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.plateNumber}
-                    onChange={(e) =>
-                      handleFilterChange("plateNumber", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.carBrand}
-                    onChange={(e) =>
-                      handleFilterChange("carBrand", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.carName}
-                    onChange={(e) =>
-                      handleFilterChange("carName", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.vinNumber}
-                    onChange={(e) =>
-                      handleFilterChange("vinNumber", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.fuelType}
-                    onChange={(e) =>
-                      handleFilterChange("fuelType", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="number"
-                    className="w-full p-1"
-                    value={filters.engineCapacity}
-                    onChange={(e) =>
-                      handleFilterChange("engineCapacity", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.category}
-                    onChange={(e) =>
-                      handleFilterChange("category", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.department}
-                    onChange={(e) =>
-                      handleFilterChange("department", e.target.value)
-                    }
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.user}
-                    onChange={(e) => handleFilterChange("user", e.target.value)}
-                  />
-                </td>
-                <td className="p-2 border">
-                  <input
-                    type="text"
-                    className="w-full p-1"
-                    value={filters.status}
-                    onChange={(e) =>
-                      handleFilterChange("status", e.target.value)
-                    }
-                  />
-                </td>
+                {Object.entries(filters).map(([key, value]) => (
+                  <td className="p-2 border" key={key}>
+                    <input
+                      type={key === "engineCapacity" ? "number" : "text"}
+                      className="w-full p-1"
+                      value={value}
+                      onChange={(e) => handleFilterChange(key, e.target.value)}
+                    />
+                  </td>
+                ))}
               </tr>
-              {/* END INPUTS FOR SEARCH FILTERS */}
             </thead>
             <tbody>
               {filteredCars.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="text-center p-4">
+                  <td colSpan={11} className="text-center p-4">
                     No vehicles found.
                   </td>
                 </tr>
@@ -264,47 +185,36 @@ export function Landing() {
                       key={car.id}
                       className={`hover:cursor-pointer ${
                         isPastDue
-                          ? "bg-red-300 hover:bg-red-200 duration-300 transition-all"
+                          ? "bg-red-300 hover:bg-red-200"
                           : alert
-                          ? "bg-yellow-300 hover:bg-yellow-200 duration-300 transition-all"
-                          : "hover:bg-sky-300 duration-300 transition-all"
-                      }`}
+                          ? "bg-yellow-300 hover:bg-yellow-200"
+                          : "hover:bg-sky-300"
+                      } transition-all duration-300`}
                       onClick={() => navigate(`/vehicles/${car.id}`)}
                       onMouseEnter={(e) => {
-                        if (isPastDue) {
+                        if (isPastDue || alert) {
                           setTooltip({
                             visible: true,
                             x: e.clientX + 20,
                             y: e.clientY - 50,
-                            text: "Trecută de data reviziei",
-                          });
-                        } else if (alert) {
-                          setTooltip({
-                            visible: true,
-                            x: e.clientX + 20,
-                            y: e.clientY - 50,
-                            text: `Data reviziei: ${intlDate(
-                              car.nextRevDate!
-                            )}`,
+                            text: isPastDue
+                              ? "Trecută de data reviziei"
+                              : `Data reviziei: ${intlDate(car.nextRevDate!)}`,
                           });
                         }
                       }}
-                      onMouseLeave={() => {
-                        setTooltip((prev) => ({ ...prev, visible: false }));
-                      }}
+                      onMouseLeave={() =>
+                        setTooltip((prev) => ({ ...prev, visible: false }))
+                      }
                     >
                       <TableCol carDetail={car.id} />
                       {Object.keys(filters).map((field) => {
                         const value = car[field as keyof Car];
-
-                        if (Array.isArray(value))
-                          return <TableCol key={field} carDetail="-" />;
-
                         return (
                           <TableCol
                             key={field}
                             carDetail={
-                              value as string | number | Date | null | undefined
+                              Array.isArray(value) ? "-" : (value as any)
                             }
                           />
                         );
@@ -315,7 +225,8 @@ export function Landing() {
               )}
             </tbody>
           </table>
-          {totalCount && (
+
+          {!areFiltersActive && (
             <Pagination
               itemsPerPage={limitPerPage}
               totalCount={totalCount}
@@ -324,6 +235,7 @@ export function Landing() {
               setPage={setPage}
             />
           )}
+
           {tooltip.visible && (
             <div
               className="fixed px-2 py-1 bg-black text-white text-sm rounded pointer-events-none z-50"

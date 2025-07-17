@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { useEffect, useState } from "react";
 import { AuthResponse, Car } from "../Types/Types";

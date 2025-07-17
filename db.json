@@ -184,7 +184,14 @@
       "status": "Activa",
       "nextRevDate": "2025-07-09",
       "kilometers": "125,544",
-      "id": 8
+      "id": 8,
+      "repairs": [
+        {
+          "intervention": "Revizie",
+          "cost": "955",
+          "repairAtKm": "135000"
+        }
+      ]
     },
     {
       "plateNumber": "IF67TCH",
