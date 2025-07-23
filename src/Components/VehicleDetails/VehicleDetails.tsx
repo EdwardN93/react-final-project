@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
-import { literal } from "zod/v4";
+import { Button } from "../Button/Button";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -38,6 +38,11 @@ export default function VehicleDetails() {
       getCarFromApi(id);
     }
   }, [id, accessToken]);
+
+  function handleDeleteIntervention(e: React.MouseEvent<HTMLButtonElement>) {
+    const targetId = e.currentTarget.closest("li")?.id;
+    console.log(targetId);
+  }
 
   if (!accessToken) {
     return <div className="p-6 text-red-600">Please log in</div>;
@@ -127,8 +132,9 @@ export default function VehicleDetails() {
               <ul className="space-y-3">
                 {car.repairs.map((repair, i) => (
                   <li
+                    id={String(i)}
                     key={i}
-                    className="grid grid-cols-3 border-b pb-2 text-sm"
+                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
                   >
                     <span className="text-gray-700">{repair.intervention}</span>
                     <span className="text-gray-700 text-center">
@@ -136,6 +142,9 @@ export default function VehicleDetails() {
                     </span>
                     <span className="text-gray-900 font-semibold text-right">
                       {Number(repair.cost).toLocaleString()} RON
+                    </span>
+                    <span className="text-right">
+                      <Button text="X" onClick={handleDeleteIntervention} />
                     </span>
                   </li>
                 ))}
