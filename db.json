@@ -66,11 +66,6 @@
       "id": 4,
       "repairs": [
         {
-          "intervention": "Schimb placute de frana",
-          "cost": "200",
-          "repairAtKm": "55,100"
-        },
-        {
           "intervention": "Schimb ulei",
           "cost": "150",
           "repairAtKm": "89,982"
@@ -94,6 +89,11 @@
           "intervention": "Revizie",
           "cost": "887",
           "repairAtKm": "143,100"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "889",
+          "repairAtKm": "55,420"
         }
       ]
     },

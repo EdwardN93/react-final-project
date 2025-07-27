@@ -39,9 +39,42 @@ export default function VehicleDetails() {
     }
   }, [id, accessToken]);
 
-  function handleDeleteIntervention(e: React.MouseEvent<HTMLButtonElement>) {
+  async function handleDeleteIntervention(
+    e: React.MouseEvent<HTMLButtonElement>
+  ) {
     const targetId = e.currentTarget.closest("li")?.id;
-    console.log(targetId);
+    if (!targetId || !id || !accessToken) return;
+
+    try {
+      const response = await fetch(`${apiUrl}/vehicles/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      const carData: Car = await response.json();
+
+      const updatedRepairs = carData.repairs!.filter(
+        (_, i) => i !== Number(targetId)
+      );
+
+      const updateResponse = await fetch(`${apiUrl}/vehicles/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ repairs: updatedRepairs }),
+      });
+
+      if (!updateResponse.ok) throw new Error("Failed to update car");
+
+      // Update UI
+      setCar((prev) => (prev ? { ...prev, repairs: updatedRepairs } : prev));
+    } catch (error) {
+      console.error("Error deleting intervention:", error);
+    }
   }
 
   if (!accessToken) {
@@ -130,24 +163,32 @@ export default function VehicleDetails() {
             </h3>
             {car.repairs && car.repairs.length > 0 ? (
               <ul className="space-y-3">
-                {car.repairs.map((repair, i) => (
-                  <li
-                    id={String(i)}
-                    key={i}
-                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
-                  >
-                    <span className="text-gray-700">{repair.intervention}</span>
-                    <span className="text-gray-700 text-center">
-                      Kilometri: {repair.repairAtKm}
-                    </span>
-                    <span className="text-gray-900 font-semibold text-right">
-                      {Number(repair.cost).toLocaleString()} RON
-                    </span>
-                    <span className="text-right">
-                      <Button text="X" onClick={handleDeleteIntervention} />
-                    </span>
-                  </li>
-                ))}
+                {[...car.repairs]
+                  .sort(
+                    (a, b) =>
+                      Number(a.repairAtKm.replace(",", "")) -
+                      Number(b.repairAtKm.replace(",", ""))
+                  )
+                  .map((repair, i) => (
+                    <li
+                      id={String(i)}
+                      key={i}
+                      className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
+                    >
+                      <span className="text-gray-700">
+                        {repair.intervention}
+                      </span>
+                      <span className="text-gray-700 text-center">
+                        Kilometri: {repair.repairAtKm}
+                      </span>
+                      <span className="text-gray-900 font-semibold text-right">
+                        {Number(repair.cost).toLocaleString()} RON
+                      </span>
+                      <span className="text-right">
+                        <Button text="X" onClick={handleDeleteIntervention} />
+                      </span>
+                    </li>
+                  ))}
                 <div className="w-full text-right">
                   <span className="text-gray-900 font-semibold">
                     Total costuri:{" "}
