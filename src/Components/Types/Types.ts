@@ -4,6 +4,7 @@ type Repairs = {
   repairAtKm: string;
   cost: string;
   intervention: string;
+  createdAt: string;
 };
 
 export type Car = {

@@ -64,38 +64,7 @@
       "nextRevDate": "2026-06-20",
       "kilometers": "145,080",
       "id": 4,
-      "repairs": [
-        {
-          "intervention": "Schimb ulei",
-          "cost": "150",
-          "repairAtKm": "89,982"
-        },
-        {
-          "intervention": "Schimb placute frana",
-          "cost": "800",
-          "repairAtKm": "100,025"
-        },
-        {
-          "intervention": "Revizie",
-          "cost": "915",
-          "repairAtKm": "128,100"
-        },
-        {
-          "intervention": "Schimb filtru de particule",
-          "cost": "2100",
-          "repairAtKm": "131,190"
-        },
-        {
-          "intervention": "Revizie",
-          "cost": "887",
-          "repairAtKm": "143,100"
-        },
-        {
-          "intervention": "Revizie",
-          "cost": "889",
-          "repairAtKm": "55,420"
-        }
-      ]
+      "repairs": []
     },
     {
       "plateNumber": "IF29TCH",
@@ -111,23 +80,7 @@
       "nextRevDate": "2025-10-06",
       "kilometers": "44,513",
       "id": 5,
-      "repairs": [
-        {
-          "intervention": "Schimb placute de frana",
-          "cost": "320",
-          "repairAtKm": "31,448"
-        },
-        {
-          "intervention": "Schimb baterie",
-          "cost": "675",
-          "repairAtKm": "38,232"
-        },
-        {
-          "intervention": "Revizie",
-          "cost": "935",
-          "repairAtKm": "42,100"
-        }
-      ]
+      "repairs": []
     },
     {
       "plateNumber": "B34TCH",
@@ -185,13 +138,7 @@
       "nextRevDate": "2025-07-09",
       "kilometers": "125,544",
       "id": 8,
-      "repairs": [
-        {
-          "intervention": "Revizie",
-          "cost": "955",
-          "repairAtKm": "135000"
-        }
-      ]
+      "repairs": []
     },
     {
       "plateNumber": "IF67TCH",

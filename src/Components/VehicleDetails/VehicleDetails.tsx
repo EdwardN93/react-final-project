@@ -6,6 +6,7 @@ import { intlDate, compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
 import { Button } from "../Button/Button";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -39,42 +40,31 @@ export default function VehicleDetails() {
     }
   }, [id, accessToken]);
 
-  async function handleDeleteIntervention(
-    e: React.MouseEvent<HTMLButtonElement>
-  ) {
-    const targetId = e.currentTarget.closest("li")?.id;
-    if (!targetId || !id || !accessToken) return;
+  function handleDeleteIntervention(repairId: string) {
+    if (!car) return;
 
-    try {
-      const response = await fetch(`${apiUrl}/vehicles/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-type": "application/json",
-        },
+    const updatedRepairs = car.repairs!.filter(
+      (repair) => repair.createdAt !== repairId
+    );
+
+    const updatedCar = { ...car, repairs: updatedRepairs };
+
+    fetch(`${apiUrl}/vehicles/${car.id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedCar),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCar(data); // refresh local state
+      })
+      .catch((error) => {
+        console.error("Error deleting repair:", error);
+        toast.error("Eroare la ștergerea intervenției");
       });
-
-      const carData: Car = await response.json();
-
-      const updatedRepairs = carData.repairs!.filter(
-        (_, i) => i !== Number(targetId)
-      );
-
-      const updateResponse = await fetch(`${apiUrl}/vehicles/${id}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ repairs: updatedRepairs }),
-      });
-
-      if (!updateResponse.ok) throw new Error("Failed to update car");
-
-      // Update UI
-      setCar((prev) => (prev ? { ...prev, repairs: updatedRepairs } : prev));
-    } catch (error) {
-      console.error("Error deleting intervention:", error);
-    }
   }
 
   if (!accessToken) {
@@ -126,7 +116,7 @@ export default function VehicleDetails() {
             <h3 className="text-2xl font-semibold mb-4 text-blue-800">
               Date Tehnice
             </h3>
-            <dl className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
               {carDetails.map(({ label, value }) => {
                 const isRevision = label === "Zile rămase până la revizie";
                 const isUrgent =
@@ -153,7 +143,7 @@ export default function VehicleDetails() {
                   </div>
                 );
               })}
-            </dl>
+            </ul>
           </section>
 
           {/* Repairs Section */}
@@ -163,32 +153,29 @@ export default function VehicleDetails() {
             </h3>
             {car.repairs && car.repairs.length > 0 ? (
               <ul className="space-y-3">
-                {[...car.repairs]
-                  .sort(
-                    (a, b) =>
-                      Number(a.repairAtKm.replace(",", "")) -
-                      Number(b.repairAtKm.replace(",", ""))
-                  )
-                  .map((repair, i) => (
-                    <li
-                      id={String(i)}
-                      key={i}
-                      className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
-                    >
-                      <span className="text-gray-700">
-                        {repair.intervention}
-                      </span>
-                      <span className="text-gray-700 text-center">
-                        Kilometri: {repair.repairAtKm}
-                      </span>
-                      <span className="text-gray-900 font-semibold text-right">
-                        {Number(repair.cost).toLocaleString()} RON
-                      </span>
-                      <span className="text-right">
-                        <Button text="X" onClick={handleDeleteIntervention} />
-                      </span>
-                    </li>
-                  ))}
+                {car.repairs.map((repair) => (
+                  <li
+                    id={repair.createdAt}
+                    key={repair.createdAt}
+                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
+                  >
+                    <span className="text-gray-700">{repair.intervention}</span>
+                    <span className="text-gray-700 text-center">
+                      Kilometri: {repair.repairAtKm}
+                    </span>
+                    <span className="text-gray-900 font-semibold text-right">
+                      {Number(repair.cost).toLocaleString()} RON
+                    </span>
+                    <span className="text-right">
+                      <Button
+                        text="X"
+                        onClick={() =>
+                          handleDeleteIntervention(repair.createdAt)
+                        }
+                      />
+                    </span>
+                  </li>
+                ))}
                 <div className="w-full text-right">
                   <span className="text-gray-900 font-semibold">
                     Total costuri:{" "}

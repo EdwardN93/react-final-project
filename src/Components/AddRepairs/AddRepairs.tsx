@@ -72,6 +72,7 @@ export default function AddRepairs() {
       intervention: values.intervention,
       cost: values.cost,
       repairAtKm: String(values.repairAtKm).replace(".", ","),
+      createdAt: new Date().toISOString(),
     };
 
     const updatedCar = {
