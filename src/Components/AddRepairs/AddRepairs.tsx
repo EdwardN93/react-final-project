@@ -24,7 +24,7 @@ const initialDefaultValues = {
   repairAtKm: "",
 };
 
-export default function AddRepairs() {
+export function AddRepairs() {
   const [errors, setErrors] = useState<null | ValidationErrors<
     typeof validationSchema
   >>(null);

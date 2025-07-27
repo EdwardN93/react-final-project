@@ -2,12 +2,12 @@ import { Routes, Route, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollToTop from "./Components/behavior/ScrollToTop";
 import { Landing } from "./Components/Home/Landing";
-import SideNav from "./Components/SideNav/SideNav";
-import MainNav from "./Components/MainNav/MainNav";
+import { SideNav } from "./Components/SideNav/SideNav";
+import { MainNav } from "./Components/MainNav/MainNav";
 import { Footer } from "./Components/Footer/Footer";
 import { Account } from "./Components/Account/Account";
 import { ChangeAccountDetails } from "./Components/Account/ChangeAccountDetails/ChangeAccountDetails";
-import VehicleDetails from "./Components/VehicleDetails/VehicleDetails";
+import { VehicleDetails } from "./Components/VehicleDetails/VehicleDetails";
 import { ModifyCar } from "./Components/ModifyCar/ModifyCar";
 import { UserMenu } from "./Components/UserMenu/UserMenu";
 import { Register } from "./Components/routes/auth/Register/Register";
@@ -16,7 +16,7 @@ import { RegisterCar } from "./Components/routes/RegisterCar/RegisterCar";
 import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 import { ToastContainer } from "react-toastify";
-import AddRepairs from "./Components/AddRepairs/AddRepairs";
+import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
 
 function App() {
   const location = useLocation();

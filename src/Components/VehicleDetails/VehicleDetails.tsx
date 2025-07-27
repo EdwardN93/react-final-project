@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export default function VehicleDetails() {
+export function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>();
   const { accessToken } = useAuthContext();
@@ -59,7 +59,7 @@ export default function VehicleDetails() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setCar(data); // refresh local state
+        setCar(data);
       })
       .catch((error) => {
         console.error("Error deleting repair:", error);

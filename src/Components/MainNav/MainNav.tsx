@@ -6,7 +6,7 @@ import { CustomModal } from "../Modal/Modal";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-function Navbar() {
+export function MainNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const segments = location.pathname.split("/");
@@ -94,5 +94,3 @@ function Navbar() {
     </nav>
   ) : null;
 }
-
-export default Navbar;

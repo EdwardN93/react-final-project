@@ -4,7 +4,7 @@ import { LiElementProps } from "../Types/Types";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import "./SideNav.css";
 
-export default function SideNav() {
+export function SideNav() {
   const { user, logout } = useAuthContext();
 
   function handleLogout() {
