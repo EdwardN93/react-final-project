@@ -17,7 +17,7 @@ import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 import { ToastContainer } from "react-toastify";
 import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
-import { FuelPrices } from "./FuelPrices/FuelPrices";
+import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 function App() {
   const location = useLocation();
 
