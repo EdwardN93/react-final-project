@@ -64,7 +64,14 @@
       "nextRevDate": "2026-06-20",
       "kilometers": "145,080",
       "id": 4,
-      "repairs": []
+      "repairs": [
+        {
+          "intervention": "Revizie",
+          "cost": "899",
+          "repairAtKm": "15,992",
+          "createdAt": "2025-07-27T20:33:29.095Z"
+        }
+      ]
     },
     {
       "plateNumber": "IF29TCH",

@@ -197,14 +197,16 @@ export const Register = () => {
 
           <div className="flex items-center gap-2 mt-4">
             <input
-              className="w-4 h-4"
+              className="w-4 h-4 hover:cursor-pointer duration-200"
               type="checkbox"
               name="showPassword"
               id="showPassword"
               checked={showPassword}
               onChange={handleShowPassword}
             />
-            <label htmlFor="showPassword">Show Password</label>
+            <label htmlFor="showPassword" className="hover:cursor-pointer">
+              Show Password
+            </label>
           </div>
 
           <button
@@ -218,7 +220,7 @@ export const Register = () => {
           <p>
             Ai deja cont? Click{" "}
             <NavLink
-              className="text-blue-600 hover:cursor-pointer md:text-center"
+              className="text-blue-600 hover:cursor-pointer hover:text-red-600 active:text-red-700 duration-200 md:text-center"
               to="/login"
             >
               AICI

@@ -129,7 +129,7 @@ export function Login() {
           <p>
             Nu ai cont? Înregistrează-te{" "}
             <NavLink
-              className="text-blue-600 hover:cursor-pointer md:text-center"
+              className="text-blue-600 hover:cursor-pointer hover:text-red-600 active:text-red-700 md:text-center duration-200"
               to="/register"
             >
               AICI
