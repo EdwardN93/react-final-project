@@ -17,7 +17,7 @@ import { NotFound } from "./Components/NotFound/NotFound";
 import { AuthContextProvider } from "./Components/routes/auth/AuthContext";
 import { ToastContainer } from "react-toastify";
 import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
-
+import { FuelPrices } from "./FuelPrices/FuelPrices";
 function App() {
   const location = useLocation();
 
@@ -30,10 +30,12 @@ function App() {
         </aside>
 
         <main className="flex-1 overflow-y-auto bg-gray-50">
-          <div className="flex w-full items-center justify-center mt-5"></div>
           <div className="p-6">
-            <div className="flex items-center justify-between shadow-md mb-4 p-2 px-4 rounded-md">
-              <h2 className="text-2xl font-semibold mb-4">Car Logistic App</h2>
+            <div className="flex flex-col justify-center items-center gap-y-4 sm:flex-row sm:items-center sm:justify-between shadow-md mb-4 p-2 px-4 rounded-md">
+              <h2 className="text-2xl font-semibold mb-2 sm:mb-0">
+                Car Logistic App
+              </h2>
+              <FuelPrices />
               <UserMenu />
             </div>
             <MainNav />
