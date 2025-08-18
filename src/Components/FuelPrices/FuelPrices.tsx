@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export function FuelPrices() {
-  const apiKey = "fca_live_zHXLOVKqC7vwILmgOjJG56uox4J7IwAKAh0sBKWT";
+  const exchangeKey = import.meta.env.VITE_EXCHANGE_API_KEY;
+  const fueloKey = import.meta.env.VITE_FUELO_API_KEY;
   const [petrolPrice, setPetrolPrice] = useState<null | number | string>(null);
   const [dieselPrice, setDieselPrice] = useState<null | number | string>(null);
   const [loading, setLoading] = useState(true);
+  console.log(exchangeKey, fueloKey);
 
   useEffect(() => {
     async function fetchPrices() {
       setLoading(true);
       try {
         const exchangeRes = await fetch(
-          `https://api.freecurrencyapi.com/v1/latest?apikey=${apiKey}&currencies=RON&base_currency=BGN`
+          `https://api.freecurrencyapi.com/v1/latest?apikey=${exchangeKey}&currencies=RON&base_currency=BGN`
         );
         const exchangeData = await exchangeRes.json();
         console.log(exchangeData);
 
         const petrolResponse = await fetch(
-          "https://fuelo.net/api/price?key=87f40ca3d32e9d0&fuel=gasoline&date=2025-08-08"
+          `https://fuelo.net/api/price?key=${fueloKey}&fuel=gasoline&date=2025-08-08`
         );
         const petrolData = await petrolResponse.json();
 
         const dieselResponse = await fetch(
-          "https://fuelo.net/api/price?key=87f40ca3d32e9d0&fuel=diesel&date=2025-08-08"
+          `https://fuelo.net/api/price?key=${fueloKey}&fuel=diesel&date=2025-08-08`
         );
         const dieselData = await dieselResponse.json();
 
