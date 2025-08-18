@@ -157,7 +157,7 @@ export function VehicleDetails() {
                   <li
                     id={repair.createdAt}
                     key={repair.createdAt}
-                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start"
+                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
                   >
                     <span className="text-gray-700">{repair.intervention}</span>
                     <span className="text-gray-700 text-center">

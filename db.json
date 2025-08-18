@@ -67,9 +67,15 @@
       "repairs": [
         {
           "intervention": "Revizie",
-          "cost": "899",
-          "repairAtKm": "15,992",
-          "createdAt": "2025-07-27T20:33:29.095Z"
+          "cost": "897",
+          "repairAtKm": "15,000",
+          "createdAt": "2025-08-18T17:01:15.767Z"
+        },
+        {
+          "intervention": "Schimb placute de frana",
+          "cost": "1500",
+          "repairAtKm": "15100",
+          "createdAt": "2025-08-18T17:02:32.028Z"
         }
       ]
     },
