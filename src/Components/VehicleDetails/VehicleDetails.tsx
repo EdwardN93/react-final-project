@@ -161,7 +161,7 @@ export function VehicleDetails() {
                   >
                     <span className="text-gray-700">{repair.intervention}</span>
                     <span className="text-gray-700 text-center">
-                      Kilometri: {repair.repairAtKm}
+                      Kilometri: {Number(repair.repairAtKm).toLocaleString()}
                     </span>
                     <span className="text-gray-900 font-semibold text-right">
                       {Number(repair.cost).toLocaleString()} RON

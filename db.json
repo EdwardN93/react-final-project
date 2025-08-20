@@ -68,7 +68,7 @@
         {
           "intervention": "Revizie",
           "cost": "897",
-          "repairAtKm": "15,000",
+          "repairAtKm": "15000",
           "createdAt": "2025-08-18T17:01:15.767Z"
         },
         {
@@ -76,6 +76,12 @@
           "cost": "1500",
           "repairAtKm": "15100",
           "createdAt": "2025-08-18T17:02:32.028Z"
+        },
+        {
+          "intervention": "Revizie",
+          "cost": "8551",
+          "repairAtKm": "12334",
+          "createdAt": "2025-08-20T18:18:25.439Z"
         }
       ]
     },
@@ -105,7 +111,7 @@
       "category": "Autoturism M1",
       "department": "Logistică",
       "user": "Laurentiu Nedelcu",
-      "status": "Activa",
+      "status": "Vanduta",
       "nextRevDate": "2026-08-07",
       "kilometers": "150,000",
       "id": 6
@@ -128,12 +134,12 @@
         {
           "intervention": "Schimb placute de frana",
           "cost": "875",
-          "repairAtKm": "121,000"
+          "repairAtKm": "121000"
         },
         {
           "intervention": "Revizie",
           "cost": "1350",
-          "repairAtKm": "131,200"
+          "repairAtKm": "131200"
         }
       ]
     },

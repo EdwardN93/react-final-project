@@ -71,7 +71,7 @@ export function AddRepairs() {
     const newRepair = {
       intervention: values.intervention,
       cost: values.cost,
-      repairAtKm: String(values.repairAtKm).replace(".", ","),
+      repairAtKm: values.repairAtKm,
       createdAt: new Date().toISOString(),
     };
 
@@ -150,7 +150,7 @@ export function AddRepairs() {
 
           <div className="mb-4">
             <label htmlFor="cost" className="block mb-1 font-medium">
-              Cost
+              Cost (RON)
             </label>
             <input
               type="number"
@@ -168,14 +168,14 @@ export function AddRepairs() {
 
           <div className="mb-4">
             <label htmlFor="repairAtKm" className="block mb-1 font-medium">
-              Kilometri la momentul reparatiei / interventiei
+              Kilometri la momentul reparației / intervenției
             </label>
             <input
               type="text"
               id="repairAtKm"
               name="repairAtKm"
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
-              placeholder="100,4"
+              placeholder="1004"
               defaultValue={defaultValues.repairAtKm}
               onChange={handleInputChange}
             />
