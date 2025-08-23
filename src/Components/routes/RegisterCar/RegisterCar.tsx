@@ -93,6 +93,8 @@ export function RegisterCar() {
       nextRevDate: formDetails.nextRevDate,
       kilometers: formDetails.kilometers.replace(".", ","),
       repairs: [],
+      rca: [],
+      casco: [],
     };
 
     setErrors(null);
@@ -374,6 +376,153 @@ export function RegisterCar() {
                 </select>
               </div>
             </div>
+
+            {/* DETALII RCA */}
+
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4">Date asigurare RCA</h2>
+
+              <div className="mb-4">
+                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                  Asigurator<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaInsurer"
+                  id="rcaInsurer"
+                  placeholder="Groupama"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                  Serie<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaSerie"
+                  id="rcaSerie"
+                  placeholder="Groupama"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                  Număr<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaSerie"
+                  id="rcaSerie"
+                  placeholder="Groupama"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="start" className="block mb-1 font-medium">
+                  Valabilitate de la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="rcaStart"
+                  id="rcaStart"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="end" className="block mb-1 font-medium">
+                  Valabilitate până la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="rcaEnd"
+                  id="rcaEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+            </div>
+
+            {/* DETALII CASCO */}
+
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4">Date asigurare CASCO</h2>
+
+              <div className="mb-4">
+                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                  Asigurator<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoInsurer"
+                  id="cascoInsurer"
+                  placeholder="Groupama"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="start" className="block mb-1 font-medium">
+                  Valabilitate de la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="cascoStart"
+                  id="cascoStart"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="end" className="block mb-1 font-medium">
+                  Valabilitate până la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="cascoEnd"
+                  id="cascoEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.nextRevDate && (
+                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                )}
+              </div>
+            </div>
+
             <div className="flex justify-center gap-2">
               <Button
                 text="Adaugă"

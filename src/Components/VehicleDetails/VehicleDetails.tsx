@@ -97,6 +97,18 @@ export function VehicleDetails() {
     },
   ];
 
+  // const assuranceDetails = [
+  //   { label: "Asigurator", value: car.rca.rcaInsurer },
+  //   { label: "Data începerii asigurării", value: car.rca.rcaStart },
+  //   { label: "Data expirării asigurării", value: car.rca.rcaEnd },
+  // ];
+
+  // const cascoDetails = [
+  //   { label: "Asigurator", value: car.casco.cascoInsurer },
+  //   { label: "Data începerii asigurării", value: car.casco.cascoStart },
+  //   { label: "Data expirării asigurării", value: car.casco.cascoEnd },
+  // ];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -252,7 +264,7 @@ export function VehicleDetails() {
             <div className="space-y-10">
               <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
                 <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Date Tehnice
+                  Detalii RCA
                 </h3>
                 <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                   {carDetails.map(({ label, value }) => {

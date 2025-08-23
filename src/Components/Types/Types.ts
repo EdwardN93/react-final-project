@@ -7,6 +7,12 @@ type Repairs = {
   createdAt: string;
 };
 
+type Assurance = {
+  insurer: string;
+  start: string;
+  end: string;
+};
+
 export type Car = {
   id?: number;
   plateNumber?: string;
@@ -22,6 +28,8 @@ export type Car = {
   nextRevDate?: string | Date;
   kilometers?: string;
   repairs?: Repairs[];
+  rca?: Assurance[];
+  casco?: Assurance[];
 };
 
 // li Element for SideNav
