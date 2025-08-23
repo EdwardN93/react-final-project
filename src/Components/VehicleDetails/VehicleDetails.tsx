@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, NavLink, useParams } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
@@ -106,90 +106,102 @@ export function VehicleDetails() {
       {!accessToken ? (
         <NotLoggedIn />
       ) : (
-        <div className="p-6 max-w-6xl mx-auto space-y-10">
+        <div className="p-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold border-b pb-4">
             Vehicul: {car.plateNumber}
           </h2>
 
           {/* Car Details Section */}
-          <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
-            <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-              Date Tehnice
-            </h3>
-            <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-              {carDetails.map(({ label, value }) => {
-                const isRevision = label === "Zile rămase până la revizie";
-                const isUrgent =
-                  isRevision && typeof value === "number" && value <= 30;
-                const pastRevision =
-                  isRevision && typeof value === "number" && value < 0;
 
-                return (
-                  <div key={label} className="flex flex-col">
-                    <dt className="text-gray-800 font-medium">
-                      {pastRevision
-                        ? "Zile întârziere în efectuarea reviziei"
-                        : label}
-                    </dt>
-                    <dd
-                      className={`${
-                        isUrgent
-                          ? "text-red-600 font-semibold"
-                          : "text-gray-800"
-                      }`}
-                    >
-                      {pastRevision ? -value : value}
-                    </dd>
-                  </div>
-                );
-              })}
-            </ul>
-          </section>
+          <div className="flex items-center justify-center mt-4 gap-4">
+            <NavLink to="#">RCA</NavLink>
+            <NavLink to="#">CASCO</NavLink>
+            <NavLink to="#">Vigneta</NavLink>
+          </div>
+          <div className="space-y-10">
+            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                Date Tehnice
+              </h3>
+              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                {carDetails.map(({ label, value }) => {
+                  const isRevision = label === "Zile rămase până la revizie";
+                  const isUrgent =
+                    isRevision && typeof value === "number" && value <= 30;
+                  const pastRevision =
+                    isRevision && typeof value === "number" && value < 0;
 
-          {/* Repairs Section */}
-          <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
-            <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-              Intervenții & Costuri
-            </h3>
-            {car.repairs && car.repairs.length > 0 ? (
-              <ul className="space-y-3">
-                {car.repairs.map((repair) => (
-                  <li
-                    id={repair.createdAt}
-                    key={repair.createdAt}
-                    className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
-                  >
-                    <span className="text-gray-700">{repair.intervention}</span>
-                    <span className="text-gray-700 text-center">
-                      Kilometri: {Number(repair.repairAtKm).toLocaleString()}
-                    </span>
-                    <span className="text-gray-900 font-semibold text-right">
-                      {Number(repair.cost).toLocaleString()} RON
-                    </span>
-                    <span className="text-right">
-                      <Button
-                        text="X"
-                        onClick={() =>
-                          handleDeleteIntervention(repair.createdAt)
-                        }
-                      />
-                    </span>
-                  </li>
-                ))}
-                <div className="w-full text-right">
-                  <span className="text-gray-900 font-semibold">
-                    Total costuri:{" "}
-                    {car.repairs
-                      .reduce((acc, val) => acc + Number(val.cost), 0)
-                      .toLocaleString()}{" "}
-                    RON
-                  </span>
-                </div>
+                  return (
+                    <div key={label} className="flex flex-col">
+                      <dt className="text-gray-800 font-medium">
+                        {pastRevision
+                          ? "Zile întârziere în efectuarea reviziei"
+                          : label}
+                      </dt>
+                      <dd
+                        className={`${
+                          isUrgent
+                            ? "text-red-600 font-semibold"
+                            : "text-gray-800"
+                        }`}
+                      >
+                        {pastRevision ? -value : value}
+                      </dd>
+                    </div>
+                  );
+                })}
               </ul>
-            ) : (
-              <p className="text-gray-500 text-sm italic">Nicio intervenție.</p>
-            )}
-          </section>
+            </section>
+
+            {/* Repairs Section */}
+            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                Intervenții & Costuri
+              </h3>
+              {car.repairs && car.repairs.length > 0 ? (
+                <ul className="space-y-3">
+                  {car.repairs.map((repair) => (
+                    <li
+                      id={repair.createdAt}
+                      key={repair.createdAt}
+                      className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
+                    >
+                      <span className="text-gray-700">
+                        {repair.intervention}
+                      </span>
+                      <span className="text-gray-700 text-center">
+                        Kilometri: {Number(repair.repairAtKm).toLocaleString()}
+                      </span>
+                      <span className="text-gray-900 font-semibold text-right">
+                        {Number(repair.cost).toLocaleString()} RON
+                      </span>
+                      <span className="text-right">
+                        <Button
+                          text="X"
+                          onClick={() =>
+                            handleDeleteIntervention(repair.createdAt)
+                          }
+                        />
+                      </span>
+                    </li>
+                  ))}
+                  <div className="w-full text-right">
+                    <span className="text-gray-900 font-semibold">
+                      Total costuri:{" "}
+                      {car.repairs
+                        .reduce((acc, val) => acc + Number(val.cost), 0)
+                        .toLocaleString()}{" "}
+                      RON
+                    </span>
+                  </div>
+                </ul>
+              ) : (
+                <p className="text-gray-500 text-sm italic">
+                  Nicio intervenție.
+                </p>
+              )}
+            </section>
+          </div>
         </div>
       )}
     </motion.div>
