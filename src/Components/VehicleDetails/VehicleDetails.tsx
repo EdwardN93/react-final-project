@@ -14,6 +14,7 @@ export function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>();
   const { accessToken } = useAuthContext();
+  const [activeTab, setActiveTab] = useState("detalii");
 
   useEffect(() => {
     async function getCarFromApi(id: string) {
@@ -114,9 +115,48 @@ export function VehicleDetails() {
           {/* Car Details Section */}
 
           <div className="flex items-center justify-center mt-4 gap-4">
-            <NavLink to="#">RCA</NavLink>
-            <NavLink to="#">CASCO</NavLink>
-            <NavLink to="#">Vigneta</NavLink>
+            <div className="flex items-center justify-center mt-4 gap-4">
+              <button
+                onClick={() => setActiveTab("detalii")}
+                className={`${
+                  activeTab === "detalii"
+                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
+              >
+                Detalii Tehnice
+              </button>
+              <button
+                onClick={() => setActiveTab("rca")}
+                className={`${
+                  activeTab === "rca"
+                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
+              >
+                RCA
+              </button>
+              <button
+                onClick={() => setActiveTab("casco")}
+                className={`${
+                  activeTab === "casco"
+                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
+              >
+                CASCO
+              </button>
+              <button
+                onClick={() => setActiveTab("vigneta")}
+                className={`${
+                  activeTab === "vigneta"
+                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
+              >
+                Vigneta
+              </button>
+            </div>
           </div>
           <div className="space-y-10">
             <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
