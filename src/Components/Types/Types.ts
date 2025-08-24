@@ -8,9 +8,11 @@ type Repairs = {
 };
 
 type Assurance = {
-  insurer: string;
-  start: string;
-  end: string;
+  rcaInsurer?: string;
+  rcaSerie?: string;
+  rcaNumber?: string;
+  rcaStart?: string | Date;
+  rcaEnd?: string | Date;
 };
 
 export type Car = {

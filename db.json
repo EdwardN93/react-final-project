@@ -264,6 +264,32 @@
       "kilometers": "15,156",
       "repairs": [],
       "id": 15
+    },
+    {
+      "plateNumber": "B221TCH",
+      "carBrand": "Dacia",
+      "carName": "Dokker",
+      "vinNumber": "DCA8277KKA",
+      "engineCapacity": "1197",
+      "fuelType": "Motorină",
+      "category": "Autoturism M1",
+      "department": "Logistică",
+      "user": "Dando Danda",
+      "status": "Activa",
+      "nextRevDate": "2025-09-30T00:00:00.000Z",
+      "kilometers": "154,879",
+      "repairs": [],
+      "rca": [
+        {
+          "rcaInsurer": "Groupama",
+          "rcaSerie": "RO/25/C25/HP",
+          "rcaNumber": "8956136",
+          "rcaStart": "2025-08-24T00:00:00.000Z",
+          "rcaEnd": "2026-08-24T00:00:00.000Z"
+        }
+      ],
+      "casco": [],
+      "id": 16
     }
   ]
 }

@@ -76,6 +76,14 @@ export function RegisterCar() {
       kilometers: rawFormDetails.kilometers?.toString().trim(),
     };
 
+    const newRcaDetails = {
+      rcaInsurer: rawFormDetails.rcaInsurer.toString().trim(),
+      rcaSerie: rawFormDetails.rcaSerie.toString().trim(),
+      rcaNumber: rawFormDetails.rcaNumber.toString().trim(),
+      rcaStart: new Date(rawFormDetails.rcaStart?.toString() || ""),
+      rcaEnd: new Date(rawFormDetails.rcaEnd?.toString() || ""),
+    };
+
     const newErrors = validateForm(stringFormDetails, validationSchema);
     if (newErrors) {
       setErrors(newErrors);
@@ -98,7 +106,7 @@ export function RegisterCar() {
       nextRevDate: formDetails.nextRevDate,
       kilometers: formDetails.kilometers.replace(".", ","),
       repairs: [],
-      rca: [],
+      rca: [newRcaDetails],
       casco: [],
     };
 
@@ -471,10 +479,11 @@ export function RegisterCar() {
                 )}
               </div>
             </div>
+            {/* END DETALII RCA */}
 
             {/* DETALII CASCO */}
 
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <h2 className="font-medium text-xl mb-4">Date asigurare CASCO</h2>
 
               <div className="mb-4">
@@ -526,7 +535,8 @@ export function RegisterCar() {
                   <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
                 )}
               </div>
-            </div>
+            </div> */}
+            {/* END DETALII CASCO */}
 
             <div className="flex justify-center gap-2">
               <Button
