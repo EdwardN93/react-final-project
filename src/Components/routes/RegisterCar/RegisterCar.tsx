@@ -19,6 +19,11 @@ const validationSchema = z.object({
   user: z.string().min(1, "Introdu numele utilizatorului mașinii"),
   nextRevDate: z.string().min(1, "Selectează data următoarei revizii"),
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
+  rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
+  rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
+  rcaNumber: z.string().min(1, "Introdu numarul poliței RCA"),
+  rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
+  rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
 });
 
 function validateForm<T extends ZodObject>(
@@ -394,8 +399,8 @@ export function RegisterCar() {
                   placeholder="Groupama"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.rcaInsurer && (
+                  <p className="text-red-600 mb-4">{errors.rcaInsurer[0]}</p>
                 )}
               </div>
 
@@ -408,11 +413,11 @@ export function RegisterCar() {
                   type="text"
                   name="rcaSerie"
                   id="rcaSerie"
-                  placeholder="Groupama"
+                  placeholder="RO/25/C25/HP"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.rcaSerie && (
+                  <p className="text-red-600 mb-4">{errors.rcaSerie[0]}</p>
                 )}
               </div>
 
@@ -423,13 +428,13 @@ export function RegisterCar() {
                 <input
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                   type="text"
-                  name="rcaSerie"
-                  id="rcaSerie"
-                  placeholder="Groupama"
+                  name="rcaNumber"
+                  id="rcaNumber"
+                  placeholder="12345"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.rcaNumber && (
+                  <p className="text-red-600 mb-4">{errors.rcaNumber[0]}</p>
                 )}
               </div>
 
@@ -445,8 +450,8 @@ export function RegisterCar() {
                   placeholder="Utilizator"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.rcaStart && (
+                  <p className="text-red-600 mb-4">{errors.rcaStart[0]}</p>
                 )}
               </div>
               <div className="mb-4">
@@ -461,8 +466,8 @@ export function RegisterCar() {
                   placeholder="Utilizator"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.rcaEnd && (
+                  <p className="text-red-600 mb-4">{errors.rcaEnd[0]}</p>
                 )}
               </div>
             </div>
