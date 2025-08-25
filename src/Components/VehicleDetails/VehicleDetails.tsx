@@ -97,17 +97,19 @@ export function VehicleDetails() {
     },
   ];
 
+  const latestRca = car.rca?.[car.rca.length - 1];
+
   const assuranceDetails = [
-    { label: "Asigurator", value: car.rca.rcaInsurer },
-    { label: "Serie asigurare", value: car.rca.rcaSerie },
-    { label: "Număr asigurare", value: car.rca.rcaNumber },
+    { label: "Asigurator", value: latestRca?.rcaInsurer || "-" },
+    { label: "Serie asigurare", value: latestRca?.rcaSerie || "-" },
+    { label: "Număr asigurare", value: latestRca?.rcaNumber || "-" },
     {
       label: "Data începerii asigurării",
-      value: intlDate(car.rca.rcaStart || ""),
+      value: latestRca?.rcaStart ? intlDate(latestRca.rcaStart) : "-",
     },
     {
       label: "Data expirării asigurării",
-      value: intlDate(car.rca.rcaEnd || ""),
+      value: latestRca?.rcaEnd ? intlDate(latestRca.rcaEnd) : "-",
     },
   ];
 
@@ -269,52 +271,18 @@ export function VehicleDetails() {
           )}
 
           {activeTab === "rca" && (
-            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
               <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                Intervenții & Costuri
+                Detalii RCA
               </h3>
-              {car.rca && car.rca.length > 0 ? (
-                <ul className="space-y-3">
-                  {car.rca.map((repair) => (
-                    <li
-                      id={repair.rcaStart}
-                      key={repair.rcaStart}
-                      className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
-                    >
-                      <span className="text-gray-700">
-                        {repair.intervention}
-                      </span>
-                      <span className="text-gray-700 text-center">
-                        Kilometri: {Number(repair.repairAtKm).toLocaleString()}
-                      </span>
-                      <span className="text-gray-900 font-semibold text-right">
-                        {Number(repair.cost).toLocaleString()} RON
-                      </span>
-                      <span className="text-right">
-                        <Button
-                          text="X"
-                          onClick={() =>
-                            handleDeleteIntervention(repair.createdAt)
-                          }
-                        />
-                      </span>
-                    </li>
-                  ))}
-                  <div className="w-full text-right">
-                    <span className="text-gray-900 font-semibold">
-                      Total costuri:{" "}
-                      {car.repairs
-                        .reduce((acc, val) => acc + Number(val.cost), 0)
-                        .toLocaleString()}{" "}
-                      RON
-                    </span>
+              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                {assuranceDetails.map(({ label, value }) => (
+                  <div key={label} className="flex flex-col">
+                    <dt className="text-gray-800 font-medium">{label}</dt>
+                    <dd className="text-gray-800">{value || "-"}</dd>
                   </div>
-                </ul>
-              ) : (
-                <p className="text-gray-500 text-sm italic">
-                  Nicio intervenție.
-                </p>
-              )}
+                ))}
+              </ul>
             </section>
           )}
         </div>

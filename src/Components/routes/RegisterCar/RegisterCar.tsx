@@ -24,6 +24,11 @@ const validationSchema = z.object({
   rcaNumber: z.string().min(1, "Introdu numarul poliței RCA"),
   rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
   rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
+  cascoSerie: z.string().min(1, "Introdu seria poliței CASCO"),
+  cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
+  cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
 });
 
 function validateForm<T extends ZodObject>(
@@ -82,6 +87,14 @@ export function RegisterCar() {
       rcaNumber: rawFormDetails.rcaNumber.toString().trim(),
       rcaStart: new Date(rawFormDetails.rcaStart?.toString() || ""),
       rcaEnd: new Date(rawFormDetails.rcaEnd?.toString() || ""),
+    };
+
+    const newCascoDetails = {
+      rcaInsurer: rawFormDetails.cascoInsurer.toString().trim(),
+      rcaSerie: rawFormDetails.cascoSerie.toString().trim(),
+      rcaNumber: rawFormDetails.cascoNumber.toString().trim(),
+      rcaStart: new Date(rawFormDetails.cascoStart?.toString() || ""),
+      rcaEnd: new Date(rawFormDetails.cascoEnd?.toString() || ""),
     };
 
     const newErrors = validateForm(stringFormDetails, validationSchema);
@@ -169,7 +182,7 @@ export function RegisterCar() {
       {!accessToken ? (
         <NotLoggedIn />
       ) : (
-        <div className="flex justify-center items-center min-h-screen px-4 mb-10 mt-10 flex-col">
+        <div className="flex justify-center items-center min-h-screen px-4 mb-10 mt-10 flex-col border-b">
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Înregistrare Mașină
           </h2>
@@ -179,6 +192,9 @@ export function RegisterCar() {
             noValidate
           >
             <div>
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date tehnice
+              </h2>
               <div className="mb-4">
                 <label htmlFor="plateNumber" className="block mb-1 font-medium">
                   Număr Înmatriculare<span className="text-red-600">*</span>
@@ -321,7 +337,7 @@ export function RegisterCar() {
               </div>
             </div>
 
-            <div className="flex gap-6 items-center justify-center flex-col lg:flex-row text-center">
+            <div className="flex gap-6 items-center justify-center flex-col lg:flex-row text-center border-b pb-2">
               <div className="mb-4">
                 <label htmlFor="fuelType" className="block mb-1 font-medium">
                   Combustibil<span className="text-red-600">*</span>
@@ -392,11 +408,13 @@ export function RegisterCar() {
 
             {/* DETALII RCA */}
 
-            <div className="mb-4">
-              <h2 className="font-medium text-xl mb-4">Date asigurare RCA</h2>
+            <div className="mb-4 pb-2 border-b">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date asigurare RCA
+              </h2>
 
               <div className="mb-4">
-                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                <label htmlFor="rcaInsurer" className="block mb-1 font-medium">
                   Asigurator<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -413,7 +431,7 @@ export function RegisterCar() {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                <label htmlFor="rcaSerie" className="block mb-1 font-medium">
                   Serie<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -430,7 +448,7 @@ export function RegisterCar() {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                <label htmlFor="rcaNumber" className="block mb-1 font-medium">
                   Număr<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -447,7 +465,7 @@ export function RegisterCar() {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="start" className="block mb-1 font-medium">
+                <label htmlFor="rcaStart" className="block mb-1 font-medium">
                   Valabilitate de la:<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -463,7 +481,7 @@ export function RegisterCar() {
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="end" className="block mb-1 font-medium">
+                <label htmlFor="rcaEnd" className="block mb-1 font-medium">
                   Valabilitate până la:<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -483,11 +501,16 @@ export function RegisterCar() {
 
             {/* DETALII CASCO */}
 
-            {/* <div className="mb-4">
-              <h2 className="font-medium text-xl mb-4">Date asigurare CASCO</h2>
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date asigurare CASCO
+              </h2>
 
               <div className="mb-4">
-                <label htmlFor="ensurer" className="block mb-1 font-medium">
+                <label
+                  htmlFor="cascoInsurer"
+                  className="block mb-1 font-medium"
+                >
                   Asigurator<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -495,16 +518,50 @@ export function RegisterCar() {
                   type="text"
                   name="cascoInsurer"
                   id="cascoInsurer"
-                  placeholder="Groupama"
+                  placeholder="OMNIASIG"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.cascoInsurer && (
+                  <p className="text-red-600 mb-4">{errors.cascoInsurer[0]}</p>
                 )}
               </div>
 
               <div className="mb-4">
-                <label htmlFor="start" className="block mb-1 font-medium">
+                <label htmlFor="cascoSerie" className="block mb-1 font-medium">
+                  Serie<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoSerie"
+                  id="cascoSerie"
+                  placeholder="C"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoSerie && (
+                  <p className="text-red-600 mb-4">{errors.cascoSerie[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoNumber" className="block mb-1 font-medium">
+                  Număr<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoNumber"
+                  id="cascoNumber"
+                  placeholder="C12345"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoNumber && (
+                  <p className="text-red-600 mb-4">{errors.cascoNumber[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoStart" className="block mb-1 font-medium">
                   Valabilitate de la:<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -515,12 +572,12 @@ export function RegisterCar() {
                   placeholder="Utilizator"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.cascoStart && (
+                  <p className="text-red-600 mb-4">{errors.cascoStart[0]}</p>
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="end" className="block mb-1 font-medium">
+                <label htmlFor="cascoEnd" className="block mb-1 font-medium">
                   Valabilitate până la:<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -531,11 +588,11 @@ export function RegisterCar() {
                   placeholder="Utilizator"
                   onChange={handleInputChange}
                 />
-                {errors?.nextRevDate && (
-                  <p className="text-red-600 mb-4">{errors.nextRevDate[0]}</p>
+                {errors?.cascoEnd && (
+                  <p className="text-red-600 mb-4">{errors.cascoEnd[0]}</p>
                 )}
               </div>
-            </div> */}
+            </div>
             {/* END DETALII CASCO */}
 
             <div className="flex justify-center gap-2">
