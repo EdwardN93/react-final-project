@@ -1,12 +1,30 @@
-# React + Vite
+# 🚗 Car Logistic App (Parc Auto)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **Car Fleet Management** application built with **React + TypeScript + Vite + Tailwind**.  
+This project was developed as a school final project to manage and keep track of company cars, their insurance, revisions, and technical details.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔑 **Authentication** – Login, Register, Logout (with `json-server-auth`)
+- 📋 **CRUD Operations** – Add, edit, delete, and view cars
+- 🛠 **Technical Details** – Track VIN, plate number, brand, model, engine, kilometers, fuel type, department, and status
+- 📅 **Revisions** – Store and calculate days until next revision
+- 🛡 **Insurance Management** – Track RCA & CASCO details (insurer, series, number, start & end dates)
+- 🔧 **Repairs** – Log repair history for each car
+- 💱 **Currency Conversion** – Integrates with [FreeCurrencyAPI](https://freecurrencyapi.com) to convert fuel prices (BGN → RON)
+- 📱 **Responsive UI** – Styled with **TailwindCSS**
+- ⚡ **No Page Reloads** – Smooth navigation with React Router
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React 18, TypeScript, Vite
+- **Styling:** TailwindCSS
+- **Backend:** JSON Server + JSON Server Auth
+- **State Management:** React Hooks
+- **API Integrations:**
+  - FreeCurrencyAPI (currency exchange)
+  - (Planned) Fuel price API
