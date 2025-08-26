@@ -1,4 +1,4 @@
-# 🚗 Car Logistic App (Parc Auto)
+# 🚗 Car Logistic App
 
 A **Car Fleet Management** application built with **React + TypeScript + Vite + Tailwind**.  
 This project was developed as a school final project to manage and keep track of company cars, their insurance, revisions, and technical details.
@@ -27,4 +27,4 @@ This project was developed as a school final project to manage and keep track of
 - **State Management:** React Hooks
 - **API Integrations:**
   - FreeCurrencyAPI (currency exchange)
-  - (Planned) Fuel price API
+  - Fuel price API
