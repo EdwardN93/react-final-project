@@ -157,48 +157,49 @@ export function VehicleDetails() {
           {/* Car Details Section */}
 
           <div className="flex items-center justify-center mt-4 gap-4">
-            <div className="flex items-center justify-center mt-4 gap-4">
-              <button
-                onClick={() => setActiveTab("detalii")}
-                className={`${
-                  activeTab === "detalii"
-                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                Detalii Tehnice
-              </button>
-              <button
-                onClick={() => setActiveTab("rca")}
-                className={`${
-                  activeTab === "rca"
-                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                RCA
-              </button>
-              <button
-                onClick={() => setActiveTab("casco")}
-                className={`${
-                  activeTab === "casco"
-                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                CASCO
-              </button>
-              <button
-                onClick={() => setActiveTab("vigneta")}
-                className={`${
-                  activeTab === "vigneta"
-                    ? "text-blue-600 font-bold border-b-2 border-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                Vigneta
-              </button>
-            </div>
+            <button
+              onClick={() => setActiveTab("detalii")}
+              className={`border-b-2 px-5 transition-all duration-300 transform ${
+                activeTab === "detalii"
+                  ? "text-blue-600 font-bold border-blue-600 scale-110"
+                  : "text-gray-600 hover:text-blue-600 border-transparent scale-100"
+              }`}
+            >
+              Detalii Tehnice
+            </button>
+
+            <button
+              onClick={() => setActiveTab("rca")}
+              className={`border-b-2 px-5 transition-all duration-300 transform ${
+                activeTab === "rca"
+                  ? "text-blue-600 font-bold border-blue-600 scale-110"
+                  : "text-gray-600 hover:text-blue-600 border-transparent scale-100"
+              }`}
+            >
+              RCA
+            </button>
+
+            <button
+              onClick={() => setActiveTab("casco")}
+              className={`border-b-2 px-5 transition-all duration-300 transform ${
+                activeTab === "casco"
+                  ? "text-blue-600 font-bold border-blue-600 scale-110"
+                  : "text-gray-600 hover:text-blue-600 border-transparent scale-100"
+              }`}
+            >
+              CASCO
+            </button>
+
+            <button
+              onClick={() => setActiveTab("vigneta")}
+              className={`border-b-2 px-5 transition-all duration-300 transform ${
+                activeTab === "vigneta"
+                  ? "text-blue-600 font-bold border-blue-600 scale-110"
+                  : "text-gray-600 hover:text-blue-600 border-transparent scale-100"
+              }`}
+            >
+              Vigneta
+            </button>
           </div>
 
           {/*Tehnical section*/}
