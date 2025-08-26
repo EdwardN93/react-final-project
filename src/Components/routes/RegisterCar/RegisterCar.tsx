@@ -19,6 +19,17 @@ const validationSchema = z.object({
   user: z.string().min(1, "Introdu numele utilizatorului mașinii"),
   nextRevDate: z.string().min(1, "Selectează data următoarei revizii"),
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
+  rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
+  rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
+  rcaNumber: z.string().min(1, "Introdu numarul poliței RCA"),
+  rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
+  rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
+  cascoSerie: z.string().min(1, "Introdu seria poliței CASCO"),
+  cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
+  cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  vignetteEnd: z.string().min(1, "Selectează data de expirare a vignetei"),
 });
 
 function validateForm<T extends ZodObject>(
@@ -71,6 +82,29 @@ export function RegisterCar() {
       kilometers: rawFormDetails.kilometers?.toString().trim(),
     };
 
+    const newRcaDetails = {
+      rcaInsurer: rawFormDetails.rcaInsurer.toString().trim(),
+      rcaSerie: rawFormDetails.rcaSerie.toString().trim(),
+      rcaNumber: rawFormDetails.rcaNumber.toString().trim(),
+      rcaStart: new Date(rawFormDetails.rcaStart?.toString() || ""),
+      rcaEnd: new Date(rawFormDetails.rcaEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
+    };
+
+    const newCascoDetails = {
+      cascoInsurer: rawFormDetails.cascoInsurer.toString().trim(),
+      cascoSerie: rawFormDetails.cascoSerie.toString().trim(),
+      cascoNumber: rawFormDetails.cascoNumber.toString().trim(),
+      cascoStart: new Date(rawFormDetails.cascoStart?.toString() || ""),
+      cascoEnd: new Date(rawFormDetails.cascoEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
+    };
+
+    const newVignetteDetails = {
+      hasVignette: rawFormDetails.vignette.toString().trim(),
+      vignetteEnd: new Date(rawFormDetails.vignetteExp?.toString() || ""),
+    };
+
     const newErrors = validateForm(stringFormDetails, validationSchema);
     if (newErrors) {
       setErrors(newErrors);
@@ -93,6 +127,9 @@ export function RegisterCar() {
       nextRevDate: formDetails.nextRevDate,
       kilometers: formDetails.kilometers.replace(".", ","),
       repairs: [],
+      rca: [newRcaDetails],
+      casco: [newCascoDetails],
+      vignette: [newVignetteDetails],
     };
 
     setErrors(null);
@@ -154,7 +191,7 @@ export function RegisterCar() {
       {!accessToken ? (
         <NotLoggedIn />
       ) : (
-        <div className="flex justify-center items-center min-h-screen px-4 mb-10 mt-10 flex-col">
+        <div className="flex justify-center items-center min-h-screen px-4 mb-10 mt-10 flex-col border-b">
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Înregistrare Mașină
           </h2>
@@ -164,6 +201,9 @@ export function RegisterCar() {
             noValidate
           >
             <div>
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date tehnice
+              </h2>
               <div className="mb-4">
                 <label htmlFor="plateNumber" className="block mb-1 font-medium">
                   Număr Înmatriculare<span className="text-red-600">*</span>
@@ -306,7 +346,7 @@ export function RegisterCar() {
               </div>
             </div>
 
-            <div className="flex gap-6 items-center justify-center flex-col lg:flex-row text-center">
+            <div className="flex gap-6 items-center justify-center flex-col lg:flex-row text-center border-b pb-2">
               <div className="mb-4">
                 <label htmlFor="fuelType" className="block mb-1 font-medium">
                   Combustibil<span className="text-red-600">*</span>
@@ -374,6 +414,236 @@ export function RegisterCar() {
                 </select>
               </div>
             </div>
+
+            {/* DETALII RCA */}
+
+            <div className="mb-4 pb-2 border-b">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date asigurare RCA
+              </h2>
+
+              <div className="mb-4">
+                <label htmlFor="rcaInsurer" className="block mb-1 font-medium">
+                  Asigurator<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaInsurer"
+                  id="rcaInsurer"
+                  placeholder="Groupama"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaInsurer && (
+                  <p className="text-red-600 mb-4">{errors.rcaInsurer[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="rcaSerie" className="block mb-1 font-medium">
+                  Serie<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaSerie"
+                  id="rcaSerie"
+                  placeholder="RO/25/C25/HP"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaSerie && (
+                  <p className="text-red-600 mb-4">{errors.rcaSerie[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="rcaNumber" className="block mb-1 font-medium">
+                  Număr<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaNumber"
+                  id="rcaNumber"
+                  placeholder="12345"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaNumber && (
+                  <p className="text-red-600 mb-4">{errors.rcaNumber[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="rcaStart" className="block mb-1 font-medium">
+                  Valabilitate de la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="rcaStart"
+                  id="rcaStart"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaStart && (
+                  <p className="text-red-600 mb-4">{errors.rcaStart[0]}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="rcaEnd" className="block mb-1 font-medium">
+                  Valabilitate până la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="rcaEnd"
+                  id="rcaEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaEnd && (
+                  <p className="text-red-600 mb-4">{errors.rcaEnd[0]}</p>
+                )}
+              </div>
+            </div>
+            {/* END DETALII RCA */}
+
+            {/* DETALII CASCO */}
+
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date asigurare CASCO
+              </h2>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="cascoInsurer"
+                  className="block mb-1 font-medium"
+                >
+                  Asigurator<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoInsurer"
+                  id="cascoInsurer"
+                  placeholder="OMNIASIG"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoInsurer && (
+                  <p className="text-red-600 mb-4">{errors.cascoInsurer[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoSerie" className="block mb-1 font-medium">
+                  Serie<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoSerie"
+                  id="cascoSerie"
+                  placeholder="C"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoSerie && (
+                  <p className="text-red-600 mb-4">{errors.cascoSerie[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoNumber" className="block mb-1 font-medium">
+                  Număr<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoNumber"
+                  id="cascoNumber"
+                  placeholder="C12345"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoNumber && (
+                  <p className="text-red-600 mb-4">{errors.cascoNumber[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoStart" className="block mb-1 font-medium">
+                  Valabilitate de la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="cascoStart"
+                  id="cascoStart"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoStart && (
+                  <p className="text-red-600 mb-4">{errors.cascoStart[0]}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="cascoEnd" className="block mb-1 font-medium">
+                  Valabilitate până la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="cascoEnd"
+                  id="cascoEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoEnd && (
+                  <p className="text-red-600 mb-4">{errors.cascoEnd[0]}</p>
+                )}
+              </div>
+            </div>
+            {/* END DETALII CASCO */}
+
+            {/* DETALII VIGNETA */}
+
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date Vigneta
+              </h2>
+
+              <div className="mb-4">
+                <label htmlFor="vignette" className="block mb-1 font-medium">
+                  Vignetă disponibilă ?<span className="text-red-600">*</span>
+                </label>
+                <select
+                  name="vignette"
+                  id="vignette"
+                  className="p-2 rounded hover:cursor-pointer border"
+                  required
+                >
+                  <option value="true">Da</option>
+                  <option value="false">Nu</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="vignetteEnd" className="block mb-1 font-medium">
+                  Expiră la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="vignetteEnd"
+                  id="vignetteEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.vignetteEnd && (
+                  <p className="text-red-600 mb-4">{errors.vignetteEnd[0]}</p>
+                )}
+              </div>
+            </div>
+            {/* END DETALII VIGNETA */}
+
             <div className="flex justify-center gap-2">
               <Button
                 text="Adaugă"

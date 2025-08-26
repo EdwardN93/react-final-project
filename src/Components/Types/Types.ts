@@ -7,6 +7,29 @@ type Repairs = {
   createdAt: string;
 };
 
+type Assurance = {
+  rcaInsurer?: string;
+  rcaSerie?: string;
+  rcaNumber?: string;
+  rcaStart?: string | Date;
+  rcaEnd?: string | Date;
+  createdAt?: string;
+};
+
+type CascoAssurance = {
+  cascoInsurer?: string;
+  cascoSerie?: string;
+  cascoNumber?: string;
+  cascoStart?: string | Date;
+  cascoEnd?: string | Date;
+  createdAt?: string;
+};
+
+type Vignette = {
+  hasVignette: string;
+  vignetteEnd: string | Date;
+};
+
 export type Car = {
   id?: number;
   plateNumber?: string;
@@ -22,6 +45,9 @@ export type Car = {
   nextRevDate?: string | Date;
   kilometers?: string;
   repairs?: Repairs[];
+  rca?: Assurance[];
+  casco?: CascoAssurance[];
+  vignette?: Vignette[];
 };
 
 // li Element for SideNav
