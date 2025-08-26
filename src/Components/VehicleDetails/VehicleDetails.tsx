@@ -98,6 +98,8 @@ export function VehicleDetails() {
   ];
 
   const latestRca = car.rca?.[car.rca.length - 1];
+  const latestCasco = car.casco?.[car.casco.length - 1];
+  const latestVignette = car.vignette?.[car.vignette.length - 1];
 
   const assuranceDetails = [
     { label: "Asigurator", value: latestRca?.rcaInsurer || "-" },
@@ -113,11 +115,29 @@ export function VehicleDetails() {
     },
   ];
 
-  // const cascoDetails = [
-  //   { label: "Asigurator", value: car.casco.cascoInsurer },
-  //   { label: "Data începerii asigurării", value: car.casco.cascoStart },
-  //   { label: "Data expirării asigurării", value: car.casco.cascoEnd },
-  // ];
+  const cascoAssuranceDetails = [
+    { label: "Asigurator", value: latestCasco?.cascoInsurer || "-" },
+    { label: "Serie asigurare", value: latestCasco?.cascoSerie || "-" },
+    { label: "Număr asigurare", value: latestCasco?.cascoNumber || "-" },
+    {
+      label: "Data începerii asigurării",
+      value: latestCasco?.cascoStart ? intlDate(latestCasco.cascoStart) : "-",
+    },
+    {
+      label: "Data expirării asigurării",
+      value: latestCasco?.cascoEnd ? intlDate(latestCasco.cascoEnd) : "-",
+    },
+  ];
+
+  const vignetteDetails = [
+    { label: "Vigneta valabilă", value: latestVignette?.hasVignette || "-" },
+    {
+      label: "Data expirare",
+      value: latestVignette?.vignetteEnd
+        ? intlDate(latestVignette?.vignetteEnd)
+        : "-",
+    },
+  ];
 
   return (
     <motion.div
@@ -276,7 +296,39 @@ export function VehicleDetails() {
                 Detalii RCA
               </h3>
               <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                {cascoAssuranceDetails.map(({ label, value }) => (
+                  <div key={label} className="flex flex-col">
+                    <dt className="text-gray-800 font-medium">{label}</dt>
+                    <dd className="text-gray-800">{value || "-"}</dd>
+                  </div>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {activeTab === "casco" && (
+            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                Detalii CASCO
+              </h3>
+              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 {assuranceDetails.map(({ label, value }) => (
+                  <div key={label} className="flex flex-col">
+                    <dt className="text-gray-800 font-medium">{label}</dt>
+                    <dd className="text-gray-800">{value || "-"}</dd>
+                  </div>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {activeTab === "vigneta" && (
+            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
+              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                Detalii CASCO
+              </h3>
+              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                {vignetteDetails.map(({ label, value }) => (
                   <div key={label} className="flex flex-col">
                     <dt className="text-gray-800 font-medium">{label}</dt>
                     <dd className="text-gray-800">{value || "-"}</dd>

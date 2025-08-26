@@ -13,6 +13,21 @@ type Assurance = {
   rcaNumber?: string;
   rcaStart?: string | Date;
   rcaEnd?: string | Date;
+  createdAt?: string;
+};
+
+type CascoAssurance = {
+  cascoInsurer?: string;
+  cascoSerie?: string;
+  cascoNumber?: string;
+  cascoStart?: string | Date;
+  cascoEnd?: string | Date;
+  createdAt?: string;
+};
+
+type Vignette = {
+  hasVignette: string;
+  vignetteEnd: string | Date;
 };
 
 export type Car = {
@@ -31,7 +46,8 @@ export type Car = {
   kilometers?: string;
   repairs?: Repairs[];
   rca?: Assurance[];
-  casco?: Assurance[];
+  casco?: CascoAssurance[];
+  vignette?: Vignette[];
 };
 
 // li Element for SideNav

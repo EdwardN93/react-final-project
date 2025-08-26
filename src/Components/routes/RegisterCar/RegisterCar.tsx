@@ -29,6 +29,7 @@ const validationSchema = z.object({
   cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
   cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  vignetteEnd: z.string().min(1, "Selectează data de expirare a vignetei"),
 });
 
 function validateForm<T extends ZodObject>(
@@ -87,14 +88,21 @@ export function RegisterCar() {
       rcaNumber: rawFormDetails.rcaNumber.toString().trim(),
       rcaStart: new Date(rawFormDetails.rcaStart?.toString() || ""),
       rcaEnd: new Date(rawFormDetails.rcaEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
     };
 
     const newCascoDetails = {
-      rcaInsurer: rawFormDetails.cascoInsurer.toString().trim(),
-      rcaSerie: rawFormDetails.cascoSerie.toString().trim(),
-      rcaNumber: rawFormDetails.cascoNumber.toString().trim(),
-      rcaStart: new Date(rawFormDetails.cascoStart?.toString() || ""),
-      rcaEnd: new Date(rawFormDetails.cascoEnd?.toString() || ""),
+      cascoInsurer: rawFormDetails.cascoInsurer.toString().trim(),
+      cascoSerie: rawFormDetails.cascoSerie.toString().trim(),
+      cascoNumber: rawFormDetails.cascoNumber.toString().trim(),
+      cascoStart: new Date(rawFormDetails.cascoStart?.toString() || ""),
+      cascoEnd: new Date(rawFormDetails.cascoEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
+    };
+
+    const newVignetteDetails = {
+      hasVignette: rawFormDetails.vignette.toString().trim(),
+      vignetteEnd: new Date(rawFormDetails.vignetteExp?.toString() || ""),
     };
 
     const newErrors = validateForm(stringFormDetails, validationSchema);
@@ -120,7 +128,8 @@ export function RegisterCar() {
       kilometers: formDetails.kilometers.replace(".", ","),
       repairs: [],
       rca: [newRcaDetails],
-      casco: [],
+      casco: [newCascoDetails],
+      vignette: [newVignetteDetails],
     };
 
     setErrors(null);
@@ -594,6 +603,46 @@ export function RegisterCar() {
               </div>
             </div>
             {/* END DETALII CASCO */}
+
+            {/* DETALII VIGNETA */}
+
+            <div className="mb-4">
+              <h2 className="font-medium text-xl mb-4 text-center">
+                Date Vigneta
+              </h2>
+
+              <div className="mb-4">
+                <label htmlFor="vignette" className="block mb-1 font-medium">
+                  Vignetă disponibilă ?<span className="text-red-600">*</span>
+                </label>
+                <select
+                  name="vignette"
+                  id="vignette"
+                  className="p-2 rounded hover:cursor-pointer border"
+                  required
+                >
+                  <option value="true">Da</option>
+                  <option value="false">Nu</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="vignetteEnd" className="block mb-1 font-medium">
+                  Expiră la:<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="date"
+                  name="vignetteEnd"
+                  id="vignetteEnd"
+                  placeholder="Utilizator"
+                  onChange={handleInputChange}
+                />
+                {errors?.vignetteEnd && (
+                  <p className="text-red-600 mb-4">{errors.vignetteEnd[0]}</p>
+                )}
+              </div>
+            </div>
+            {/* END DETALII VIGNETA */}
 
             <div className="flex justify-center gap-2">
               <Button

@@ -290,6 +290,42 @@
       ],
       "casco": [],
       "id": 16
+    },
+    {
+      "plateNumber": "B999TCH",
+      "carBrand": "Dacia",
+      "carName": "Dokker",
+      "vinNumber": "DCA9912992A",
+      "engineCapacity": "1197",
+      "fuelType": "Motorină",
+      "category": "Autoturism M1G",
+      "department": "Logistică",
+      "user": "Marian Gogea",
+      "status": "Activa",
+      "nextRevDate": "2025-11-26T00:00:00.000Z",
+      "kilometers": "121,343",
+      "repairs": [],
+      "rca": [
+        {
+          "rcaInsurer": "City Insurance",
+          "rcaSerie": "RO/22/C41/HH",
+          "rcaNumber": "6541896",
+          "rcaStart": "2025-08-27T00:00:00.000Z",
+          "rcaEnd": "2026-08-26T00:00:00.000Z",
+          "createdAt": "2025-08-26T16:10:34.530Z"
+        }
+      ],
+      "casco": [
+        {
+          "cascoInsurer": "OMNIASIG",
+          "cascoSerie": "R",
+          "cascoNumber": "R92393",
+          "cascoStart": "2025-08-26T00:00:00.000Z",
+          "cascoEnd": "2026-08-26T00:00:00.000Z",
+          "createdAt": "2025-08-26T16:10:34.530Z"
+        }
+      ],
+      "id": 17
     }
   ]
 }
