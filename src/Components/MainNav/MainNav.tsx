@@ -67,7 +67,7 @@ export function MainNav() {
           </li>
         )}
         {id && user?.role === 1 && (
-          <li>
+          <li className="ml-auto">
             <Button
               text="Sterge mașină"
               color="red"
