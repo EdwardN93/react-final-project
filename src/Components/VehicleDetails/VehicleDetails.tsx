@@ -130,7 +130,13 @@ export function VehicleDetails() {
   ];
 
   const vignetteDetails = [
-    { label: "Vigneta valabilă", value: latestVignette?.hasVignette || "-" },
+    {
+      label: "Rovinietă",
+      value:
+        latestVignette?.hasVignette == "true"
+          ? "Valabilă"
+          : "Nu există rovinietă",
+    },
     {
       label: "Data expirare",
       value: latestVignette?.vignetteEnd
@@ -198,7 +204,7 @@ export function VehicleDetails() {
                   : "text-gray-600 hover:text-blue-600 border-transparent scale-100"
               }`}
             >
-              Vigneta
+              Vignetă
             </button>
           </div>
 

@@ -45,9 +45,16 @@ export function FuelPrices() {
   if (loading) return <p>Loading fuel prices...</p>;
 
   return (
-    <div>
-      <p>Benzină / l: {petrolPrice} RON</p>
-      <p>Motorină / l: {dieselPrice} RON</p>
+    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-x-6 text-sm text-gray-700 bg-gray-100 px-3 py-2 rounded-lg shadow-inner">
+      <p className="font-semibold text-blue-800">Medie preț carburant:</p>
+      <div className="flex flex-col sm:flex-row sm:gap-x-4">
+        <span>
+          Benzină: <span className="font-medium">{petrolPrice} RON/l</span>
+        </span>
+        <span>
+          Motorină: <span className="font-medium">{dieselPrice} RON/l</span>
+        </span>
+      </div>
     </div>
   );
 }
