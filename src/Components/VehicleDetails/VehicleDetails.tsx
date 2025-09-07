@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";

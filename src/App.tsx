@@ -61,7 +61,7 @@ function App() {
               </motion.div>
             </AnimatePresence>
             <ToastContainer />
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </main>
       </div>

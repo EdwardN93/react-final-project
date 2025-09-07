@@ -83,6 +83,12 @@
           "repairAtKm": "12334",
           "createdAt": "2025-08-20T18:18:25.439Z"
         }
+      ],
+      "vignette": [
+        {
+          "hasVignette": "true",
+          "vignetteEnd": "2026-09-07T00:00:00.000Z"
+        }
       ]
     },
     {
@@ -96,7 +102,7 @@
       "department": "Logistică",
       "user": "Marian Sirbu",
       "status": "Activa",
-      "nextRevDate": "2025-10-06",
+      "nextRevDate": "2026-10-06",
       "kilometers": "44,513",
       "id": 5,
       "repairs": []
