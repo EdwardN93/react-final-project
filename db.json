@@ -157,7 +157,13 @@
       "nextRevDate": "2025-07-09",
       "kilometers": "125,544",
       "id": 8,
-      "repairs": []
+      "repairs": [],
+      "vignette": [
+        {
+          "hasVignette": "true",
+          "vignetteEnd": "2025-09-28T00:00:00.000Z"
+        }
+      ]
     },
     {
       "plateNumber": "IF67TCH",

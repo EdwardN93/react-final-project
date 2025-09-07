@@ -67,6 +67,15 @@ export function MainNav() {
           </li>
         )}
         {id && user?.role === 1 && (
+          <li>
+            <Button
+              text="Adaugă vignetă"
+              color="green"
+              onClick={() => navigate(`/vignette/${id}`)}
+            />
+          </li>
+        )}
+        {id && user?.role === 1 && (
           <li className="ml-auto">
             <Button
               text="Sterge mașină"
