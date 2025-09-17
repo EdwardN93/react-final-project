@@ -141,15 +141,15 @@ export function Landing() {
                 >
                   ID {sorter ? "↓" : "↑"}
                 </th>
-                <th className="p-2 border">Numar Inmatriculare</th>
-                <th className="p-2 border">Marca</th>
+                <th className="p-2 border">Număr Înmatriculare</th>
+                <th className="p-2 border">Marcă</th>
                 <th className="p-2 border">Model</th>
-                <th className="p-2 border">Serie Sasiu</th>
-                <th className="p-2 border">Combustibil</th>
+                <th className="p-2 border">Serie Șasiu</th>
+                <th className="p-2 border">Tip Combustibil</th>
                 <th className="p-2 border">Capacitate Motor</th>
                 <th className="p-2 border">Categorie</th>
-                <th className="p-2 border">Department</th>
-                <th className="p-2 border">Utilizator</th>
+                <th className="p-2 border">Departament</th>
+                <th className="p-2 border">Nume Utilizator</th>
                 <th className="p-2 border">Status</th>
               </tr>
               <tr>
