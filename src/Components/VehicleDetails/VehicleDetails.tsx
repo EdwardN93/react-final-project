@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Car } from "../Types/Types";
 import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
@@ -332,7 +332,7 @@ export function VehicleDetails() {
           {activeTab === "vigneta" && (
             <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
               <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                Detalii CASCO
+                Detalii Vignetă
               </h3>
               <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 {vignetteDetails.map(({ label, value }) => (
