@@ -1,4 +1,5 @@
-export function generatePassword(length: number) {
+export function generatePassword() {
+  const length = 10;
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-=+_/*";
   let string = "";
