@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { motion } from "framer-motion";
 import { z } from "zod/v4";
 import { AuthResponse } from "../../../Types/Types";
@@ -7,6 +7,7 @@ import { useAuthContext } from "../AuthContext";
 import { useRedirectWhenLoggedIn } from "../useRedirectWhenLogIn";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { generatePassword } from "../../../utils/passwordGenerator";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -47,6 +48,15 @@ export const Register = () => {
 
   if (willRedirect) {
     return null;
+  }
+
+  function handleGeneratePassword() {
+    const newPw = generatePassword();
+    setDefaultValues((prev) => ({
+      ...prev,
+      password: newPw,
+      retypePassword: newPw,
+    }));
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -195,18 +205,26 @@ export const Register = () => {
             />
           </div>
 
-          <div className="flex items-center gap-2 mt-4">
-            <input
-              className="w-4 h-4 hover:cursor-pointer duration-200"
-              type="checkbox"
-              name="showPassword"
-              id="showPassword"
-              checked={showPassword}
-              onChange={handleShowPassword}
-            />
-            <label htmlFor="showPassword" className="hover:cursor-pointer">
-              Show Password
-            </label>
+          <div className="flex items-center justify-between gap-2 mt-4">
+            <div className="flex gap-2 items-center">
+              <input
+                className="w-4 h-4 hover:cursor-pointer duration-200"
+                type="checkbox"
+                name="showPassword"
+                id="showPassword"
+                checked={showPassword}
+                onChange={handleShowPassword}
+              />
+              <label htmlFor="showPassword" className="hover:cursor-pointer">
+                Show Password
+              </label>
+            </div>
+
+            <div className="flex gap-2 items-center">
+              <button type="button" onClick={handleGeneratePassword}>
+                Generate strong password
+              </button>
+            </div>
           </div>
 
           <button

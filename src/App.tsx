@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify";
 import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
 import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 import { AddVignette } from "./Components/AddVignette/AddVignette";
+import AddRca from "./Components/AddRca/AddRca";
 function App() {
   const location = useLocation();
 
@@ -52,6 +53,7 @@ function App() {
                   <Route path="/account" element={<Account />} />
                   <Route path="/repairs/:id" element={<AddRepairs />} />
                   <Route path="/vignette/:id" element={<AddVignette />} />
+                  <Route path="/addrca/:id" element={<AddRca />} />
                   <Route
                     path="/change-account-details"
                     element={<ChangeAccountDetails />}

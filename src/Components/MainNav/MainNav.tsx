@@ -69,6 +69,24 @@ export function MainNav() {
         {id && user?.role === 1 && (
           <li>
             <Button
+              text="Adaugă RCA"
+              color="green"
+              onClick={() => navigate(`/addrca/${id}`)}
+            />
+          </li>
+        )}
+        {id && user?.role === 1 && (
+          <li>
+            <Button
+              text="Adaugă CASCO"
+              color="green"
+              onClick={() => navigate(`/vignette/${id}`)}
+            />
+          </li>
+        )}
+        {id && user?.role === 1 && (
+          <li>
+            <Button
               text="Adaugă vignetă"
               color="green"
               onClick={() => navigate(`/vignette/${id}`)}
