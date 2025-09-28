@@ -21,7 +21,7 @@ const validationSchema = z.object({
   kilometers: z.string().min(1, "Introdu kilometrii actuali ai mașinii"),
   rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
-  rcaNumber: z.string().min(1, "Introdu numarul poliței RCA"),
+  rcaNumber: z.string().min(1, "Introdu numărul poliței RCA"),
   rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
   rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),

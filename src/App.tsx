@@ -19,7 +19,7 @@ import { ToastContainer } from "react-toastify";
 import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
 import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 import { AddVignette } from "./Components/AddVignette/AddVignette";
-import AddRca from "./Components/AddRca/AddRca";
+import { AddRca } from "./Components/AddRca/AddRca";
 function App() {
   const location = useLocation();
 

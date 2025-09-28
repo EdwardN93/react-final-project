@@ -303,7 +303,7 @@ export function VehicleDetails() {
                 Detalii RCA
               </h3>
               <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                {cascoAssuranceDetails.map(({ label, value }) => (
+                {assuranceDetails.map(({ label, value }) => (
                   <div key={label} className="flex flex-col">
                     <dt className="text-gray-800 font-medium">{label}</dt>
                     <dd className="text-gray-800">{value || "-"}</dd>
@@ -319,7 +319,7 @@ export function VehicleDetails() {
                 Detalii CASCO
               </h3>
               <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                {assuranceDetails.map(({ label, value }) => (
+                {cascoAssuranceDetails.map(({ label, value }) => (
                   <div key={label} className="flex flex-col">
                     <dt className="text-gray-800 font-medium">{label}</dt>
                     <dd className="text-gray-800">{value || "-"}</dd>
