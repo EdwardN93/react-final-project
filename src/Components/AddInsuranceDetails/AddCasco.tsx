@@ -11,22 +11,22 @@ import { validateForm, ValidationErrors } from "../utils/validation";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const validationSchema = z.object({
-  rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
-  rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
-  rcaNumber: z.string().min(1, "Introdu numărul poliței RCA"),
-  rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
-  rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
+  cascoSerie: z.string().min(1, "Introdu seria poliței CASCO"),
+  cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
+  cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
+  cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
 });
 
 const initialDefaultValues = {
-  rcaInsurer: "",
-  rcaSerie: "",
-  rcaNumber: "",
-  rcaStart: "",
-  rcaEnd: "",
+  cascoInsurer: "",
+  cascoSerie: "",
+  cascoNumber: "",
+  cascoStart: "",
+  cascoEnd: "",
 };
 
-export function AddRca() {
+export function AddCasco() {
   const [errors, setErrors] = useState<null | ValidationErrors<
     typeof validationSchema
   >>(null);
@@ -70,18 +70,18 @@ export function AddRca() {
     setErrors(null);
     setDefaultValues(initialDefaultValues);
 
-    const newRcaDetails = {
-      rcaInsurer: values.rcaInsurer.toString().trim(),
-      rcaSerie: values.rcaSerie.toString().trim(),
-      rcaNumber: values.rcaNumber.toString().trim(),
-      rcaStart: new Date(values.rcaStart?.toString() || ""),
-      rcaEnd: new Date(values.rcaEnd?.toString() || ""),
+    const newCascoDetails = {
+      cascoInsurer: values.cascoInsurer.toString().trim(),
+      cascoSerie: values.cascoSerie.toString().trim(),
+      cascoNumber: values.cascoNumber.toString().trim(),
+      cascoStart: new Date(values.cascoStart?.toString() || ""),
+      cascoEnd: new Date(values.cascoEnd?.toString() || ""),
       createdAt: new Date().toISOString(),
     };
 
     const updatedCar = {
       ...car,
-      rca: [...(car.rca || []), newRcaDetails],
+      casco: [...(car.casco || []), newCascoDetails],
     };
 
     const data = await fetch(`${apiUrl}/vehicles/${id}`, {
@@ -93,7 +93,7 @@ export function AddRca() {
       },
     }).then((res) => res.json() as Promise<AuthResponse>);
 
-    toast.success("Poliță RCA adăugată cu succes !");
+    toast.success("Poliță CASCO adăugată cu succes !");
     navigate(-1);
   }
 
@@ -131,91 +131,91 @@ export function AddRca() {
           noValidate
         >
           <h2 className="font-medium text-xl mb-4 text-center">
-            Date asigurare RCA
+            Date asigurare CASCO
           </h2>
 
-          <div className="mb-4 pb-2 border-b">
+          <div className="mb-4">
             <div className="mb-4">
-              <label htmlFor="rcaInsurer" className="block mb-1 font-medium">
+              <label htmlFor="cascoInsurer" className="block mb-1 font-medium">
                 Asigurator<span className="text-red-600">*</span>
               </label>
               <input
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 type="text"
-                name="rcaInsurer"
-                id="rcaInsurer"
-                placeholder="Groupama"
+                name="cascoInsurer"
+                id="cascoInsurer"
+                placeholder="OMNIASIG"
                 onChange={handleInputChange}
               />
-              {errors?.rcaInsurer && (
-                <p className="text-red-600 mb-4">{errors.rcaInsurer[0]}</p>
+              {errors?.cascoInsurer && (
+                <p className="text-red-600 mb-4">{errors.cascoInsurer[0]}</p>
               )}
             </div>
 
             <div className="mb-4">
-              <label htmlFor="rcaSerie" className="block mb-1 font-medium">
+              <label htmlFor="cascoSerie" className="block mb-1 font-medium">
                 Serie<span className="text-red-600">*</span>
               </label>
               <input
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 type="text"
-                name="rcaSerie"
-                id="rcaSerie"
-                placeholder="RO/25/C25/HP"
+                name="cascoSerie"
+                id="cascoSerie"
+                placeholder="C"
                 onChange={handleInputChange}
               />
-              {errors?.rcaSerie && (
-                <p className="text-red-600 mb-4">{errors.rcaSerie[0]}</p>
+              {errors?.cascoSerie && (
+                <p className="text-red-600 mb-4">{errors.cascoSerie[0]}</p>
               )}
             </div>
 
             <div className="mb-4">
-              <label htmlFor="rcaNumber" className="block mb-1 font-medium">
+              <label htmlFor="cascoNumber" className="block mb-1 font-medium">
                 Număr<span className="text-red-600">*</span>
               </label>
               <input
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 type="text"
-                name="rcaNumber"
-                id="rcaNumber"
-                placeholder="12345"
+                name="cascoNumber"
+                id="cascoNumber"
+                placeholder="C12345"
                 onChange={handleInputChange}
               />
-              {errors?.rcaNumber && (
-                <p className="text-red-600 mb-4">{errors.rcaNumber[0]}</p>
+              {errors?.cascoNumber && (
+                <p className="text-red-600 mb-4">{errors.cascoNumber[0]}</p>
               )}
             </div>
 
             <div className="mb-4">
-              <label htmlFor="rcaStart" className="block mb-1 font-medium">
+              <label htmlFor="cascoStart" className="block mb-1 font-medium">
                 Valabilitate de la:<span className="text-red-600">*</span>
               </label>
               <input
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 type="date"
-                name="rcaStart"
-                id="rcaStart"
+                name="cascoStart"
+                id="cascoStart"
                 placeholder="Utilizator"
                 onChange={handleInputChange}
               />
-              {errors?.rcaStart && (
-                <p className="text-red-600 mb-4">{errors.rcaStart[0]}</p>
+              {errors?.cascoStart && (
+                <p className="text-red-600 mb-4">{errors.cascoStart[0]}</p>
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="rcaEnd" className="block mb-1 font-medium">
+              <label htmlFor="cascoEnd" className="block mb-1 font-medium">
                 Valabilitate până la:<span className="text-red-600">*</span>
               </label>
               <input
                 className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
                 type="date"
-                name="rcaEnd"
-                id="rcaEnd"
+                name="cascoEnd"
+                id="cascoEnd"
                 placeholder="Utilizator"
                 onChange={handleInputChange}
               />
-              {errors?.rcaEnd && (
-                <p className="text-red-600 mb-4">{errors.rcaEnd[0]}</p>
+              {errors?.cascoEnd && (
+                <p className="text-red-600 mb-4">{errors.cascoEnd[0]}</p>
               )}
             </div>
           </div>

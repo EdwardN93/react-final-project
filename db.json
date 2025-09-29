@@ -100,12 +100,30 @@
       ],
       "rca": [
         {
+          "cascoInsurer": "OMNIASIG",
+          "cascoSerie": "T",
+          "cascoNumber": "R64895",
+          "cascoStart": "2025-09-29T00:00:00.000Z",
+          "cascoEnd": "2026-09-29T00:00:00.000Z",
+          "createdAt": "2025-09-29T04:41:03.764Z"
+        },
+        {
           "rcaInsurer": "Groupama",
-          "rcaSerie": "RO/22/C23/HN",
-          "rcaNumber": "132141",
-          "rcaStart": "2025-09-28T00:00:00.000Z",
-          "rcaEnd": "2026-09-28T00:00:00.000Z",
-          "createdAt": "2025-09-28T19:22:27.342Z"
+          "rcaSerie": "RO/25/C31/HH",
+          "rcaNumber": "4569871",
+          "rcaStart": "2025-09-29T00:00:00.000Z",
+          "rcaEnd": "2026-09-29T00:00:00.000Z",
+          "createdAt": "2025-09-29T04:43:08.936Z"
+        }
+      ],
+      "casco": [
+        {
+          "cascoInsurer": "OMNIASIG",
+          "cascoSerie": "T",
+          "cascoNumber": "T65485",
+          "cascoStart": "2025-09-29T00:00:00.000Z",
+          "cascoEnd": "2026-09-29T00:00:00.000Z",
+          "createdAt": "2025-09-29T04:42:08.454Z"
         }
       ]
     },

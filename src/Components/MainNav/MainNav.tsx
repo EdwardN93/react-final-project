@@ -80,7 +80,7 @@ export function MainNav() {
             <Button
               text="Adaugă CASCO"
               color="green"
-              onClick={() => navigate(`/vignette/${id}`)}
+              onClick={() => navigate(`/addcasco/${id}`)}
             />
           </li>
         )}

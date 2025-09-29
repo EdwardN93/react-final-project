@@ -20,6 +20,7 @@ import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
 import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 import { AddVignette } from "./Components/AddVignette/AddVignette";
 import { AddRca } from "./Components/AddRca/AddRca";
+import { AddCasco } from "./Components/AddInsuranceDetails/AddCasco";
 function App() {
   const location = useLocation();
 
@@ -54,6 +55,7 @@ function App() {
                   <Route path="/repairs/:id" element={<AddRepairs />} />
                   <Route path="/vignette/:id" element={<AddVignette />} />
                   <Route path="/addrca/:id" element={<AddRca />} />
+                  <Route path="/addcasco/:id" element={<AddCasco />} />
                   <Route
                     path="/change-account-details"
                     element={<ChangeAccountDetails />}
