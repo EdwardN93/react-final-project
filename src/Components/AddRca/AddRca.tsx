@@ -14,6 +14,7 @@ const validationSchema = z.object({
   rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
   rcaNumber: z.string().min(1, "Introdu numărul poliței RCA"),
+  rcaCost: z.string().min(1, "Introdu prețul poliței RCA (în RON)"),
   rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
   rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
 });
@@ -22,6 +23,7 @@ const initialDefaultValues = {
   rcaInsurer: "",
   rcaSerie: "",
   rcaNumber: "",
+  rcaCost: "",
   rcaStart: "",
   rcaEnd: "",
 };
@@ -71,9 +73,10 @@ export function AddRca() {
     setDefaultValues(initialDefaultValues);
 
     const newRcaDetails = {
-      rcaInsurer: values.rcaInsurer.toString().trim(),
-      rcaSerie: values.rcaSerie.toString().trim(),
+      rcaInsurer: values.rcaInsurer.toString().toUpperCase().trim(),
+      rcaSerie: values.rcaSerie.toString().toUpperCase().trim(),
       rcaNumber: values.rcaNumber.toString().trim(),
+      rcaCost: values.rcaCost.toString().trim(),
       rcaStart: new Date(values.rcaStart?.toString() || ""),
       rcaEnd: new Date(values.rcaEnd?.toString() || ""),
       createdAt: new Date().toISOString(),
@@ -183,6 +186,23 @@ export function AddRca() {
               />
               {errors?.rcaNumber && (
                 <p className="text-red-600 mb-4">{errors.rcaNumber[0]}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="rcaCost" className="block mb-1 font-medium">
+                Costul poliței (în RON)<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                type="text"
+                name="rcaCost"
+                id="rcaCost"
+                placeholder="12345"
+                onChange={handleInputChange}
+              />
+              {errors?.rcaCost && (
+                <p className="text-red-600 mb-4">{errors.rcaCost[0]}</p>
               )}
             </div>
 

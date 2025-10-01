@@ -106,6 +106,12 @@ export function VehicleDetails() {
     { label: "Serie asigurare", value: latestRca?.rcaSerie || "-" },
     { label: "Număr asigurare", value: latestRca?.rcaNumber || "-" },
     {
+      label: "Costul poliței RON",
+      value: isNaN(Number(latestRca?.rcaCost))
+        ? "-"
+        : Number(latestRca?.rcaCost).toLocaleString(),
+    },
+    {
       label: "Data începerii asigurării",
       value: latestRca?.rcaStart ? intlDate(latestRca.rcaStart) : "-",
     },
@@ -119,6 +125,12 @@ export function VehicleDetails() {
     { label: "Asigurator", value: latestCasco?.cascoInsurer || "-" },
     { label: "Serie asigurare", value: latestCasco?.cascoSerie || "-" },
     { label: "Număr asigurare", value: latestCasco?.cascoNumber || "-" },
+    {
+      label: "Costul poliței RON",
+      value: isNaN(Number(latestCasco?.cascoCost))
+        ? "-"
+        : Number(latestCasco?.cascoCost).toLocaleString(),
+    },
     {
       label: "Data începerii asigurării",
       value: latestCasco?.cascoStart ? intlDate(latestCasco.cascoStart) : "-",

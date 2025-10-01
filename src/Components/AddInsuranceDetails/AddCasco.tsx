@@ -14,6 +14,7 @@ const validationSchema = z.object({
   cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   cascoSerie: z.string().min(1, "Introdu seria poliței CASCO"),
   cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
+  cascoCost: z.string().min(1, "Introdu prețul poliței CASCO (în RON)"),
   cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
 });
@@ -22,6 +23,7 @@ const initialDefaultValues = {
   cascoInsurer: "",
   cascoSerie: "",
   cascoNumber: "",
+  cascoCost: "",
   cascoStart: "",
   cascoEnd: "",
 };
@@ -74,6 +76,7 @@ export function AddCasco() {
       cascoInsurer: values.cascoInsurer.toString().trim(),
       cascoSerie: values.cascoSerie.toString().trim(),
       cascoNumber: values.cascoNumber.toString().trim(),
+      cascoCost: values.cascoCost.toString().trim(),
       cascoStart: new Date(values.cascoStart?.toString() || ""),
       cascoEnd: new Date(values.cascoEnd?.toString() || ""),
       createdAt: new Date().toISOString(),
@@ -183,6 +186,23 @@ export function AddCasco() {
               />
               {errors?.cascoNumber && (
                 <p className="text-red-600 mb-4">{errors.cascoNumber[0]}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="cascoCost" className="block mb-1 font-medium">
+                Costul poliței (în RON)<span className="text-red-600">*</span>
+              </label>
+              <input
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                type="text"
+                name="cascoCost"
+                id="cascoCost"
+                placeholder="C12345"
+                onChange={handleInputChange}
+              />
+              {errors?.cascoCost && (
+                <p className="text-red-600 mb-4">{errors.cascoCost[0]}</p>
               )}
             </div>
 

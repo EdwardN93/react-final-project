@@ -22,7 +22,7 @@ const validationSchema = z.object({
   rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
   rcaNumber: z.string().min(1, "Introdu numărul poliței RCA"),
-  rcaCost: z.string().min(1, "Introdu prețul poliței RCA"),
+  rcaCost: z.string().min(1, "Introdu prețul poliței RCA (în RON)"),
   rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
   rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
@@ -647,7 +647,7 @@ export function RegisterCar() {
 
             <div className="mb-4">
               <h2 className="font-medium text-xl mb-4 text-center">
-                Date Vigneta
+                Date Vignetă
               </h2>
 
               <div className="mb-4">

@@ -100,17 +100,19 @@
       ],
       "rca": [
         {
-          "cascoInsurer": "OMNIASIG",
-          "cascoSerie": "T",
-          "cascoNumber": "R64895",
-          "cascoStart": "2025-09-29T00:00:00.000Z",
-          "cascoEnd": "2026-09-29T00:00:00.000Z",
+          "rcaInsurer": "OMNIASIG",
+          "rcaSerie": "T",
+          "rcaNumber": "R64895",
+          "rcaCost": "2543",
+          "rcaStart": "2025-09-29T00:00:00.000Z",
+          "rcaEnd": "2026-09-29T00:00:00.000Z",
           "createdAt": "2025-09-29T04:41:03.764Z"
         },
         {
           "rcaInsurer": "Groupama",
           "rcaSerie": "RO/25/C31/HH",
           "rcaNumber": "4569871",
+          "rcaCost": "1564",
           "rcaStart": "2025-09-29T00:00:00.000Z",
           "rcaEnd": "2026-09-29T00:00:00.000Z",
           "createdAt": "2025-09-29T04:43:08.936Z"
@@ -121,6 +123,7 @@
           "cascoInsurer": "OMNIASIG",
           "cascoSerie": "T",
           "cascoNumber": "T65485",
+          "cascoCost": "2542",
           "cascoStart": "2025-09-29T00:00:00.000Z",
           "cascoEnd": "2026-09-29T00:00:00.000Z",
           "createdAt": "2025-09-29T04:42:08.454Z"
@@ -166,7 +169,18 @@
       "status": "Vanduta",
       "nextRevDate": "2026-08-07",
       "kilometers": "150,000",
-      "id": 6
+      "id": 6,
+      "rca": [
+        {
+          "rcaInsurer": "GROUPAMA",
+          "rcaSerie": "RO/53/C53/HH",
+          "rcaNumber": "1284192",
+          "rcaCost": "2289.18",
+          "rcaStart": "2025-10-01T00:00:00.000Z",
+          "rcaEnd": "2025-10-01T00:00:00.000Z",
+          "createdAt": "2025-10-01T20:53:00.890Z"
+        }
+      ]
     },
     {
       "plateNumber": "IF07TCH",

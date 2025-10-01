@@ -11,6 +11,7 @@ type Assurance = {
   rcaInsurer?: string;
   rcaSerie?: string;
   rcaNumber?: string;
+  rcaCost?: string;
   rcaStart?: string | Date;
   rcaEnd?: string | Date;
   createdAt?: string;
@@ -20,6 +21,7 @@ type CascoAssurance = {
   cascoInsurer?: string;
   cascoSerie?: string;
   cascoNumber?: string;
+  cascoCost?: string;
   cascoStart?: string | Date;
   cascoEnd?: string | Date;
   createdAt?: string;
