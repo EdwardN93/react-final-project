@@ -22,11 +22,13 @@ const validationSchema = z.object({
   rcaInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   rcaSerie: z.string().min(1, "Introdu seria poliței RCA"),
   rcaNumber: z.string().min(1, "Introdu numărul poliței RCA"),
+  rcaCost: z.string().min(1, "Introdu prețul poliței RCA"),
   rcaStart: z.string().min(1, "Selectează perioada de valabilitate"),
   rcaEnd: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoInsurer: z.string().min(1, "Introdu numele companiei de asigurări"),
   cascoSerie: z.string().min(1, "Introdu seria poliței CASCO"),
   cascoNumber: z.string().min(1, "Introdu numarul poliței CACSO"),
+  cascoCost: z.string().min(1, "Introdu prețul poliței CASCO"),
   cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
   vignetteEnd: z.string().min(1, "Selectează data de expirare a vignetei"),
@@ -86,15 +88,17 @@ export function RegisterCar() {
       rcaInsurer: rawFormDetails.rcaInsurer.toString().trim(),
       rcaSerie: rawFormDetails.rcaSerie.toString().trim(),
       rcaNumber: rawFormDetails.rcaNumber.toString().trim(),
+      rcaCost: rawFormDetails.rcaCost.toString().trim(),
       rcaStart: new Date(rawFormDetails.rcaStart?.toString() || ""),
       rcaEnd: new Date(rawFormDetails.rcaEnd?.toString() || ""),
       createdAt: new Date().toISOString(),
     };
 
     const newCascoDetails = {
-      cascoInsurer: rawFormDetails.cascoInsurer.toString().trim(),
-      cascoSerie: rawFormDetails.cascoSerie.toString().trim(),
+      cascoInsurer: rawFormDetails.cascoInsurer.toString().toUpperCase().trim(),
+      cascoSerie: rawFormDetails.cascoSerie.toString().toUpperCase().trim(),
       cascoNumber: rawFormDetails.cascoNumber.toString().trim(),
+      cascoCost: rawFormDetails.cascoCost.toString().trim(),
       cascoStart: new Date(rawFormDetails.cascoStart?.toString() || ""),
       cascoEnd: new Date(rawFormDetails.cascoEnd?.toString() || ""),
       createdAt: new Date().toISOString(),
@@ -102,6 +106,7 @@ export function RegisterCar() {
 
     const newVignetteDetails = {
       hasVignette: rawFormDetails.vignette.toString().trim(),
+      vignetteCost: rawFormDetails.vignette.toString().trim(),
       vignetteEnd: new Date(rawFormDetails.vignetteExp?.toString() || ""),
     };
 
@@ -474,6 +479,23 @@ export function RegisterCar() {
               </div>
 
               <div className="mb-4">
+                <label htmlFor="rcaCost" className="block mb-1 font-medium">
+                  Costul poliței (în RON)<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="rcaCost"
+                  id="rcaCost"
+                  placeholder="12345"
+                  onChange={handleInputChange}
+                />
+                {errors?.rcaCost && (
+                  <p className="text-red-600 mb-4">{errors.rcaCost[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
                 <label htmlFor="rcaStart" className="block mb-1 font-medium">
                   Valabilitate de la:<span className="text-red-600">*</span>
                 </label>
@@ -566,6 +588,23 @@ export function RegisterCar() {
                 />
                 {errors?.cascoNumber && (
                   <p className="text-red-600 mb-4">{errors.cascoNumber[0]}</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="cascoCost" className="block mb-1 font-medium">
+                  Costul poliței (în RON)<span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="cascoCost"
+                  id="cascoCost"
+                  placeholder="C12345"
+                  onChange={handleInputChange}
+                />
+                {errors?.cascoCost && (
+                  <p className="text-red-600 mb-4">{errors.cascoCost[0]}</p>
                 )}
               </div>
 
