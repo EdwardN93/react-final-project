@@ -12,11 +12,13 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 const validationSchema = z.object({
   hasVignette: z.string().min(1, "Adaugă vignetă"),
+  vignetteCost: z.string().min(1, "Introdu prețul vignetei"),
   vignetteEnd: z.string().min(1, "Selectează data de expirare a vignetei"),
 });
 
 const initialDefaultValues = {
   hasVignette: "",
+  vignetteCost: "",
   vignetteEnd: "",
 };
 
@@ -66,6 +68,7 @@ export function AddVignette() {
 
     const newVignette = {
       hasVignette: values.hasVignette.toString().trim(),
+      vignetteCost: values.vignetteCost.toString().trim(),
       vignetteEnd: new Date(values.vignetteEnd?.toString() || ""),
     };
 
@@ -139,6 +142,25 @@ export function AddVignette() {
                 <option value="false">Nu</option>
               </select>
             </div>
+
+            <div className="mb-4">
+              <label htmlFor="vignetteCost" className="block mb-1 font-medium">
+                Costul vignetei (în RON)
+                <span className="text-red-600">*</span>
+              </label>
+              <input
+                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                type="text"
+                name="vignetteCost"
+                id="vignetteCost"
+                placeholder="212.12"
+                onChange={handleInputChange}
+              />
+              {errors?.vignetteCost && (
+                <p className="text-red-600 mb-4">{errors.vignetteCost[0]}</p>
+              )}
+            </div>
+
             <div className="mb-4">
               <label htmlFor="vignetteEnd" className="block mb-1 font-medium">
                 Expiră la:<span className="text-red-600">*</span>

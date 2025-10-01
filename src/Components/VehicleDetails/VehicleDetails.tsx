@@ -150,6 +150,12 @@ export function VehicleDetails() {
           : "Nu există rovinietă",
     },
     {
+      label: "Costul vignetei RON",
+      value: isNaN(Number(latestVignette?.vignetteCost))
+        ? "-"
+        : Number(latestVignette?.vignetteCost).toLocaleString(),
+    },
+    {
       label: "Data expirare",
       value: latestVignette?.vignetteEnd
         ? intlDate(latestVignette?.vignetteEnd)

@@ -96,6 +96,11 @@
         {
           "hasVignette": "true",
           "vignetteEnd": "2026-09-18T00:00:00.000Z"
+        },
+        {
+          "hasVignette": "true",
+          "vignetteCost": "210",
+          "vignetteEnd": "2026-12-12T00:00:00.000Z"
         }
       ],
       "rca": [

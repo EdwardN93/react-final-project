@@ -29,6 +29,7 @@ type CascoAssurance = {
 
 type Vignette = {
   hasVignette: string;
+  vignetteCost: string;
   vignetteEnd: string | Date;
 };
 

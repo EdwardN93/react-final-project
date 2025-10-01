@@ -31,6 +31,7 @@ const validationSchema = z.object({
   cascoCost: z.string().min(1, "Introdu prețul poliței CASCO"),
   cascoStart: z.string().min(1, "Selectează perioada de valabilitate"),
   cascoEnd: z.string().min(1, "Selectează perioada de valabilitate"),
+  vignetteCost: z.string().min(1, "Introdu prețul vignetei"),
   vignetteEnd: z.string().min(1, "Selectează data de expirare a vignetei"),
 });
 
@@ -106,8 +107,8 @@ export function RegisterCar() {
 
     const newVignetteDetails = {
       hasVignette: rawFormDetails.vignette.toString().trim(),
-      vignetteCost: rawFormDetails.vignette.toString().trim(),
-      vignetteEnd: new Date(rawFormDetails.vignetteExp?.toString() || ""),
+      vignetteCost: rawFormDetails.vignetteCost.toString().trim(),
+      vignetteEnd: new Date(rawFormDetails.vignetteEnd?.toString() || ""),
     };
 
     const newErrors = validateForm(stringFormDetails, validationSchema);
@@ -664,6 +665,28 @@ export function RegisterCar() {
                   <option value="false">Nu</option>
                 </select>
               </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="vignetteCost"
+                  className="block mb-1 font-medium"
+                >
+                  Costul vignetei (în RON)
+                  <span className="text-red-600">*</span>
+                </label>
+                <input
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-400"
+                  type="text"
+                  name="vignetteCost"
+                  id="vignetteCost"
+                  placeholder="212.12"
+                  onChange={handleInputChange}
+                />
+                {errors?.vignetteCost && (
+                  <p className="text-red-600 mb-4">{errors.vignetteCost[0]}</p>
+                )}
+              </div>
+
               <div className="mb-4">
                 <label htmlFor="vignetteEnd" className="block mb-1 font-medium">
                   Expiră la:<span className="text-red-600">*</span>
