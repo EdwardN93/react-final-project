@@ -417,6 +417,15 @@
           "rcaStart": "2025-08-27T00:00:00.000Z",
           "rcaEnd": "2026-08-26T00:00:00.000Z",
           "createdAt": "2025-08-26T16:10:34.530Z"
+        },
+        {
+          "rcaInsurer": "GROUPAMA",
+          "rcaSerie": "RO/24/C24/IT",
+          "rcaNumber": "1939124",
+          "rcaCost": "1667.24",
+          "rcaStart": "2025-05-05T00:00:00.000Z",
+          "rcaEnd": "2026-05-05T00:00:00.000Z",
+          "createdAt": "2025-10-02T21:22:41.487Z"
         }
       ],
       "casco": [

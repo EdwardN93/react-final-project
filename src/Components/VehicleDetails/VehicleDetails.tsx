@@ -315,20 +315,71 @@ export function VehicleDetails() {
             </div>
           )}
 
+          {/* END of Repairs Section */}
+
           {activeTab === "rca" && (
-            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
-              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                Detalii RCA
-              </h3>
-              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                {assuranceDetails.map(({ label, value }) => (
-                  <div key={label} className="flex flex-col">
-                    <dt className="text-gray-800 font-medium">{label}</dt>
-                    <dd className="text-gray-800">{value || "-"}</dd>
-                  </div>
-                ))}
-              </ul>
-            </section>
+            <div>
+              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
+                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                  Detalii RCA
+                </h3>
+                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                  {assuranceDetails.map(({ label, value }) => (
+                    <div key={label} className="flex flex-col">
+                      <dt className="text-gray-800 font-medium">{label}</dt>
+                      <dd className="text-gray-800">{value || "-"}</dd>
+                    </div>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 mt-4">
+                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                  Istoric Polițe
+                </h3>
+                {car.rca && car.rca.length > 0 ? (
+                  <ul className="space-y-3">
+                    {car.rca.map((rca) => (
+                      <li
+                        id={rca.createdAt}
+                        key={rca.createdAt}
+                        className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
+                      >
+                        <span className="text-gray-700">
+                          Număr: {rca.rcaNumber}
+                        </span>
+                        <span className="text-gray-700 text-center">
+                          Data start: {intlDate(rca.rcaStart!).toLocaleString()}
+                        </span>
+                        <span className="text-gray-900 font-semibold text-right">
+                          {isNaN(Number(rca.rcaCost))
+                            ? "Preț nespecificat"
+                            : `${Number(rca.rcaCost).toLocaleString()} RON`}
+                        </span>
+                      </li>
+                    ))}
+                    <div className="w-full text-right">
+                      <span className="text-gray-900 font-semibold">
+                        Total costuri:{" "}
+                        {car.rca
+                          .reduce(
+                            (acc, val) => acc + (Number(val.rcaCost) || 0),
+                            0
+                          )
+                          .toLocaleString()}{" "}
+                        RON
+                      </span>
+                    </div>
+                  </ul>
+                ) : (
+                  <p className="text-gray-500 text-sm italic">
+                    Nu există date.
+                  </p>
+                )}
+              </section>
+
+              <canvas className="w-full h-full"></canvas>
+            </div>
           )}
 
           {activeTab === "casco" && (
