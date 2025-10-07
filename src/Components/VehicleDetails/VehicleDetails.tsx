@@ -13,7 +13,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>();
-  const { accessToken } = useAuthContext();
+  const { user, accessToken } = useAuthContext();
   const [activeTab, setActiveTab] = useState("detalii");
 
   useEffect(() => {
@@ -287,12 +287,14 @@ export function VehicleDetails() {
                           {Number(repair.cost).toLocaleString()} RON
                         </span>
                         <span className="text-right">
-                          <Button
-                            text="X"
-                            onClick={() =>
-                              handleDeleteIntervention(repair.createdAt)
-                            }
-                          />
+                          {user?.role == 1 ? (
+                            <Button
+                              text="X"
+                              onClick={() =>
+                                handleDeleteIntervention(repair.createdAt)
+                              }
+                            />
+                          ) : null}
                         </span>
                       </li>
                     ))}
@@ -383,19 +385,67 @@ export function VehicleDetails() {
           )}
 
           {activeTab === "casco" && (
-            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
-              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                Detalii CASCO
-              </h3>
-              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                {cascoAssuranceDetails.map(({ label, value }) => (
-                  <div key={label} className="flex flex-col">
-                    <dt className="text-gray-800 font-medium">{label}</dt>
-                    <dd className="text-gray-800">{value || "-"}</dd>
-                  </div>
-                ))}
-              </ul>
-            </section>
+            <>
+              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
+                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                  Detalii CASCO
+                </h3>
+                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                  {cascoAssuranceDetails.map(({ label, value }) => (
+                    <div key={label} className="flex flex-col">
+                      <dt className="text-gray-800 font-medium">{label}</dt>
+                      <dd className="text-gray-800">{value || "-"}</dd>
+                    </div>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 mt-4">
+                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
+                  Istoric Polițe
+                </h3>
+                {car.casco && car.casco.length > 0 ? (
+                  <ul className="space-y-3">
+                    {car.casco.map((casco) => (
+                      <li
+                        id={casco.createdAt}
+                        key={casco.createdAt}
+                        className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
+                      >
+                        <span className="text-gray-700">
+                          Număr: {casco.cascoNumber}
+                        </span>
+                        <span className="text-gray-700 text-center">
+                          Data start:{" "}
+                          {intlDate(casco.cascoStart!).toLocaleString()}
+                        </span>
+                        <span className="text-gray-900 font-semibold text-right">
+                          {isNaN(Number(casco.cascoCost))
+                            ? "Preț nespecificat"
+                            : `${Number(casco.cascoCost).toLocaleString()} RON`}
+                        </span>
+                      </li>
+                    ))}
+                    <div className="w-full text-right">
+                      <span className="text-gray-900 font-semibold">
+                        Total costuri:{" "}
+                        {car.casco
+                          .reduce(
+                            (acc, val) => acc + (Number(val.cascoCost) || 0),
+                            0
+                          )
+                          .toLocaleString()}{" "}
+                        RON
+                      </span>
+                    </div>
+                  </ul>
+                ) : (
+                  <p className="text-gray-500 text-sm italic">
+                    Nu există date.
+                  </p>
+                )}
+              </section>
+            </>
           )}
 
           {activeTab === "vigneta" && (

@@ -23,7 +23,9 @@ import { AddRca } from "./Components/AddRca/AddRca";
 import { AddCasco } from "./Components/AddInsuranceDetails/AddCasco";
 function App() {
   const location = useLocation();
-
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")!)
+    : null;
   return (
     <AuthContextProvider>
       <div className="flex flex-col md:flex-row min-h-screen">
@@ -38,7 +40,7 @@ function App() {
               <h2 className="text-2xl font-semibold mb-2 sm:mb-0">
                 Car Logistic App
               </h2>
-              <FuelPrices />
+              {user?.accessToken && <FuelPrices />}
               <UserMenu />
             </div>
             <MainNav />
