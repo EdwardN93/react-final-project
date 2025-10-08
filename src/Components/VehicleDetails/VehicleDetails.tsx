@@ -200,12 +200,9 @@ export function VehicleDetails() {
                 </ul>
               </section>
 
-              {/* Repairs Section */}
               <RepairsDetails car={car} setCar={setCar} />
             </div>
           )}
-
-          {/* END of Repairs Section */}
 
           {activeTab === "rca" && <AssuranceDetails car={car} type={"rca"} />}
 
