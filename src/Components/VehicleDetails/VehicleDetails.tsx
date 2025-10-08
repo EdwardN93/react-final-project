@@ -8,6 +8,8 @@ import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
 import { Button } from "../Button/Button";
 import { toast } from "react-toastify";
 import { AssuranceDetails } from "./AssuranceDetails";
+import { VignetteDetails } from "./VignetteDetails";
+import { RepairsDetails } from "./RepairsDetails";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -95,30 +97,6 @@ export function VehicleDetails() {
     {
       label: "Zile rămase până la revizie",
       value: compareDates(car.nextRevDate || ""),
-    },
-  ];
-
-  const latestVignette = car.vignette?.[car.vignette.length - 1];
-
-  const vignetteDetails = [
-    {
-      label: "Rovinietă",
-      value:
-        latestVignette?.hasVignette == "true"
-          ? "Valabilă"
-          : "Nu există rovinietă",
-    },
-    {
-      label: "Costul vignetei RON",
-      value: isNaN(Number(latestVignette?.vignetteCost))
-        ? "-"
-        : Number(latestVignette?.vignetteCost).toLocaleString(),
-    },
-    {
-      label: "Data expirare",
-      value: latestVignette?.vignetteEnd
-        ? intlDate(latestVignette?.vignetteEnd)
-        : "-",
     },
   ];
 
@@ -223,56 +201,7 @@ export function VehicleDetails() {
               </section>
 
               {/* Repairs Section */}
-              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200">
-                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Intervenții & Costuri
-                </h3>
-                {car.repairs && car.repairs.length > 0 ? (
-                  <ul className="space-y-3">
-                    {car.repairs.map((repair) => (
-                      <li
-                        id={repair.createdAt}
-                        key={repair.createdAt}
-                        className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
-                      >
-                        <span className="text-gray-700">
-                          {repair.intervention}
-                        </span>
-                        <span className="text-gray-700 text-center">
-                          Kilometri:{" "}
-                          {Number(repair.repairAtKm).toLocaleString()}
-                        </span>
-                        <span className="text-gray-900 font-semibold text-right">
-                          {Number(repair.cost).toLocaleString()} RON
-                        </span>
-                        <span className="text-right">
-                          {user?.role == 1 ? (
-                            <Button
-                              text="X"
-                              onClick={() =>
-                                handleDeleteIntervention(repair.createdAt)
-                              }
-                            />
-                          ) : null}
-                        </span>
-                      </li>
-                    ))}
-                    <div className="w-full text-right">
-                      <span className="text-gray-900 font-semibold">
-                        Total costuri:{" "}
-                        {car.repairs
-                          .reduce((acc, val) => acc + Number(val.cost), 0)
-                          .toLocaleString()}{" "}
-                        RON
-                      </span>
-                    </div>
-                  </ul>
-                ) : (
-                  <p className="text-gray-500 text-sm italic">
-                    Nicio intervenție.
-                  </p>
-                )}
-              </section>
+              <RepairsDetails car={car} setCar={setCar} />
             </div>
           )}
 
@@ -284,21 +213,7 @@ export function VehicleDetails() {
             <AssuranceDetails car={car} type={"casco"} />
           )}
 
-          {activeTab === "vigneta" && (
-            <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
-              <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                Detalii Vignetă
-              </h3>
-              <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                {vignetteDetails.map(({ label, value }) => (
-                  <div key={label} className="flex flex-col">
-                    <dt className="text-gray-800 font-medium">{label}</dt>
-                    <dd className="text-gray-800">{value || "-"}</dd>
-                  </div>
-                ))}
-              </ul>
-            </section>
-          )}
+          {activeTab === "vigneta" && <VignetteDetails car={car} />}
         </div>
       )}
     </motion.div>

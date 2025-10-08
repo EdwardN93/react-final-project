@@ -105,3 +105,7 @@ export interface AssuranceDetailsProps {
   car: Car;
   type: "rca" | "casco";
 }
+
+export interface CarDetailsProps {
+  car: Car;
+}
