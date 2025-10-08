@@ -7,6 +7,7 @@ import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
 import { Button } from "../Button/Button";
 import { toast } from "react-toastify";
+import { AssuranceDetails } from "./AssuranceDetails";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -97,49 +98,7 @@ export function VehicleDetails() {
     },
   ];
 
-  const latestRca = car.rca?.[car.rca.length - 1];
-  const latestCasco = car.casco?.[car.casco.length - 1];
   const latestVignette = car.vignette?.[car.vignette.length - 1];
-
-  const assuranceDetails = [
-    { label: "Asigurator", value: latestRca?.rcaInsurer || "-" },
-    { label: "Serie asigurare", value: latestRca?.rcaSerie || "-" },
-    { label: "Număr asigurare", value: latestRca?.rcaNumber || "-" },
-    {
-      label: "Costul poliței RON",
-      value: isNaN(Number(latestRca?.rcaCost))
-        ? "-"
-        : Number(latestRca?.rcaCost).toLocaleString(),
-    },
-    {
-      label: "Data începerii asigurării",
-      value: latestRca?.rcaStart ? intlDate(latestRca.rcaStart) : "-",
-    },
-    {
-      label: "Data expirării asigurării",
-      value: latestRca?.rcaEnd ? intlDate(latestRca.rcaEnd) : "-",
-    },
-  ];
-
-  const cascoAssuranceDetails = [
-    { label: "Asigurator", value: latestCasco?.cascoInsurer || "-" },
-    { label: "Serie asigurare", value: latestCasco?.cascoSerie || "-" },
-    { label: "Număr asigurare", value: latestCasco?.cascoNumber || "-" },
-    {
-      label: "Costul poliței RON",
-      value: isNaN(Number(latestCasco?.cascoCost))
-        ? "-"
-        : Number(latestCasco?.cascoCost).toLocaleString(),
-    },
-    {
-      label: "Data începerii asigurării",
-      value: latestCasco?.cascoStart ? intlDate(latestCasco.cascoStart) : "-",
-    },
-    {
-      label: "Data expirării asigurării",
-      value: latestCasco?.cascoEnd ? intlDate(latestCasco.cascoEnd) : "-",
-    },
-  ];
 
   const vignetteDetails = [
     {
@@ -319,133 +278,10 @@ export function VehicleDetails() {
 
           {/* END of Repairs Section */}
 
-          {activeTab === "rca" && (
-            <div>
-              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
-                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Detalii RCA
-                </h3>
-                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                  {assuranceDetails.map(({ label, value }) => (
-                    <div key={label} className="flex flex-col">
-                      <dt className="text-gray-800 font-medium">{label}</dt>
-                      <dd className="text-gray-800">{value || "-"}</dd>
-                    </div>
-                  ))}
-                </ul>
-              </section>
-
-              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 mt-4">
-                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Istoric Polițe
-                </h3>
-                {car.rca && car.rca.length > 0 ? (
-                  <ul className="space-y-3">
-                    {car.rca.map((rca) => (
-                      <li
-                        id={rca.createdAt}
-                        key={rca.createdAt}
-                        className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
-                      >
-                        <span className="text-gray-700">
-                          Număr: {rca.rcaNumber}
-                        </span>
-                        <span className="text-gray-700 text-center">
-                          Data start: {intlDate(rca.rcaStart!).toLocaleString()}
-                        </span>
-                        <span className="text-gray-900 font-semibold text-right">
-                          {isNaN(Number(rca.rcaCost))
-                            ? "Preț nespecificat"
-                            : `${Number(rca.rcaCost).toLocaleString()} RON`}
-                        </span>
-                      </li>
-                    ))}
-                    <div className="w-full text-right">
-                      <span className="text-gray-900 font-semibold">
-                        Total costuri:{" "}
-                        {car.rca
-                          .reduce(
-                            (acc, val) => acc + (Number(val.rcaCost) || 0),
-                            0
-                          )
-                          .toLocaleString()}{" "}
-                        RON
-                      </span>
-                    </div>
-                  </ul>
-                ) : (
-                  <p className="text-gray-500 text-sm italic">
-                    Nu există date.
-                  </p>
-                )}
-              </section>
-
-              <canvas className="w-full h-full"></canvas>
-            </div>
-          )}
+          {activeTab === "rca" && <AssuranceDetails car={car} type={"rca"} />}
 
           {activeTab === "casco" && (
-            <>
-              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 m-y-10">
-                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Detalii CASCO
-                </h3>
-                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                  {cascoAssuranceDetails.map(({ label, value }) => (
-                    <div key={label} className="flex flex-col">
-                      <dt className="text-gray-800 font-medium">{label}</dt>
-                      <dd className="text-gray-800">{value || "-"}</dd>
-                    </div>
-                  ))}
-                </ul>
-              </section>
-
-              <section className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 mt-4">
-                <h3 className="text-2xl font-semibold mb-4 text-blue-800">
-                  Istoric Polițe
-                </h3>
-                {car.casco && car.casco.length > 0 ? (
-                  <ul className="space-y-3">
-                    {car.casco.map((casco) => (
-                      <li
-                        id={casco.createdAt}
-                        key={casco.createdAt}
-                        className="grid grid-cols-4 border-b pb-2 text-sm justify-start items-center"
-                      >
-                        <span className="text-gray-700">
-                          Număr: {casco.cascoNumber}
-                        </span>
-                        <span className="text-gray-700 text-center">
-                          Data start:{" "}
-                          {intlDate(casco.cascoStart!).toLocaleString()}
-                        </span>
-                        <span className="text-gray-900 font-semibold text-right">
-                          {isNaN(Number(casco.cascoCost))
-                            ? "Preț nespecificat"
-                            : `${Number(casco.cascoCost).toLocaleString()} RON`}
-                        </span>
-                      </li>
-                    ))}
-                    <div className="w-full text-right">
-                      <span className="text-gray-900 font-semibold">
-                        Total costuri:{" "}
-                        {car.casco
-                          .reduce(
-                            (acc, val) => acc + (Number(val.cascoCost) || 0),
-                            0
-                          )
-                          .toLocaleString()}{" "}
-                        RON
-                      </span>
-                    </div>
-                  </ul>
-                ) : (
-                  <p className="text-gray-500 text-sm italic">
-                    Nu există date.
-                  </p>
-                )}
-              </section>
-            </>
+            <AssuranceDetails car={car} type={"casco"} />
           )}
 
           {activeTab === "vigneta" && (

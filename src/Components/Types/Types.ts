@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 
-type Repairs = {
+export type Repairs = {
   repairAtKm: string;
   cost: string;
   intervention: string;
   createdAt: string;
 };
 
-type Assurance = {
+export type Assurance = {
   rcaInsurer?: string;
   rcaSerie?: string;
   rcaNumber?: string;
@@ -17,7 +17,7 @@ type Assurance = {
   createdAt?: string;
 };
 
-type CascoAssurance = {
+export type CascoAssurance = {
   cascoInsurer?: string;
   cascoSerie?: string;
   cascoNumber?: string;
@@ -27,7 +27,7 @@ type CascoAssurance = {
   createdAt?: string;
 };
 
-type Vignette = {
+export type Vignette = {
   hasVignette: string;
   vignetteCost: string;
   vignetteEnd: string | Date;
@@ -100,3 +100,8 @@ export type ModalProps = {
   onConfirm: () => void;
   onCancel?: () => void;
 };
+
+export interface AssuranceDetailsProps {
+  car: Car;
+  type: "rca" | "casco";
+}
