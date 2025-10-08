@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { z } from "zod/v4";
 import { toast } from "react-toastify";
 import { validateForm, ValidationErrors } from "../utils/validation";
+import { toStringToUpperCaseTrim } from "../utils/helperFunctions";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -73,9 +74,9 @@ export function AddCasco() {
     setDefaultValues(initialDefaultValues);
 
     const newCascoDetails = {
-      cascoInsurer: values.cascoInsurer.toString().trim(),
-      cascoSerie: values.cascoSerie.toString().trim(),
-      cascoNumber: values.cascoNumber.toString().trim(),
+      cascoInsurer: toStringToUpperCaseTrim(values.cascoInsurer),
+      cascoSerie: toStringToUpperCaseTrim(values.cascoSerie),
+      cascoNumber: toStringToUpperCaseTrim(values.cascoNumber),
       cascoCost: values.cascoCost.toString().trim(),
       cascoStart: new Date(values.cascoStart?.toString() || ""),
       cascoEnd: new Date(values.cascoEnd?.toString() || ""),

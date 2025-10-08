@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { z } from "zod/v4";
 import { toast } from "react-toastify";
 import { validateForm, ValidationErrors } from "../utils/validation";
+import { capitalizeFirstLetter } from "../utils/helperFunctions";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -69,7 +70,7 @@ export function AddRepairs() {
     setDefaultValues(initialDefaultValues);
 
     const newRepair = {
-      intervention: values.intervention,
+      intervention: capitalizeFirstLetter(values.intervention),
       cost: values.cost,
       repairAtKm: values.repairAtKm,
       createdAt: new Date().toISOString(),

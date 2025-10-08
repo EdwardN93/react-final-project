@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { z } from "zod/v4";
 import { toast } from "react-toastify";
 import { validateForm, ValidationErrors } from "../utils/validation";
+import { toStringToUpperCaseTrim } from "../utils/helperFunctions";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -73,9 +74,9 @@ export function AddRca() {
     setDefaultValues(initialDefaultValues);
 
     const newRcaDetails = {
-      rcaInsurer: values.rcaInsurer.toString().toUpperCase().trim(),
-      rcaSerie: values.rcaSerie.toString().toUpperCase().trim(),
-      rcaNumber: values.rcaNumber.toString().trim(),
+      rcaInsurer: toStringToUpperCaseTrim(values.rcaInsurer),
+      rcaSerie: toStringToUpperCaseTrim(values.rcaSerie),
+      rcaNumber: toStringToUpperCaseTrim(values.rcaNumber),
       rcaCost: values.rcaCost.toString().trim(),
       rcaStart: new Date(values.rcaStart?.toString() || ""),
       rcaEnd: new Date(values.rcaEnd?.toString() || ""),

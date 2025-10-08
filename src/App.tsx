@@ -20,7 +20,7 @@ import { AddRepairs } from "./Components/AddRepairs/AddRepairs";
 import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 import { AddVignette } from "./Components/AddVignette/AddVignette";
 import { AddRca } from "./Components/AddRca/AddRca";
-import { AddCasco } from "./Components/AddInsuranceDetails/AddCasco";
+import { AddCasco } from "./Components/AddCasco/AddCasco";
 function App() {
   const location = useLocation();
   const user = localStorage.getItem("user")

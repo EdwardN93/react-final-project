@@ -132,6 +132,15 @@
           "cascoStart": "2025-09-29T00:00:00.000Z",
           "cascoEnd": "2026-09-29T00:00:00.000Z",
           "createdAt": "2025-09-29T04:42:08.454Z"
+        },
+        {
+          "cascoInsurer": "omniasig",
+          "cascoSerie": "V",
+          "cascoNumber": "V231318",
+          "cascoCost": "2399.23",
+          "cascoStart": "2025-10-08T00:00:00.000Z",
+          "cascoEnd": "2026-10-08T00:00:00.000Z",
+          "createdAt": "2025-10-08T15:23:01.991Z"
         }
       ]
     },
