@@ -21,6 +21,7 @@ import { FuelPrices } from "./Components/FuelPrices/FuelPrices";
 import { AddVignette } from "./Components/AddVignette/AddVignette";
 import { AddRca } from "./Components/AddRca/AddRca";
 import { AddCasco } from "./Components/AddCasco/AddCasco";
+import { MySqlTest } from "./Components/MySqlTest/MySqlTest";
 function App() {
   const location = useLocation();
   const user = localStorage.getItem("user")
@@ -62,6 +63,7 @@ function App() {
                     path="/change-account-details"
                     element={<ChangeAccountDetails />}
                   />
+                  <Route path="/sqlTest" element={<MySqlTest />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </motion.div>

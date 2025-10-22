@@ -70,6 +70,7 @@ export function AddVignette() {
       hasVignette: values.hasVignette.toString().trim(),
       vignetteCost: values.vignetteCost.toString().trim(),
       vignetteEnd: new Date(values.vignetteEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
     };
 
     const updatedCar = {

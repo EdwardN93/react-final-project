@@ -13,6 +13,7 @@ function isCasco(policy: Assurance | CascoAssurance): policy is CascoAssurance {
   return "cascoNumber" in policy;
 }
 
+
 export function AssuranceDetails({ car, type }: AssuranceDetailsProps) {
   const assuranceData =
     type === "rca" ? (car.rca as Assurance[]) : (car.casco as CascoAssurance[]);

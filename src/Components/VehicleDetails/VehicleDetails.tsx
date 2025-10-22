@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { intlDate, compareDates } from "../functions/getDate";
 import { useAuthContext } from "../routes/auth/AuthContext";
 import { NotLoggedIn } from "../NotLoggedIn/NotLoggedIn";
-import { Button } from "../Button/Button";
 import { toast } from "react-toastify";
 import { AssuranceDetails } from "./AssuranceDetails";
 import { VignetteDetails } from "./VignetteDetails";
@@ -16,7 +15,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export function VehicleDetails() {
   const { id } = useParams<{ id: string }>();
   const [car, setCar] = useState<Car | null>();
-  const { user, accessToken } = useAuthContext();
+  const { accessToken } = useAuthContext();
   const [activeTab, setActiveTab] = useState("detalii");
 
   useEffect(() => {

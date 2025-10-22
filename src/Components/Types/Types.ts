@@ -31,6 +31,7 @@ export type Vignette = {
   hasVignette: string;
   vignetteCost: string;
   vignetteEnd: string | Date;
+  createdAt?: string;
 };
 
 export type Car = {

@@ -168,6 +168,20 @@
           "rcaEnd": "2026-09-14T00:00:00.000Z",
           "createdAt": "2025-09-28T19:26:06.890Z"
         }
+      ],
+      "vignette": [
+        {
+          "hasVignette": "true",
+          "vignetteCost": "210",
+          "vignetteEnd": "2026-04-04T00:00:00.000Z",
+          "createdAt": "2025-09-28T19:26:06.890Z"
+        },
+        {
+          "hasVignette": "true",
+          "vignetteCost": "350",
+          "vignetteEnd": "2025-02-22T00:00:00.000Z",
+          "createdAt": "2024-08-28T19:26:06.890Z"
+        }
       ]
     },
     {

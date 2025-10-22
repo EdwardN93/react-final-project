@@ -109,6 +109,7 @@ export function RegisterCar() {
       hasVignette: rawFormDetails.vignette.toString().trim(),
       vignetteCost: rawFormDetails.vignetteCost.toString().trim(),
       vignetteEnd: new Date(rawFormDetails.vignetteEnd?.toString() || ""),
+      createdAt: new Date().toISOString(),
     };
 
     const newErrors = validateForm(stringFormDetails, validationSchema);

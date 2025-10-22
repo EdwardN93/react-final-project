@@ -27,6 +27,15 @@ export function SideNav() {
             <FaChartBar /> Home
           </NavLink>
         </LiElement>
+        <LiElement>
+          <NavLink
+            className="flex w-full hover:bg-gray-300 p-2 gap-4 justify-start items-center rounded"
+            to="/sqlTest"
+            viewTransition
+          >
+            <FaChartBar /> SQL TEST
+          </NavLink>
+        </LiElement>
         {user ? (
           ""
         ) : (
