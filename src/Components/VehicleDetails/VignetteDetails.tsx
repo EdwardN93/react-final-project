@@ -1,8 +1,30 @@
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { intlDate } from "../functions/getDate";
 import { CarDetailsProps } from "../Types/Types";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 export function VignetteDetails({ car }: CarDetailsProps) {
   const latestVignette = car.vignette?.[car.vignette.length - 1];
+  const cost = car.vignette?.map((p) => Number(p.vignetteCost)) || [];
+  const dates = car.vignette?.map((p) => intlDate(p.createdAt!)) || [];
+  const vignetteExists = car.vignette && car.vignette.length > 0;
 
   const vignetteDetails = [
     {
@@ -25,6 +47,58 @@ export function VignetteDetails({ car }: CarDetailsProps) {
         : "-",
     },
   ];
+
+  function charter() {
+    const data = {
+      labels: dates,
+      datasets: [
+        {
+          label: "Cost RON",
+          data: cost,
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    const options = {
+      // responsive: true,
+      aspectRatio: 3.5,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: "top" },
+        title: { display: true, text: "Istoric cost vignete" },
+      },
+      scales: {
+        x: {
+          grid: {
+            borderDash: [15, 5],
+            color: "#CDD1DB",
+            borderColor: "#CDD1DB",
+          },
+          ticks: {
+            color: "#6B7280",
+            font: {
+              size: 10,
+            },
+          },
+        },
+        y: {
+          min: 0,
+          ticks: {
+            font: {
+              size: 10,
+            },
+            stepSize: 25,
+            color: "#6B7280",
+          },
+        },
+      },
+    };
+
+    return <Bar data={data} options={options} />;
+  }
 
   return (
     <>
@@ -88,6 +162,11 @@ export function VignetteDetails({ car }: CarDetailsProps) {
           <p className="text-gray-500 text-sm italic">Nu există date.</p>
         )}
       </section>
+      {vignetteExists && (
+        <section className="w-full h-full mt-8 justify-center items-center self-center">
+          {charter()}
+        </section>
+      )}
     </>
   );
 }
