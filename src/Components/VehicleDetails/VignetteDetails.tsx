@@ -7,6 +7,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from "chart.js";
 import { intlDate } from "../functions/getDate";
 import { CarDetailsProps } from "../Types/Types";
@@ -62,8 +63,7 @@ export function VignetteDetails({ car }: CarDetailsProps) {
       ],
     };
 
-    const options = {
-      // responsive: true,
+    const options: ChartOptions<"bar"> = {
       aspectRatio: 3.5,
       maintainAspectRatio: true,
       plugins: {
@@ -73,23 +73,17 @@ export function VignetteDetails({ car }: CarDetailsProps) {
       scales: {
         x: {
           grid: {
-            borderDash: [15, 5],
             color: "#CDD1DB",
-            borderColor: "#CDD1DB",
           },
           ticks: {
             color: "#6B7280",
-            font: {
-              size: 10,
-            },
+            font: { size: 10 },
           },
         },
         y: {
           min: 0,
           ticks: {
-            font: {
-              size: 10,
-            },
+            font: { size: 10 },
             stepSize: 25,
             color: "#6B7280",
           },
